@@ -127,12 +127,14 @@ p {
     font-weight: 500;
 }
 
+/* image style */
 img-discription,
 img {
     padding: 8px;
 }
 
 #footer,
+/* footer style */
 p {
     margin-bottom: 5px;
 }
