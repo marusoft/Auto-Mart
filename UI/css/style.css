@@ -7,7 +7,6 @@ body {
     font-family: 'Catamaran', sans-serif;
     min-height: 100vh;
     line-height: 1.6;
-    overflow: hidden;
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
@@ -51,8 +50,8 @@ a {
 }
 
 .container {
-    padding-top: .8em;
-    padding-bottom: .8em;
+    padding-top: .9em;
+    padding-bottom: .9em;
     border: 1px solid #a2a2a2;
     background-color: #f4f4f4;
     -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
@@ -70,6 +69,7 @@ a {
     outline: none;
     padding: 12px 40px 10px;
     position: relative;
+
 }
 
 .button:before,
@@ -104,25 +104,35 @@ a {
     height: 100%;
     width: 100%;
 }
+
 /* END OF HEADER/NAVIGATION STYLE */
 
 
 /* START SECTION */
 
-h1{
-  margin-top: 40px;
-  margin-bottom: 15px;
-}
-p{
-  max-width: 600px;
-  margin: auto;
-}
-h1,p{
-  text-align: center;
-  color: #010165;
-  font-weight: 500;
+h1 {
+    margin-top: 40px;
+    margin-bottom: 15px;
 }
 
-img-discription,img{
-  padding: 8px;
+p {
+    max-width: 600px;
+    margin: auto;
+}
+
+h1,
+p {
+    text-align: center;
+    color: #010165;
+    font-weight: 500;
+}
+
+img-discription,
+img {
+    padding: 8px;
+}
+
+#footer,
+p {
+    margin-bottom: 5px;
 }
