@@ -7,6 +7,7 @@
     <title>Auto Mart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/form.css">
     <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
 </head>
 
@@ -20,18 +21,27 @@
         </ul>
     </header>
     <!-- header ends here -->
-    <!-- signin and signup form -->
-    <section class="form-container">
-      <div class="signin-page">
-        <div class="form">
-          <form action="#" class="register-form">
-            <input type="text" name="username" id="name" placeholder="enter username">
-            <input type="password" name="password" id="password" placeholder="enter password">
-            <input type="email" name="email" id="email" placeholder="email address">
-            <button class="btn">Submit</button>
-          </form>
+    <section>
+        <div class="app-discription">
+            <h1>Welcome To Automobile Dealer marketplace</h1>
+            <p>Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. With
+                Auto Mart, users can sell their cars or buy from trusted dealerships or private sellers.</p>
         </div>
-      </div>
+    </section>
+
+    <!-- signup form -->
+    <section class="form-container">
+        <div class="signup-page">
+            <div class="form">
+                <form action="#" class="register-form">
+                    <input type="text" name="name" id="name" placeholder="Enter Fullname" required>
+                    <input type="text" name="username" id="username" placeholder="Enter Username" required>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                    <input type="email" name="email" id="email" placeholder="example@automart.com" required>
+                    <input type="submit" value="Sign up">
+                </form>
+            </div>
+        </div>
     </section>
 
     <footer id="footer">
