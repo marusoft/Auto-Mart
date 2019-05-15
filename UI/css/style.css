@@ -140,12 +140,9 @@ img {
 
 
 /* footer style */
-footer>p {
-    /* margin-bottom: 5px; */
-}
 
 
-/* media queries */
+/* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
     img {
         width: 100%;
@@ -170,9 +167,35 @@ footer>p {
         padding: 20px;
         width: 500px;
     }
+
     #footer p {
-        margin-top: 100px;
+        margin-top: 10px;
     }
 
+
+}
+
+@media only screen and (max-width: 360px) {
+
+    .container,
+    .nav-list {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+    }
+
+    .home {
+        margin: 0;
+        font-size: 0.9em;
+        padding: 4px;
+    }
+
+    h1,
+    p {
+        text-align: center;
+        color: #010165;
+        font-weight: 530;
+    }
 
 }
