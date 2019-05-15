@@ -7,7 +7,7 @@ body {
     font-family: 'Catamaran', sans-serif;
     min-height: 100vh;
     line-height: 1.6;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
@@ -129,13 +129,50 @@ p {
 }
 
 /* image style */
-img-discription,
+
 img {
-    padding: 8px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 540px;
 }
 
+/* END SECTION */
+
+
 /* footer style */
-#footer,
-p {
-    margin-bottom: 5px;
+footer>p {
+    /* margin-bottom: 5px; */
+}
+
+
+/* media queries */
+@media only screen and (max-width: 768px) {
+    img {
+        width: 100%;
+        padding: 30px;
+        margin: 0 auto;
+    }
+
+    body {
+        overflow: initial;
+    }
+
+    #footer p {
+        margin-bottom: 35px;
+    }
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+    img {
+        margin: 0 auto;
+        padding: 20px;
+        width: 500px;
+    }
+    #footer p {
+        margin-top: 100px;
+    }
+
+
 }
