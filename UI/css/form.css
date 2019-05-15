@@ -4,6 +4,7 @@ body{
   background-size: cover;
   background-position: center;
   font-family: 'Catamaran', sans-serif;
+  overflow: initial;
 }
 .signup-page{
   width: 360px;
@@ -52,4 +53,7 @@ input[type="submit"]:hover{
 }
 h1,p{
   color: #ffffff;
+}
+p > a{
+  color: #D4AF37;
 }
