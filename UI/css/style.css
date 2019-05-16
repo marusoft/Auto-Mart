@@ -23,9 +23,9 @@ a {
     color: #010165;
 }
 
-.home {
+.home > a {
     margin: 0;
-    font-size: 1.45em
+    font-size: 1.45em;
 }
 
 .container,
@@ -38,6 +38,10 @@ a {
 
 .home a {
     text-transform: uppercase;
+}
+
+.home a:hover {
+    text-decoration: underline;
 }
 
 .home a,
