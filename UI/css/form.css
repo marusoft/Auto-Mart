@@ -57,3 +57,8 @@ h1,p{
 p > a{
   color: #D4AF37;
 }
+
+h2{
+  margin-top: 2px;
+  color: #ffffff;
+}
