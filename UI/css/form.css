@@ -7,6 +7,10 @@ body {
     overflow: initial;
 }
 
+.app-discription p {
+    margin-bottom: 15px;
+}
+
 /* form style */
 .signup-page {
     width: 360px;
@@ -81,7 +85,6 @@ h2 {
     margin-top: 2px;
     color: #ffffff;
 }
-
 
 
 .alternate-form{
