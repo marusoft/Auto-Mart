@@ -88,7 +88,7 @@ h2 {
 }
 
 
-.alternate-form{
+.alternate-form {
     position: relative;
     z-index: 1;
     border-radius: 10px;
@@ -98,7 +98,7 @@ h2 {
     max-width: 360px;
     text-align: center;
     box-sizing: border-box;
-    display:none ;
+    display: none;
 }
 
 @media only screen and (max-width: 320px) {
@@ -116,8 +116,9 @@ h2 {
         font-size: 0.53em;
         padding: 4px;
     }
-    p{
+
+    p {
         font-weight: 800
     }
-   
+
 }
