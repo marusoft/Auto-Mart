@@ -62,9 +62,10 @@ h2 {
 
 }
 
-.form .para-info {
+.para-info {
     margin: 15px 0 0;
     color: #efefef;
+    font-size: 16px;
 
 }
 
@@ -98,4 +99,25 @@ h2 {
     text-align: center;
     box-sizing: border-box;
     display:none ;
+}
+
+@media only screen and (max-width: 320px) {
+
+    .container,
+    .nav-list {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+    }
+
+    .home {
+        margin: 0;
+        font-size: 0.53em;
+        padding: 4px;
+    }
+    p{
+        font-weight: 800
+    }
+   
 }
