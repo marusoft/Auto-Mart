@@ -16,8 +16,8 @@
     <header class="container">
         <div class="home"><a href="index.html">Auto Mart</a></div>
         <ul class="nav-list">
-            <li><a href="create.html" id="login" class="button">Sign in</a></li>
-            <li><a href="create.html" id="register" class="button">Sign up</a></li>
+            <li><a href="#" id="login" class="button">Sign in</a></li>
+            <li><a href="#" id="register" class="button">Sign up</a></li>
         </ul>
     </header>
     <!-- header ends here -->
@@ -29,21 +29,27 @@
         </div>
     </section>
 
-    <!-- signup form -->
-    <section class="form-container">
-        <div class="signup-page">
-            <div class="form">
-                <h2>Create an Account</h2>
-                <form action="#" class="register-form">
-                    <input type="text" name="name" id="name" placeholder="Enter Fullname" required>
-                    <input type="text" name="username" id="username" placeholder="Enter Username" required>
-                    <input type="password" name="password" id="password" placeholder="Enter Password" required>
-                    <input type="email" name="email" id="email" placeholder="example@automart.com" required>
-                    <input type="submit" value="Sign up">
-                    <p class="para-info">Already have an account? <a href="#"> Sign in</a></p>
-                </form>
-            </div>
-        </div>
+
+    <section class="form-container signup-page">
+        <!-- signup form -->
+        <form action="#" id="signup-form" class="alternate-form">
+            <h2>Create an Account</h2>
+            <input type="text" name="name" id="name" placeholder="Enter Fullname" required>
+            <input type="text" name="username" id="username" placeholder="Enter Username" required>
+            <input type="password" name="password" id="password" placeholder="Enter Password" required>
+            <input type="email" name="email" id="email" placeholder="example@automart.com" required>
+            <input type="submit" value="Sign up">
+        </form>
+        <!-- signup form  end-->
+
+        <!-- signin form start -->
+        <form action="#" id="signin-form" class="alternate-form">
+            <h2>AutoMart Account Login</h2>
+            <input type="text" name="username-1" id="username-1" placeholder="Enter Fullname" required>
+            <input type="password" name="pass" id="pass" placeholder="Enter Password" required>
+            <input type="submit" value="Sign in">
+        </form>
+        <!-- signin form end -->
     </section>
 
     <footer id="footer">
