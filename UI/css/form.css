@@ -82,6 +82,20 @@ h2 {
   color: #ffffff;
 }
 
+.naira{
+	display:inline-block;
+	position: relative;
+	}
+.naira input{
+	padding-left:15px;
+	}
+.naira:before {
+	position: absolute;
+    content:"#";
+    left:5px;
+	top:12px;
+ 	}
+
 .car-advert-form {
   position: relative;
   z-index: 1;
