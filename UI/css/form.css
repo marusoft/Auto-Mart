@@ -20,7 +20,6 @@ body {
   margin: auto;
 }
 
-
 .form-container input,
 select {
   font-family: "Catamaran", sans-serif;
@@ -33,13 +32,16 @@ select {
   box-sizing: border-box;
   font-size: 16px;
 }
-form input:focus{
-    border-radius: 5px;
-    border: 2px solid #0693cd;
-    outline:none ;
+form input:focus {
+  border-radius: 5px;
+  border: 2px solid #0693cd;
+  outline: none;
 }
 
 .form-container input[type="submit"] {
+  display: inline-block;
+  width: auto;
+  padding: 10px 20px;
   background-color: #5cb85c;
   border: 0;
   border-radius: 5px;
@@ -48,8 +50,8 @@ form input:focus{
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
-  padding: 10px;
-  width: 180px;
+  /* padding: 10px;
+  width: 180px; */
 }
 
 input[type="submit"]:hover {
@@ -103,6 +105,7 @@ h2 {
   text-align: center;
   box-sizing: border-box;
 }
+/* media queries */
 
 @media only screen and (max-width: 320px) {
   .container,
