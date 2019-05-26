@@ -39,8 +39,6 @@ form input:focus {
 }
 
 .form-container input[type="submit"] {
-  display: inline-block;
-  width: auto;
   padding: 10px 20px;
   background-color: #5cb85c;
   border: 0;
@@ -50,8 +48,6 @@ form input:focus {
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
-  /* padding: 10px;
-  width: 180px; */
 }
 
 input[type="submit"]:hover {
