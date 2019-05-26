@@ -20,7 +20,7 @@ body {
   margin: auto;
 }
 
-.form-container input,
+.form-container-ad input,
 select {
   font-family: "Catamaran", sans-serif;
   outline: 1;
@@ -38,7 +38,7 @@ form input:focus {
   outline: none;
 }
 
-.form-container input[type="submit"] {
+.form-container-ad input[type="submit"] {
   padding: 10px 20px;
   background-color: #5cb85c;
   border: 0;
@@ -67,15 +67,6 @@ h2 {
   font-size: 1.09em;
 }
 
-.para-info {
-  margin: 15px 0 0;
-  color: #efefef;
-  font-size: 16px;
-}
-
-.form .para-info a {
-  color: #db1010;
-}
 
 .form h2 {
   font-size: 1em;
