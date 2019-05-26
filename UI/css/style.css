@@ -1,4 +1,5 @@
 * {
+
   box-sizing: border-box;
 }
 
@@ -8,11 +9,13 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
 
 ul {
+
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -26,6 +29,19 @@ a {
 .home > a {
   margin: 0;
   font-size: 1.45em;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #010165;
+}
+
+.home > a {
+    margin: 0;
+    font-size: 1.45em;
 }
 
 .container,
@@ -42,7 +58,9 @@ a {
 
 .home a:hover {
   text-decoration: underline;
+    text-transform: uppercase;
 }
+
 
 .home a,
 .nav-list a {
@@ -74,7 +92,25 @@ a {
   outline: none;
   padding: 12px 40px 10px;
   position: relative;
+    padding: 10px 15px;
+    text-align: center;
+}
 
+.nav-list {
+    margin-top: 5px;
+}
+
+.container {
+    padding-top: .9em;
+    padding-bottom: .9em;
+    border: 1px solid #a2a2a2;
+    background-color: #f4f4f4;
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .button:before,
@@ -106,6 +142,7 @@ a {
 
 .button:hover:before,
 .button:hover:after {
+
   height: 100%;
   width: 100%;
 }
@@ -116,6 +153,7 @@ a {
 /* START SECTION */
 
 h1 {
+
   margin-top: 40px;
   margin-bottom: 15px;
 }
@@ -162,6 +200,14 @@ img {
       margin-bottom: 35px;
   }
 
+    body {
+        overflow: initial;
+    }
+
+    #footer p {
+        margin-bottom: 35px;
+    }
+
 }
 
 
@@ -175,6 +221,10 @@ img {
   #footer p {
       margin-top: 10px;
   }
+
+    #footer p {
+        margin-top: 10px;
+    }
 
 
 }
@@ -202,6 +252,9 @@ img {
       font-weight: 530;
   }
 
+
+   
+   
 }
 @media only screen and (max-width: 320px) {
 
@@ -225,6 +278,7 @@ img {
       color: #010165;
       font-weight: 530;
   }
+
 
 }
 
