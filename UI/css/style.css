@@ -132,6 +132,9 @@ a {
 h1 {
   margin-top: 40px;
   margin-bottom: 15px;
+  text-align: center;
+  color: #010165;
+  font-weight: 500;
 }
 
 p {
