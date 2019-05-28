@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -139,28 +141,37 @@ h1 {
 }
 
 /* card style */
-img{
+img {
   height: auto;
   max-width: 100%;
   vertical-align: middle;
 }
-.car-cards{
+.car-cards {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
 }
-.card-list-item{
+.card-list-item {
   display: flex;
   padding: 1rem;
 }
-.card{
+.card {
   background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
+.card-content{
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 16px;
 
+}
 
 /* footer */
 #footer p {
