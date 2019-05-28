@@ -195,6 +195,15 @@ img {
   margin-bottom: 20px;
 }
 
+.view{
+  background-color: #ccc;
+  border: 1px solid #e8e8e8;
+  color: #010165;
+  padding: 8px;
+  display: block;
+  width: 100%;
+}
+
 /* footer */
 #footer p {
   max-width: 600px;
