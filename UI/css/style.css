@@ -7,6 +7,7 @@ body {
   font-family: "Catamaran", sans-serif;
   min-height: 100vh;
   line-height: 1.6;
+  /* background: #e8e8e8; */
   /* overflow: hidden; */
 }
 
@@ -137,6 +138,26 @@ h1 {
   font-weight: 500;
 }
 
+/* card style */
+img{
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+.car-cards{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.card-list-item{
+  display: flex;
+  padding: 1rem;
+}
+
+
+
+/* footer */
 #footer p {
   max-width: 600px;
   margin: auto;
