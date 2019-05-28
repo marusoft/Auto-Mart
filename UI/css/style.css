@@ -172,6 +172,28 @@ img {
   padding: 16px;
 
 }
+.card-img{
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  filter: contrast(70%);
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);
+}
+
+.card-name{
+  color: #010165;
+  font-size: 20px;
+  font-weight: 300;
+}
+.price{
+  flex: 1 1 auto;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+}
 
 /* footer */
 #footer p {
@@ -179,7 +201,7 @@ img {
   margin: auto;
   text-align: center;
   color: #010165;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 /* MEDIA QUERIES */
