@@ -165,14 +165,13 @@ img {
   overflow: hidden;
 }
 
-.card-content{
+.card-content {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   padding: 16px;
-
 }
-.card-img{
+.card-img {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -181,21 +180,21 @@ img {
   filter: contrast(70%);
   overflow: hidden;
   position: relative;
-  transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);
+  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
 }
 
-.card-name{
+.card-name {
   color: #010165;
   font-size: 20px;
   font-weight: 300;
 }
-.price{
+.price {
   flex: 1 1 auto;
   font-size: 0.875rem;
   margin-bottom: 20px;
 }
 
-.view{
+.view {
   background-color: #ccc;
   border: 1px solid #e8e8e8;
   color: #010165;
@@ -282,5 +281,17 @@ img {
     text-align: center;
     color: #010165;
     font-weight: 530;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  .card-list-item{
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 896px) {
+  .card-list-item{
+    width: 33.3333%;
   }
 }
