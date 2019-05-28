@@ -9,7 +9,8 @@ body {
   font-family: "Catamaran", sans-serif;
   min-height: 100vh;
   line-height: 1.6;
-  background: #e8e8e8;
+  background: #ffffff;
+  font-weight: 400;
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
@@ -173,6 +174,10 @@ img {
   overflow: hidden;
 }
 
+.card-img:hover{
+  filter: contrast(100%);
+}
+
 .card-content {
   display: flex;
   flex: 1 1 auto;
@@ -200,6 +205,11 @@ img {
   flex: 1 1 auto;
   font-size: 0.875rem;
   margin-bottom: 20px;
+  color: #010165;
+}
+
+#span{
+  color: #010165;
 }
 
 .view {
