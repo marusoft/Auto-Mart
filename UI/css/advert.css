@@ -10,7 +10,6 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   background: #e8e8e8;
-  /* overflow: hidden; */
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
@@ -140,6 +139,15 @@ h1 {
   font-weight: 500;
 }
 
+/* footer */
+#footer p {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  color: #010165;
+  font-weight: 300;
+}
+
 /* card style */
 img {
   height: auto;
@@ -201,15 +209,6 @@ img {
   padding: 8px;
   display: block;
   width: 100%;
-}
-
-/* footer */
-#footer p {
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-  color: #010165;
-  font-weight: 300;
 }
 
 /* MEDIA QUERIES */
@@ -284,14 +283,16 @@ img {
   }
 }
 
+/* media queries */
+
 @media only screen and (min-width: 640px) {
-  .card-list-item{
+  .card-list-item {
     width: 50%;
   }
 }
 
 @media only screen and (min-width: 896px) {
-  .card-list-item{
+  .card-list-item {
     width: 33.3333%;
   }
 }
