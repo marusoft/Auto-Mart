@@ -1,12 +1,20 @@
 // variable to target modal element,0pen modal button and close button
-const updatePriceModal = document.querySelector('#update-price-modal');
-const updatePriceBtn = document.querySelector('#update-price-btn');
-const closeUpdateModal = document.querySelector('.close-update-modal')
+const updatePriceModal = document.querySelector("#update-price-modal");
+const updatePriceBtn = document.querySelector("#update-price-btn");
+const closeUpdateModal = document.querySelector(".close-update-modal");
 
-// function to open updaye price modal
-const openUpdateModal = () => {
-  updatePriceModal.style.display = 'block';
-}
+// function to open update price modal
+const openUpdateModalOnclick = () => {
+  updatePriceModal.style.display = "block";
+};
+
+// function to close update price modal
+const closeUpdateModalOnclick = () => {
+  updatePriceModal.style.display = "none";
+};
 
 // Event handlers
-updatePriceBtn.onclick = openUpdateModal;
+// on click,it opens the update price modal
+updatePriceBtn.onclick = openUpdateModalOnclick;
+// on click,it close the update price modal
+closeUpdateModal.onclick = closeUpdateModalOnclick;
