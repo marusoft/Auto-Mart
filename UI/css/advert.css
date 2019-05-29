@@ -239,6 +239,8 @@ img {
   padding: 20px;
   width: 70%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.15);
+  animation-name: modalpriceopen;
+  animation-duration: 1s;
 }
 .close-update-modal{
   color: #010165;
@@ -254,7 +256,7 @@ img {
     position: relative;
     z-index: 1;
     border-radius: 10px;
-    background: rgba(1, 1, 101, 0.8);
+    /* background: rgba(1, 1, 101, 0.8); */
     padding: 45px;
     margin: 0 auto 100px;
     max-width: 450px;
