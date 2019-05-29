@@ -107,11 +107,11 @@ a {
   width: 24px;
 }
 
-.button:before {
+ .button:before {
   border-top: 2px solid #010165;
   left: 0px;
   top: -5px;
-}
+} 
 
 .button:after {
   border-bottom: 2px solid #010165;
