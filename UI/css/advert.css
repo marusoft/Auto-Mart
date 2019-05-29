@@ -308,6 +308,11 @@ form > h2 {
 
 /* Modal Update Price Style End */
 
+@keyframes modalpriceopen{
+  from{ opacity:0}
+  to{ opacity: 1}
+}
+
 /* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
   img {
