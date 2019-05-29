@@ -305,6 +305,9 @@ form > h2 {
   font-size: 1.09em;
   color: #010165;
 }
+#car-price {
+  text-transform: capitalize;
+}
 
 /* Modal Update Price Style End */
 
