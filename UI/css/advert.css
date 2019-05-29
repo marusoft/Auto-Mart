@@ -233,6 +233,13 @@ img {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5)
 }
+.update-modal-content{
+  background-color: #e8e8e8;
+  margin: 15% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.15);
+}
 
 /* Modal Update Price Style End */
 
