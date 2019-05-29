@@ -223,7 +223,7 @@ img {
 
 /* Modal Update Price Style Start */
 .update-modal{
-  /* display: none; */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -240,7 +240,15 @@ img {
   width: 70%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.15);
 }
-
+.close-update-modal{
+  color: #010165;
+  float: right;
+  font-size: 1.875em;
+}
+.close-update-modal:hover,.close-update-modal:focus{
+  cursor: pointer;
+  color: #fa4359;
+}
 /* Modal Update Price Style End */
 
 /* MEDIA QUERIES */
