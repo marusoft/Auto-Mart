@@ -107,11 +107,11 @@ a {
   width: 24px;
 }
 
- .button:before {
+.button:before {
   border-top: 2px solid #010165;
   left: 0px;
   top: -5px;
-} 
+}
 
 .button:after {
   border-bottom: 2px solid #010165;
@@ -174,7 +174,7 @@ img {
   overflow: hidden;
 }
 
-.card-img:hover{
+.card-img:hover {
   filter: contrast(100%);
 }
 
@@ -208,7 +208,7 @@ img {
   color: #010165;
 }
 
-#span{
+#span {
   color: #010165;
 }
 
@@ -222,7 +222,7 @@ img {
 }
 
 /* Modal Update Price Style Start */
-.update-modal{
+.update-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -231,9 +231,9 @@ img {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5)
+  background-color: rgba(0, 0, 0, 0.5);
 }
-.update-modal-content{
+.update-modal-content {
   background-color: #e8e8e8;
   margin: 15% auto;
   padding: 20px;
@@ -242,29 +242,30 @@ img {
   animation-name: modalpriceopen;
   animation-duration: 1s;
 }
-.close-update-modal{
+.close-update-modal {
   color: #010165;
   float: right;
   font-size: 1.875em;
 }
-.close-update-modal:hover,.close-update-modal:focus{
+.close-update-modal:hover,
+.close-update-modal:focus {
   cursor: pointer;
   color: #fa4359;
 }
 
-.price-upadte-form{
-    position: relative;
-    z-index: 1;
-    border-radius: 10px;
-    /* background: rgba(1, 1, 101, 0.8); */
-    padding: 45px;
-    margin: 0 auto 100px;
-    max-width: 450px;
-    text-align: center;
-    box-sizing: border-box;
+.price-upadte-form {
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  padding: 45px;
+  margin: 0 auto 100px;
+  max-width: 450px;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-.form-container-update input,select{
+.form-container-update input,
+select {
   font-family: "Catamaran", sans-serif;
   outline: 1;
   background: #f2f2f2;
@@ -299,18 +300,21 @@ input[type="submit"]:hover {
   background: white;
   border: 1px solid green;
   outline: none;
-
 }
 form > h2 {
   font-size: 1.09em;
-  color: #ffffff
+  color: #010165;
 }
 
 /* Modal Update Price Style End */
 
-@keyframes modalpriceopen{
-  from{ opacity:0}
-  to{ opacity: 1}
+@keyframes modalpriceopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* MEDIA QUERIES */
