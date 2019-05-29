@@ -249,6 +249,19 @@ img {
   cursor: pointer;
   color: #fa4359;
 }
+
+.price-upadte-form{
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+    background: rgba(1, 1, 101, 0.8);
+    padding: 45px;
+    margin: 0 auto 100px;
+    max-width: 450px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
 /* Modal Update Price Style End */
 
 /* MEDIA QUERIES */
