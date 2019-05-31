@@ -12,7 +12,16 @@
 
 <body>
   <!-- header start -->
+
+  <!-- hamburger start -->
   <header class="container">
+    <div class="hambuger-container" id="hambuger-contain">
+      <div class="hambuger"></div>
+      <div class="hambuger"></div>
+      <div class="hambuger"></div>
+    </div>
+    <!-- hamburger end -->
+
     <div class="home"><a href="index.html">Auto Mart</a></div>
     <ul class="nav-list">
       <li><a href="#" id="update-price-btn" class="button">Update Price</a></li>
@@ -53,7 +62,8 @@
               <option value="e-class">E-Class</option>
               <option value="m class">M Class</option>
             </select>
-            <input type="number" name="car-price" id="car-price" min="0.00" max="10000000" placeholder=" new vehicle price">
+            <input type="number" name="car-price" id="car-price" min="0.00" max="10000000"
+              placeholder=" new vehicle price">
             <input type="submit" value="Update Price">
           </form>
         </div>
