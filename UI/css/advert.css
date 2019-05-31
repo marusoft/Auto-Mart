@@ -1,6 +1,4 @@
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
@@ -407,6 +405,7 @@ form > h2 {
   }
 }
 
+/* Media Queries for modal update price */
 @media only screen and (max-width: 418px) {
   .update-modal-content {
     margin: 45% auto;
@@ -421,4 +420,20 @@ form > h2 {
     border: 0;
     font-size: 20px;
   }
+}
+@media only screen and (max-width:768px){
+  .update-modal-content {
+    margin: 50% auto;
+    width:95%;
+  }
+  .close-update-modal {
+    color: #010165;
+    float: right;
+    font-size: 45px;
+  }
+  .close-update-modal:hover {
+    cursor: pointer;
+    color: #fa4359;
+  }
+  
 }
