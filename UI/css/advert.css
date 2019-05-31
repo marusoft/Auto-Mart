@@ -307,9 +307,6 @@ form > h2 {
 #car-price {
   text-transform: capitalize;
 }
-
-/* Modal Update Price Style End */
-
 @keyframes modalpriceopen {
   from {
     opacity: 0;
@@ -318,6 +315,7 @@ form > h2 {
     opacity: 1;
   }
 }
+/* Modal Update Price Style End */
 
 /* MEDIA QUERIES for naviagtion bar */
 @media only screen and (max-width: 768px) {
