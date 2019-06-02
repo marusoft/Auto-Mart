@@ -1,0 +1,64 @@
+.hambuger-container {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .hambuger1,
+  .hambuger2,
+  .hambuger3 {
+    width: 35px;
+    height: 5px;
+    background-color: #010165;
+    margin: 6px 0;
+    transition: 0.5s;
+  }
+  /* step 1 */
+  /* .hambuger-container {
+    cursor: pointer;
+    display: block;
+    align-self: flex-end;
+    position: absolute;
+    padding-right: 16px;
+  } */
+  /* step2 */
+  /* .toggler .hambuger1 {
+    transform: rotate(-45deg) translate(-9px, 6px);
+  }
+
+  .toggler .hambuger2 {
+    opacity: 0;
+  }
+
+  .toggler .hambuger3 {
+    transform: rotate(45deg) translate(-8px, -8px);
+  } */
+  /* step3 */
+  /* .nav-list {
+    display: none;
+  }
+  .toggler {
+    display: block;
+  } */
+
+  /* step4 */
+  /* .container,
+  .nav-list {
+    justify-content: center;
+    flex-direction: column;
+  } */
+  /* step5 */
+  /* .home a,
+  .nav-list a {
+    padding: 10px;
+    text-align: center;
+  } */
+}
+
+/* @media only screen and (max-width: 360px) {
+  .container,
+  .nav-list {
+    justify-content: center;
+    align-items: inherit;
+    flex-direction: column;
+  }
+} */
