@@ -2,6 +2,7 @@
   display: none;
 }
 
+/* media query for menu bar icon at screen size max-width:768px*/
 @media only screen and (max-width: 768px) {
   .hambuger1,
   .hambuger2,
@@ -18,9 +19,9 @@
     align-self: flex-end;
     position: absolute;
     padding-right: 16px;
-  } 
+  }
 
- .toggler .hambuger1 {
+  .toggler .hambuger1 {
     transform: rotate(-45deg) translate(-9px, 6px);
   }
 
@@ -30,20 +31,20 @@
 
   .toggler .hambuger3 {
     transform: rotate(45deg) translate(-8px, -8px);
-  } 
-   .nav-list {
+  }
+  .nav-list {
     display: none;
   }
   .toggler {
     display: block;
-  } 
+  }
 
-   .container,
+  .container,
   .nav-list {
     justify-content: center;
     flex-direction: column;
-  } 
-   .home a,
+  }
+  .home a,
   .nav-list a {
     padding: 10px;
     text-align: center;
