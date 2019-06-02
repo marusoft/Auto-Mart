@@ -71,39 +71,10 @@ a {
 
 }
 
-.button:before,
-.button:after {
-    border: 0 solid transparent;
-    transition: all 0.25s;
-    content: '';
-    height: 24px;
-    position: absolute;
-    width: 24px;
-}
-
-.button:before {
-    border-top: 2px solid #010165;
-    left: 0px;
-    top: -5px;
-}
-
-.button:after {
-    border-bottom: 2px solid #010165;
-    bottom: -5px;
-    right: 0px;
-}
-
 .button:hover {
     background-color: #010165;
     color: #ffffff;
 }
-
-.button:hover:before,
-.button:hover:after {
-    height: 100%;
-    width: 100%;
-}
-
 /* END OF HEADER/NAVIGATION STYLE */
 
 
