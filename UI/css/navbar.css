@@ -50,11 +50,11 @@
   }
 }
 
-/* @media only screen and (max-width: 360px) {
+@media only screen and (max-width: 360px) {
   .container,
   .nav-list {
     justify-content: center;
     align-items: inherit;
     flex-direction: column;
   }
-} */
+}
