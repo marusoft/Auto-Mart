@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Car Advert|Update Price</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/advert.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/navbar.css">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+</head>
+
+<body>
+  <!-- header start -->
+  <header class="container">
+    <!-- step0 -->
+    <!-- hamburger start -->
+    <div class="hambuger-container" id="hambuger-contain">
+      <div class="hambuger1"></div>
+      <div class="hambuger2"></div>
+      <div class="hambuger3"></div>
+    </div>
+    <!-- hamburger end -->
+
+    <div class="home"><a href="index.html">Auto Mart</a></div>
+    <ul class="nav-list">
+      <li><a href="#" id="update-price-btn" class="button update-btn">Update Price</a></li>
+      <li><a href="#" class="button">Make Purchase</a></li>
+      <li><a href="index.html" class="button">Sign out</a></li>
+    </ul>
+
+  </header>
+  <!-- header ends here -->
+
+  <!-- update Modal start -->
+  <section class="update-price-modal">
+    <div id="update-price-modal" class="update-modal">
+      <div class="update-modal-content">
+        <span class="close-update-modal">&times;</span>
+        <div class="form-container-update">
+          <form action="#" class="price-upadte-form">
+            <h2>Add New Price</h2>
+            <input type="text" name="name" id="name" placeholder="Owner Fullname" required>
+            <select required name="make" id="make">
+              <option value="make" disabled selected>Make</option>
+              <option value="nissan">Nissan</option>
+              <option value="bmw">BMW</option>
+              <option value="mercedes benz">Mercedes Benz</option>
+              <option value="volkswagen">Volkswagen</option>
+              <option value="land rover">Land Rover</option>
+              <option value="honda">Honda</option>
+              <option value="audi">Audi</option>
+              <option value="bentley">Bentley</option>
+            </select>
+            <select required name="model" id="model">
+              <option value="model" disabled selected>Model</option>
+              <option value="c couple">C Couple</option>
+              <option value="1113">1113</option>
+              <option value="230e">230E</option>
+              <option value="300d">300D</option>
+              <option value="cla-class">CLA-Class</option>
+              <option value="clk">CLK</option>
+              <option value="e-class">E-Class</option>
+              <option value="m class">M Class</option>
+            </select>
+            <input type="number" name="car-price" id="car-price" min="0.00" max="10000000"
+              placeholder=" new vehicle price">
+            <input type="submit" value="Update Price">
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- update Modal end -->
+
+
+  <section>
+    <div class="advert-list">
+      <h1>Vehicle Advertisement</h1>
+    </div>
+  </section>
+
+  <!-- car advert image card -->
+  <section class="card-container">
+    <div class="car-cards">
+      <!-- card1 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/toyota-4R.jpg" alt="Toyota 4Runner">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Toyota 4Runner</div>
+            <p class="price">N2,500,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <button class="view">View</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- card2 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/prius.jpg" alt="Volkswagen">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Volkswagen</div>
+            <p class="price">N3,500,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <button class="view">View</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- card3 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/honda-suv.jpg" alt="Honda SUV">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Honda SUV</div>
+            <p class="price">N1,500,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <button class="view">View</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- card4 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/mercedes-benz1.jpg" alt="Mercedes Benz">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Mercedes Benz</div>
+            <p class="price">N3,000,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <button class="view">View</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- card5 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/nissanaltima.jpg" alt="Nissan Altima">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Nissan Altima</div>
+            <p class="price">N2,300,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <button class="view">View</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- card6 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/range-rover.jpg" alt="Range Rover">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Range Rover</div>
+            <p class="price">N2,000,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <button class="view">View</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- car advert image card -->
+
+  <!-- footer start -->
+  <footer id="footer">
+    <p>&copy 2019 Auto Mart. All Rights Reserved.</p>
+  </footer>
+  <!-- footer end -->
+
+  <script src="js/updatePrice.js"></script>
+  <script src="js/navbar.js"></script>
+
+</body>
+
+</html>
