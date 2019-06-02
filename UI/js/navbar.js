@@ -1,3 +1,4 @@
+
 const hambugerContain = document.querySelector("#hambuger-contain");
 const navList = document.querySelector(".nav-list");
 
@@ -8,3 +9,4 @@ const toggleBar = () => {
 
 hambugerContain.addEventListener("click", toggleBar);
 navList.addEventListener("click", toggleBar);
+
