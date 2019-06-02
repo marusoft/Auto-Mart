@@ -12,16 +12,15 @@
     margin: 6px 0;
     transition: 0.5s;
   }
-  /* step 1 */
-  /* .hambuger-container {
+  .hambuger-container {
     cursor: pointer;
     display: block;
     align-self: flex-end;
     position: absolute;
     padding-right: 16px;
-  } */
-  /* step2 */
-  /* .toggler .hambuger1 {
+  } 
+
+ .toggler .hambuger1 {
     transform: rotate(-45deg) translate(-9px, 6px);
   }
 
@@ -31,27 +30,24 @@
 
   .toggler .hambuger3 {
     transform: rotate(45deg) translate(-8px, -8px);
-  } */
-  /* step3 */
-  /* .nav-list {
+  } 
+   .nav-list {
     display: none;
   }
   .toggler {
     display: block;
-  } */
+  } 
 
-  /* step4 */
-  /* .container,
+   .container,
   .nav-list {
     justify-content: center;
     flex-direction: column;
-  } */
-  /* step5 */
-  /* .home a,
+  } 
+   .home a,
   .nav-list a {
     padding: 10px;
     text-align: center;
-  } */
+  }
 }
 
 /* @media only screen and (max-width: 360px) {
