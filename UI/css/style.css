@@ -177,3 +177,9 @@ img {
     font-weight: 530;
   }
 }
+
+@media only screen and (max-width: 320px) {
+  .container {
+    width: 355px;
+  }
+}
