@@ -67,7 +67,6 @@ h2 {
   font-size: 1.09em;
 }
 
-
 .form h2 {
   font-size: 1em;
 }
@@ -108,5 +107,9 @@ h2 {
   }
   p {
     font-weight: 800;
+  }
+
+  .car-advert-form {
+    width: 100%;
   }
 }
