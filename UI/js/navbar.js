@@ -9,4 +9,3 @@ const toggleBar = () => {
 
 hambugerContain.addEventListener("click", toggleBar);
 navList.addEventListener("click", toggleBar);
-
