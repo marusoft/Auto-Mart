@@ -1,10 +1,9 @@
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(../img/passenger-car-150155_640.png);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/passenger-car-150155_640.png);
   height: 100vh;
   background-size: cover;
   background-position: center;
-  font-family: "Catamaran", sans-serif;
+  font-family: 'Catamaran', sans-serif;
   overflow: initial;
 }
 
@@ -13,16 +12,14 @@ body {
 }
 
 /* form style */
-
-.advert-page {
+.signup-page {
   width: 360px;
   padding: 10%, 0, 0;
   margin: auto;
 }
 
-.form-container-ad input,
-select {
-  font-family: "Catamaran", sans-serif;
+.form-container input {
+  font-family: 'Catamaran', sans-serif;
   outline: 1;
   background: #f2f2f2;
   width: 100%;
@@ -30,16 +27,10 @@ select {
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 16px;
-}
-form input:focus {
-  border-radius: 5px;
-  border: 2px solid #0693cd;
-  outline: none;
+  font-size: 14px;
 }
 
-.form-container-ad input[type="submit"] {
-  padding: 10px 20px;
+.form-container input[type=submit] {
   background-color: #5cb85c;
   border: 0;
   border-radius: 5px;
@@ -63,18 +54,32 @@ h1,
 h2,
 p {
   color: #ffffff;
+
 }
 
 h2 {
   font-size: 1.09em;
+
+}
+
+.para-info {
+  margin: 15px 0 0;
+  color: #efefef;
+  font-size: 16px;
+
+}
+
+.form .para-info a {
+  color: #db1010;
+
 }
 
 .form h2 {
   font-size: 1em;
 }
 
-p > a {
-  color: #d4af37;
+p>a {
+  color: #D4AF37;
 }
 
 h2 {
@@ -82,37 +87,38 @@ h2 {
   color: #ffffff;
 }
 
-.car-advert-form {
+
+.alternate-form {
   position: relative;
   z-index: 1;
   border-radius: 10px;
   background: rgba(1, 1, 101, 0.8);
   padding: 45px;
   margin: 0 auto 100px;
-  max-width: 450px;
+  max-width: 360px;
   text-align: center;
   box-sizing: border-box;
+  display: none;
 }
-/* media queries */
 
 @media only screen and (max-width: 320px) {
+
   .container,
   .nav-list {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .home {
-    margin: 0;
-    font-size: 0.53em;
-    padding: 4px;
-  }
-  p {
-    font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
   }
 
-  .car-advert-form {
-    width: 100%;
+  .home {
+      margin: 0;
+      font-size: 0.53em;
+      padding: 4px;
+  }
+
+  p {
+      font-weight: 800
   }
 
 }
