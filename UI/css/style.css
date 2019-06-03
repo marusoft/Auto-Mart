@@ -68,7 +68,6 @@ a {
   padding: 12px 40px 10px;
   position: relative;
 }
-
 .button:hover {
   background-color: #010165;
   color: #ffffff;
@@ -177,7 +176,6 @@ img {
     font-weight: 530;
   }
 }
-
 @media only screen and (max-width: 320px) {
   .container {
     width: 355px;
