@@ -144,8 +144,7 @@ img {
 #span {
   color: #010165;
   display: block;
-  user-select: none;
-  font-size: 25px;
+  font-size: 24px;
 }
 input[type="checkbox"] {
   height: 18px;
