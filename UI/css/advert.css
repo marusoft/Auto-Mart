@@ -155,7 +155,9 @@ input[type="checkbox"] {
   background-color: #efefef;
   border: 1px solid #e8e8e8;
   color: #010165;
-  width: 100%;
+  width: auto;
+  padding: 10px 20px;
+  margin: 3px;
 }
 /* card end */
 
