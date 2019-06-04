@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Auto Mart|Post Car AD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/form.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/navbar.css">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+</head>
+
+<body>
+    <!-- header start -->
+    <header class="container">
+        <!-- hamburger start -->
+        <div class="hambuger-container" id="hambuger-contain">
+            <div class="hambuger1"></div>
+            <div class="hambuger2"></div>
+            <div class="hambuger3"></div>
+        </div>
+        <!-- hamburger end -->
+
+        <div class="home"><a href="index.html">Auto Mart</a></div>
+        <ul class="nav-list">
+            <li><a href="view-ad.html" id="car" class="button">View Car Advert</a></li>
+            <li><a href="index.html" id="sign out" class="button">Sign out</a></li>
+        </ul>
+    </header>
+    <!-- header ends here -->
+    <section>
+        <div class="app-discription">
+            <h1>Auto Mart Car Sales Advertisement</h1>
+        </div>
+    </section>
+
+
+    <section class="form-container-ad">
+        <!-- car sales advert form -->
+        <form action="#" class="car-advert-form">
+            <h2>Add Car For Sales</h2>
+            <input type="text" name="name" id="name" placeholder="Owner Fullname" required>
+            <input type="email" name="email" id="email" placeholder="owner@automart.com" required>
+            <select required name="make" id="make">
+                <option value="make" disabled selected>Make</option>
+                <option value="nissan">Nissan</option>
+                <option value="bmw">BMW</option>
+                <option value="mercedes benz">Mercedes Benz</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="land rover">Land Rover</option>
+                <option value="honda">Honda</option>
+                <option value="audi">Audi</option>
+                <option value="bentley">Bentley</option>
+            </select>
+            <select required name="model" id="model">
+                <option value="model" disabled selected>Model</option>
+                <option value="c couple">C Couple</option>
+                <option value="1113">1113</option>
+                <option value="230e">230E</option>
+                <option value="300d">300D</option>
+                <option value="cla-class">CLA-Class</option>
+                <option value="clk">CLK</option>
+                <option value="e-class">E-Class</option>
+                <option value="m class">M Class</option>
+            </select>
+            <select required name="body-type" id="body-type">
+                <option value="body type" disabled selected>Body Type</option>
+                <option value="sadan">Sedan</option>
+                <option value="hatchback">Hatchback</option>
+                <option value="suv">SUV</option>
+                <option value="mpvs">MPVs</option>
+                <option value="estate">Estate</option>
+                <option value="crossover">Crossover</option>
+                <option value="couple">Couple</option>
+                <option value="pickpo">Pickup</option>
+            </select>
+            <input type="file" name="car-img" id="car-img">
+            <input type="number" name="car-price" id="car-price" min="0.00" max="10000000" placeholder="car price">
+            <input type="submit" value="Post Car For Sales">
+        </form>
+        <!-- car sales advert form end-->
+    </section>
+
+    <footer id="footer">
+        <p>&copy 2019 Auto Mart. All Rights Reserved.</p>
+    </footer>
+    <script src="js/navbar.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
