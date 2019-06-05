@@ -267,6 +267,8 @@ form > h2 {
 .modal-content{
   background-color: #e8e8e8;
   margin: 20% auto;
+  padding: 20px;
+  width: 70%
 }
 /* view-modal section end */
 /* footer */
