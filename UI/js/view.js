@@ -10,5 +10,10 @@ const closeCarModal = () => {
   modalView.style.display = 'none';
 }
 
+const closeModalOnClickOuterArea = event => {
+  event.target == modalView
+    ? ( modalView.style.display = "none")
+    : ( modalView.style.display = false);
+};
 viewBtn.addEventListener('click', viewCarModal);
 closeBtn.addEventListener('click', closeCarModal);
