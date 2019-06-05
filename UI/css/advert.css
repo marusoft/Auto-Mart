@@ -252,6 +252,18 @@ form > h2 {
 }
 /* Modal Update Price Style End */
 
+/* view-modal section start */
+.view-modal1{
+  /* display:none; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+/* view-modal section end */
 /* footer */
 #footer p {
   max-width: 600px;
