@@ -262,6 +262,7 @@ form > h2 {
   height: 100%;
   width: 100%;
   overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 /* view-modal section end */
 /* footer */
