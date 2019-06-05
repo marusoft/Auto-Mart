@@ -283,6 +283,9 @@ form > h2 {
   text-decoration: none;
   cursor: pointer;
 }
+.vehicle-details h2{
+  margin: 0;
+}
 .vehicle-details{
   background-color: #ddd;
   padding: 15px;
