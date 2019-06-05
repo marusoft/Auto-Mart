@@ -254,7 +254,7 @@ form > h2 {
 
 /* view-modal section start */
 .view-modal1{
-  /* display:none; */
+  display:none;
   position: fixed;
   z-index: 1;
   left: 0;
