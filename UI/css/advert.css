@@ -252,7 +252,7 @@ form > h2 {
 }
 /* Modal Update Price Style End */
 
-/* view-modal section start */
+/* car-view-modal section start */
 .view-modal1 {
   display: none;
   position: fixed;
@@ -267,7 +267,6 @@ form > h2 {
 .modal-content {
   background-color: #e8e8e8;
   margin: 20% auto;
-  padding: 20px;
   width: 70%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation-name: modalopen;
@@ -284,6 +283,12 @@ form > h2 {
   text-decoration: none;
   cursor: pointer;
 }
+.vehicle-details{
+  background-color: #ddd;
+  padding: 15px;
+  color: #010165;
+}
+
 @keyframes modalopen {
   from {
     opacity: 0;
@@ -292,7 +297,7 @@ form > h2 {
     opacity: 1;
   }
 }
-/* view-modal section end */
+/* car-view-modal section end */
 /* footer */
 #footer p {
   max-width: 600px;
