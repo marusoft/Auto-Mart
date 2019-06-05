@@ -271,6 +271,11 @@ form > h2 {
   width: 70%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19),
 }
+.close{
+  color: #010165;
+  float: right;
+  font-size: 30px;
+}
 /* view-modal section end */
 /* footer */
 #footer p {
