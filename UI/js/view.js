@@ -3,7 +3,8 @@ const viewBtn = document.querySelector('#btn-view1');
 const CloseBtn = document.querySelector('#close');
 
 // create a function to open modal
-const openModal =() => {
+const viewCarModal =() => {
   modalView.style.display = 'block';
 }
 
+viewBtn.addEventListener('click', viewCarModal);
