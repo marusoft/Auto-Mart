@@ -17,3 +17,4 @@ const closeModalOnClickOuterArea = event => {
 };
 viewBtn.addEventListener('click', viewCarModal);
 closeBtn.addEventListener('click', closeCarModal);
+window.addEventListener('click', closeModalOnClickOuterArea);
