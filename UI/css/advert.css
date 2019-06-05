@@ -276,6 +276,11 @@ form > h2 {
   float: right;
   font-size: 30px;
 }
+.close:hover,.close:focus{
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
 /* view-modal section end */
 /* footer */
 #footer p {
