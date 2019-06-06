@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/marusoft/Auto-Mart/issues"
   },
-  "homepage": "https://github.com/marusoft/Auto-Mart#readme"
+  "homepage": "https://github.com/marusoft/Auto-Mart#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
