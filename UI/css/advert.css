@@ -155,9 +155,10 @@ input[type="checkbox"] {
   background-color: #efefef;
   border: 1px solid #e8e8e8;
   color: #010165;
-  padding: 8px;
-  display: block;
-  width: 100%;
+  width: auto;
+  padding: 10px 20px;
+  margin: 3px;
+  border: none;
 }
 /* card end */
 
@@ -175,7 +176,7 @@ input[type="checkbox"] {
 }
 .update-modal-content {
   background-color: #e8e8e8;
-  margin: 15% auto;
+  margin: 5% auto;
   padding: 20px;
   height: 550px;
   width: 55%;
@@ -251,6 +252,93 @@ form > h2 {
 }
 /* Modal Update Price Style End */
 
+/* car-view-modal section start */
+.view-modal1 {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+  background-color: #e8e8e8;
+  margin: 5% auto;
+  width: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+.close1,
+.close2,
+.close3,
+.close4,
+.close5,
+.close6 {
+  color: #010165;
+  float: right;
+  font-size: 30px;
+}
+.close1:hover,
+.close1:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close2:hover,
+.close2:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close3:hover,
+.close3:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close4:hover,
+.close4:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close5:hover,
+.close5:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close6:hover,
+.close6:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.vehicle-details h2 {
+  margin: 0;
+}
+.vehicle-details {
+  background-color: #ddd;
+  padding: 15px;
+  color: #010165;
+}
+.vehicle-body {
+  padding: 10px 20px;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* car-view-modal section end */
 /* footer */
 #footer p {
   max-width: 600px;
@@ -402,5 +490,14 @@ form > h2 {
   .price {
     margin-right: 190px;
     color: #010165;
+  }
+}
+
+/* view media query */
+@media only screen and (max-width:415px){
+  .modal-content {
+    background-color: #e8e8e8;
+    margin: 20% auto;
+    width: 320px;
   }
 }
