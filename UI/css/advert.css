@@ -332,7 +332,7 @@ form > h2 {
 
 /* css rule set flag-AD-as-fraud-modal start  */
 .flag-modal1 {
-  /* display: none; */
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -340,7 +340,7 @@ form > h2 {
   height: 100%;
   width: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .modal-content {
   background-color: #e8e8e8;
