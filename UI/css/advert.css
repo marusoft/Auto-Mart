@@ -330,6 +330,86 @@ form > h2 {
   padding: 10px 20px;
 }
 
+/* css rule set flag-AD-as-fraud-modal start  */
+.flag-modal1 {
+  /* display: none; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.modal-content {
+  background-color: #e8e8e8;
+  margin: 5% auto;
+  width: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+.close-1,
+.close-2,
+.close-3,
+.close-4,
+.close-5,
+.close-6 {
+  color: #010165;
+  float: right;
+  font-size: 30px;
+}
+.close-1:hover,
+.close-1:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-2:hover,
+.close-2:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-3:hover,
+.close-3:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-4:hover,
+.close-4:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-5:hover,
+.close-5:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-6:hover,
+.close-6:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.flag-details h2 {
+  margin: 0;
+}
+.flag-details {
+  background-color: #ddd;
+  padding: 15px;
+  color: #010165;
+}
+.flag-body {
+  padding: 10px 20px;
+}
+
+/* css rule set flag-AD-as-fraud-modal end  */
+
 @keyframes modalopen {
   from {
     opacity: 0;
@@ -494,7 +574,7 @@ form > h2 {
 }
 
 /* view media query */
-@media only screen and (max-width:415px){
+@media only screen and (max-width: 415px) {
   .modal-content {
     background-color: #e8e8e8;
     margin: 20% auto;
