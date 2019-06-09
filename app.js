@@ -8,7 +8,7 @@ const port = parseInt(process.env.PORT, 10) || 1440;
 app.use(logger('dev'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("*", (req, res) => res.status(200).send({
   message: 'It all start from localhost!!!',
