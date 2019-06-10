@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/api/v1/auth/signup', Users.createUsers);
+app.post('/api/v1/auth/signin', Users.loginUsers);
 
 app.get('*', (req, res) => res.status(200).send({
   message: 'It all start from localhost!!!',
