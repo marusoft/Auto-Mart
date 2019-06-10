@@ -7,8 +7,8 @@ class Users {
   /**
    * @static
    * @returns {object} createUsers
-   * @params {*} req
-   * @params {*} res
+   * @params {object} req
+   * @params {object} res
    */
   static createUsers(req, res) {
     const {
