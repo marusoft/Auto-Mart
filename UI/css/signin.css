@@ -1,22 +1,16 @@
 body {
   margin: 0;
-  font-family: "Catamaran", sans-serif;
-  height: 500px;
-  line-height: 1.6;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../img/passenger-car-150155_640.png);
-  background-size: center;
+  height: 100vh;
+  background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   font-family: "Catamaran", sans-serif;
   overflow: initial;
 }
 
-.app-discription h1 {
-  color: #ffffff;
-}
 .app-discription p {
-  color: #ffffff;
+  margin-bottom: 15px;
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
@@ -111,6 +105,62 @@ p {
 
 /* END SECTION */
 
+/* FORM STYLE START */
+.signup-page {
+  width: 360px;
+  padding: 10%, 0, 0;
+  margin: auto;
+}
+
+.form-container input {
+  font-family: "Catamaran", sans-serif;
+  outline: 1;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form-container input[type="submit"] {
+  background-color: #5cb85c;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+  padding: 10px;
+  width: 180px;
+}
+
+input[type="submit"]:hover {
+  color: green;
+  background: white;
+  border: 1px solid green;
+  outline: none;
+}
+.form h2 {
+  font-size: 1em;
+}
+
+.alternate-form {
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  background: rgba(1, 1, 101, 0.8);
+  padding: 45px;
+  margin: 0 auto 100px;
+  max-width: 360px;
+  text-align: center;
+  box-sizing: border-box;
+  display: none;
+}
+/* FORM STYLE END */
+
 /* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
   body {
@@ -145,7 +195,6 @@ p {
   h1,
   p {
     text-align: center;
-    color: #010165;
     font-weight: 530;
   }
 }
@@ -170,8 +219,25 @@ p {
   }
 }
 
+
 @media only screen and (max-width: 320px) {
   .container {
     width: 355px;
+  }
+  .container,
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .home {
+    margin: 0;
+    font-size: 0.53em;
+    padding: 4px;
+  }
+
+  p {
+    font-weight: 800;
   }
 }
