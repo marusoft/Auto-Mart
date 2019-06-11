@@ -132,6 +132,10 @@ p {
   box-shadow: 0px 0px 7px 3px #ddd;
   text-align: center;
   margin: 25px auto;
+  transition: all 0.5s;
+}
+.card:hover {
+  filter: brightness(1.2);
 }
 img {
   width: 100%;
