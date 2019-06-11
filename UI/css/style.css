@@ -156,9 +156,14 @@ img {
   margin-top:25px;
 
 }
-
 /* END SECTION */
 
+/* FOOTER SECTION */
+#footer p{
+  color: #010165;
+  margin-bottom: 20px;
+}
+/* FOOTER SECTION */
 /* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
   body {
