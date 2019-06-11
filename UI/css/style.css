@@ -1,15 +1,21 @@
+*{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Catamaran", sans-serif;
-  height: 500px;
+  min-height: 100vh;
   line-height: 1.6;
+  font-family: "Catamaran", sans-serif;
+  overflow: initial;
+}
+.app-discription {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../img/passenger-car-150155_640.png);
   background-size: center;
   background-position: center;
   background-repeat: no-repeat;
-  font-family: "Catamaran", sans-serif;
-  overflow: initial;
 }
 
 .app-discription h1 {
