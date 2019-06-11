@@ -144,10 +144,17 @@ img {
   color: #010165;
 }
 
-.car-list h2{
+.car-list h2 {
   color: #010165;
   text-align: center;
   padding-top: 30px;
+}
+.car-name,
+.car-price {
+  text-align: left;
+  margin: 5px;
+  margin-top:25px;
+
 }
 
 /* END SECTION */
