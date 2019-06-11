@@ -117,6 +117,15 @@ p {
   text-align: center;
   font-weight: 500;
 }
+.card-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-align: center;
+  flex-direction: row;
+}
 
 /* END SECTION */
 
