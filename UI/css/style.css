@@ -59,6 +59,7 @@ a {
   text-decoration: underline;
 }
 
+
 .home a,
 .nav-list a {
   padding: 10px 15px;
@@ -77,7 +78,6 @@ a {
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
 }
-
 .button {
   border: none;
   color: #010165;
@@ -89,6 +89,7 @@ a {
   background-color: #010165;
   color: #ffffff;
 }
+
 /* END OF HEADER/NAVIGATION STYLE */
 
 /* SECTION */
@@ -194,7 +195,6 @@ img {
     align-items: center;
     justify-content: space-around;
   }
-
   .home {
     margin: 0;
     font-size: 0.9em;
@@ -207,6 +207,8 @@ img {
     font-size: 23px;
     font-weight: 600;
   }
+
+   
 }
 @media only screen and (max-width: 320px) {
   .container,
@@ -222,8 +224,8 @@ img {
     margin: 0;
     font-size: 0.6em;
     padding: 4px;
-  }
 
+  }
   h1,
   p {
     text-align: center;
