@@ -1,4 +1,4 @@
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -11,9 +11,11 @@ body {
   overflow: initial;
 }
 .app-discription {
+  padding: 5px;
+  height: 500px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url(../img/passenger-car-150155_640.png);
-  background-size: center;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -102,7 +104,7 @@ h2 {
 }
 
 h1 {
-  margin-top: 40px;
+  margin-top: 110px;
   margin-bottom: 15px;
   text-align: center;
   font-weight: 500;
