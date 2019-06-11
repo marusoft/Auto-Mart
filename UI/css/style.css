@@ -118,7 +118,6 @@ p {
 }
 .card-container {
   width: 98%;
-  /* padding: 0px auto; */
   height: auto;
   display: flex;
   justify-content: space-around;
@@ -142,7 +141,7 @@ img {
   height: 150px;
 }
 .card > p {
-  color: #000;
+  color: #010165;
 }
 
 .car-list h2{
