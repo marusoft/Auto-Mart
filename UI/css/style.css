@@ -145,6 +145,12 @@ img {
   color: #000;
 }
 
+.car-list h2{
+  color: #010165;
+  text-align: center;
+  padding-top: 30px;
+}
+
 /* END SECTION */
 
 /* MEDIA QUERIES */
