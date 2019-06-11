@@ -93,9 +93,10 @@ a {
 
 /* SECTION */
 h1,
-h2,
 p {
   color: #ffffff;
+  font-size: 22px;
+  font-weight: 800;
 }
 h2 {
   font-size: 1.09em;
@@ -167,6 +168,12 @@ img {
 @media only screen and (max-width: 768px) {
   body {
     overflow: initial;
+  }
+  h1,
+  p {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
   }
 
   #footer p {
