@@ -204,7 +204,8 @@ img {
   h1,
   p {
     text-align: center;
-    font-weight: 530;
+    font-size: 23px;
+    font-weight: 600;
   }
 }
 @media only screen and (max-width: 320px) {
@@ -226,8 +227,8 @@ img {
   h1,
   p {
     text-align: center;
-    color: #ffffff;
-    font-weight: 530;
+    font-size: 23px;
+    font-weight: 600;
   }
   .app-description {
     background-size: 700px;
