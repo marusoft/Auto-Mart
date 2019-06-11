@@ -10,7 +10,7 @@ body {
   line-height: 1.6;
   font-family: "Catamaran", sans-serif;
 }
-.app-discription {
+.app-description {
   padding: 5px;
   height: 500px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
@@ -20,7 +20,7 @@ body {
   background-repeat: no-repeat;
 }
 
-.app-discription h1 {
+.app-description h1 {
   color: #ffffff;
 }
 .app-discription p {
@@ -153,13 +153,12 @@ img {
 .car-price {
   text-align: left;
   margin: 5px;
-  margin-top:25px;
-
+  margin-top: 25px;
 }
 /* END SECTION */
 
 /* FOOTER SECTION */
-#footer p{
+#footer p {
   color: #010165;
   margin-bottom: 20px;
 }
@@ -209,7 +208,9 @@ img {
     align-items: center;
     justify-content: space-around;
   }
-
+  .container {
+    width: 355px;
+  }
   .home {
     margin: 0;
     font-size: 0.6em;
@@ -219,12 +220,11 @@ img {
   h1,
   p {
     text-align: center;
+    color: #ffffff;
     font-weight: 530;
   }
-}
-
-@media only screen and (max-width: 320px) {
-  .container {
-    width: 355px;
+  .app-description {
+    background-size: 700px;
+    margin-right: -40px;
   }
 }
