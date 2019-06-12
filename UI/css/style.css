@@ -83,7 +83,6 @@ a {
   padding: 12px 40px 10px;
   position: relative;
 }
-
 .button:hover {
   background-color: #010165;
   color: #ffffff;
@@ -242,5 +241,9 @@ img {
   .app-description {
     background-size: 700px;
     margin-right: -40px;
+}
+@media only screen and (max-width: 320px) {
+  .container {
+    width: 355px;
   }
 }
