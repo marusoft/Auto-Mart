@@ -1,17 +1,33 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
   font-family: "Catamaran", sans-serif;
   min-height: 100vh;
   line-height: 1.6;
-  overflow: hidden;
+  font-family: "Catamaran", sans-serif;
+}
+.app-description {
+  padding: 5px;
+  height: 500px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../img/passenger-car-150155_640.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.app-description h1 {
+  color: #ffffff;
+}
+.app-discription p {
+  color: #ffffff;
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
-
 ul {
   margin: 0;
   padding: 0;
@@ -42,7 +58,6 @@ a {
 .home a:hover {
   text-decoration: underline;
 }
-
 
 .home a,
 .nav-list a {
@@ -75,62 +90,110 @@ a {
 
 /* END OF HEADER/NAVIGATION STYLE */
 
-/* START SECTION */
+/* SECTION */
+h1,
+p {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 400;
+}
+h2 {
+  font-size: 1.09em;
+  margin-top: 2px;
+  color: #ffffff;
+}
 
 h1 {
-  margin-top: 40px;
+  margin-top: 110px;
   margin-bottom: 15px;
+  text-align: center;
+  font-weight: 400;
 }
 
 p {
   max-width: 600px;
   margin: auto;
-}
-
-h1,
-p {
   text-align: center;
-  color: #010165;
-  font-weight: 500;
 }
-
-/* image style */
-
+.card-container {
+  width: 98%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  flex-direction: row;
+}
+.card {
+  width: 270px;
+  height: 300px;
+  box-shadow: 0px 0px 7px 3px #ddd;
+  text-align: center;
+  margin: 25px auto;
+  transition: all 0.5s;
+}
+.card:hover {
+  filter: brightness(1.2);
+}
 img {
-  margin: 0 auto;
-  padding: 20px;
-  width: 540px;
+  width: 100%;
+  height: 150px;
+}
+.card > p {
+  color: #010165;
 }
 
+.car-list h2 {
+  color: #010165;
+  text-align: center;
+  padding-top: 30px;
+}
+.car-name,
+.car-price {
+  text-align: left;
+  margin: 5px;
+  margin-top: 25px;
+}
 /* END SECTION */
 
-/* footer style */
-
+/* FOOTER SECTION */
+#footer p {
+  color: #010165;
+  margin-bottom: 20px;
+}
+/* FOOTER SECTION */
 /* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
-  img {
-    width: 100%;
-    padding: 30px;
-    margin: 0 auto;
-  }
-
   body {
     overflow: initial;
+  }
+  h1,
+  p {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 300;
   }
 
   #footer p {
     margin-bottom: 35px;
   }
 }
+@media only screen and (min-width: 768px) {
+  h1,
+  p {
+    text-align: center;
+    font-size: 23px;
+  }
+}
 
 @media only screen and (min-width: 1024px) {
-  img {
-    margin: 0 auto;
-    padding: 20px;
-    width: 500px;
-  }
   #footer p {
     margin-top: 10px;
+  }
+  p {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 300;
   }
 }
 
@@ -150,11 +213,9 @@ img {
   h1,
   p {
     text-align: center;
-    color: #010165;
-    font-weight: 530;
+    font-size: 23px;
+    font-weight: 300;
   }
-
-   
 }
 @media only screen and (max-width: 320px) {
   .container,
@@ -163,18 +224,23 @@ img {
     align-items: center;
     justify-content: space-around;
   }
+  .container {
+    width: 355px;
+  }
   .home {
     margin: 0;
     font-size: 0.6em;
     padding: 4px;
-
   }
   h1,
   p {
     text-align: center;
-    color: #010165;
-    font-weight: 530;
+    font-size: 23px;
+    font-weight: 400;
   }
+  .app-description {
+    background-size: 700px;
+    margin-right: -40px;
 }
 @media only screen and (max-width: 320px) {
   .container {
