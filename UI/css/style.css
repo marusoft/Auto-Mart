@@ -161,6 +161,10 @@ img {
   color: #010165;
   margin-bottom: 20px;
 }
+#advert p{
+  color: #ffffff;
+  margin-bottom: 20px;
+}
 /* FOOTER SECTION */
 /* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
@@ -241,6 +245,7 @@ img {
   .app-description {
     background-size: 700px;
     margin-right: -40px;
+  }
 }
 @media only screen and (max-width: 320px) {
   .container {
