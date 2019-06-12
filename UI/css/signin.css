@@ -1,9 +1,11 @@
-body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/passenger-car-150155_640.png);
+  body {
+  margin: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../img/passenger-car-150155_640.png);
   height: 100vh;
   background-size: cover;
   background-position: center;
-  font-family: 'Catamaran', sans-serif;
+  font-family: "Catamaran", sans-serif;
   overflow: initial;
 }
 
@@ -11,7 +13,100 @@ body {
   margin-bottom: 15px;
 }
 
-/* form style */
+/* START OF HEADER/NAVIGATION STYLE */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #010165;
+}
+
+.home > a {
+  margin: 0;
+  font-size: 1.45em;
+}
+
+.container,
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.home a {
+  text-transform: uppercase;
+}
+
+.home a:hover {
+  text-decoration: underline;
+}
+
+.home a,
+.nav-list a {
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.nav-list {
+  margin-top: 5px;
+}
+
+.container {
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  border: 1px solid #a2a2a2;
+  background-color: #f4f4f4;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+}
+
+.button {
+  border: none;
+  color: #010165;
+  padding: 12px 40px 10px;
+  position: relative;
+}
+
+.button:hover {
+  background-color: #010165;
+  color: #ffffff;
+}
+/* END OF HEADER/NAVIGATION STYLE */
+
+/* SECTION */
+h1,
+p {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 800;
+}
+h2 {
+  font-size: 1.09em;
+  margin-top: 2px;
+  color: #ffffff;
+}
+
+h1 {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+p {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* END SECTION */
+
+/* FORM STYLE START */
 .signup-page {
   width: 360px;
   padding: 10%, 0, 0;
@@ -19,7 +114,7 @@ body {
 }
 
 .form-container input {
-  font-family: 'Catamaran', sans-serif;
+  font-family: "Catamaran", sans-serif;
   outline: 1;
   background: #f2f2f2;
   width: 100%;
@@ -30,7 +125,7 @@ body {
   font-size: 14px;
 }
 
-.form-container input[type=submit] {
+.form-container input[type="submit"] {
   background-color: #5cb85c;
   border: 0;
   border-radius: 5px;
@@ -40,7 +135,7 @@ body {
   font-weight: bold;
   line-height: 1.4;
   padding: 10px;
-  width: 180px
+  width: 180px;
 }
 
 input[type="submit"]:hover {
@@ -49,44 +144,9 @@ input[type="submit"]:hover {
   border: 1px solid green;
   outline: none;
 }
-
-h1,
-h2,
-p {
-  color: #ffffff;
-
-}
-
-h2 {
-  font-size: 1.09em;
-
-}
-
-.para-info {
-  margin: 15px 0 0;
-  color: #efefef;
-  font-size: 16px;
-
-}
-
-.form .para-info a {
-  color: #db1010;
-
-}
-
 .form h2 {
   font-size: 1em;
 }
-
-p>a {
-  color: #D4AF37;
-}
-
-h2 {
-  margin-top: 2px;
-  color: #ffffff;
-}
-
 
 .alternate-form {
   position: relative;
@@ -100,25 +160,90 @@ h2 {
   box-sizing: border-box;
   display: none;
 }
+/* FORM STYLE END */
 
-@media only screen and (max-width: 320px) {
+/* MEDIA QUERIES */
+@media only screen and (max-width: 768px) {
+  body {
+    overflow: initial;
+  }
+  h1,
+p {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 800;
+}
 
+  #footer p {
+    margin-bottom: 35px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #footer p {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
   .container,
   .nav-list {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 
   .home {
-      margin: 0;
-      font-size: 0.53em;
-      padding: 4px;
+    margin: 0;
+    font-size: 0.9em;
+    padding: 4px;
+  }
+
+  h1,
+  p {
+    text-align: center;
+    font-weight: 530;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .container,
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .home {
+    margin: 0;
+    font-size: 0.6em;
+    padding: 4px;
+  }
+
+  h1,
+  p {
+    text-align: center;
+    font-weight: 530;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .container {
+    width: 355px;
+  }
+  .container,
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .home {
+    margin: 0;
+    font-size: 0.53em;
+    padding: 4px;
   }
 
   p {
-      font-weight: 800
+    font-weight: 800;
   }
-
 }
