@@ -49,7 +49,7 @@ form input:focus {
   font-weight: bold;
   line-height: 1.4;
   padding: 10px;
-  width: 180px
+  width: 180px;
 }
 
 input[type="submit"]:hover {
@@ -102,12 +102,8 @@ h2 {
     font-size: 0.53em;
     padding: 4px;
   }
-  p {
-    font-weight: 800;
-  }
 
   .car-advert-form {
     width: 100%;
   }
-
 }
