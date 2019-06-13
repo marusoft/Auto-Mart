@@ -131,11 +131,12 @@ p {
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  width: auto;
   font-size: 16px;
   font-weight: bold;
   line-height: 1.4;
-  padding: 10px;
-  width: 180px;
 }
 
 input[type="submit"]:hover {
