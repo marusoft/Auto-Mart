@@ -20,4 +20,13 @@ window.addEventListener("load", () => {
   // display specify form on click
   signUp.addEventListener("click", switchFormOnClick);
   signIn.addEventListener("click", switchFormOnClick);
+
+  // get the button of Admin Login
+  const adminLogin = document.querySelector("#admin-login");
+  //function to display admin.html
+  
+  adminLogin.addEventListener("click", function(){
+    this.parentNode.action = ("admin.html");
+  });
+
 });
