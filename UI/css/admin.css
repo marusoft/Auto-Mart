@@ -14,7 +14,7 @@ body {
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
-.nav-list ul {
+.nav-list, li {
   margin: 0;
   padding: 0;
 }
