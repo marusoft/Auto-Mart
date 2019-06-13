@@ -109,10 +109,23 @@ p {
 .dashboard-container {
   display: flex;
 }
-
 .sidebar {
+  flex: 1;
   height: 500px;
   background-color: #ddd;
+}
+.dashboard-content{
+  flex: 3;
+  height: 500px;
+  background-color: #ccc;
+  font-size: 22px;
+  font-weight: bold;
+
+}
+.sidebar ul li{
+  padding: 20px;
+  border-bottom: 2px solid #010165;
+
 }
 /* DASHBOARD END */
 
