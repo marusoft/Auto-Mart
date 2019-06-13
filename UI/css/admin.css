@@ -22,7 +22,7 @@ body {
   list-style-type: none;
 }
 
-a {
+.nav-list, a {
   text-decoration: none;
   color: #010165;
 }
@@ -125,8 +125,12 @@ p {
 }
 .sidebar ul li {
   padding: 20px;
-  border-bottom: 2px solid #010165;
+  border-bottom: 1px solid #010165;
   list-style-type: none;
+}
+.sidebar ul li:hover{
+  background: #a2a2a2;
+  color: #ffffff;
 }
 /* DASHBOARD END */
 
