@@ -103,16 +103,18 @@ p {
   text-align: center;
   font-weight: 500;
 }
-
 /* END SECTION */
-.dashboard-container{
+
+/* DASHBOARD START */
+.dashboard-container {
   display: flex;
 }
 
-.sidebar{
+.sidebar {
   height: 500px;
   background-color: #ddd;
 }
+/* DASHBOARD END */
 
 
 /* MEDIA QUERIES */
