@@ -76,7 +76,7 @@ class UsersValidation {
     if (!FoundEmailInModels) {
       return res.status(401).json({
         status: 'Unauthorized',
-        error: 'Cannot verify user dtails',
+        error: 'Cannot verify user details',
       });
     }
     password = password.trim();
