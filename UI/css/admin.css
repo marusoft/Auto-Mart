@@ -132,6 +132,10 @@ p {
   background: #a2a2a2;
   color: #ffffff;
 }
+.dash-head{
+  text-align: center;
+  margin: 15px;
+}
 /* DASHBOARD END */
 
 /* MEDIA QUERIES */
