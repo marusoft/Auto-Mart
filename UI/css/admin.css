@@ -136,6 +136,9 @@ p {
   text-align: center;
   margin: 15px;
 }
+#footer-dash p{
+  color: #010165;
+}
 /* DASHBOARD END */
 
 /* MEDIA QUERIES */
