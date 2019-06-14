@@ -1,0 +1,607 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Catamaran", sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+  background: #ffffff;
+  font-weight: 400;
+}
+
+/* START OF HEADER/NAVIGATION STYLE */
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #010165;
+}
+
+.home > a {
+  margin: 0;
+  font-size: 1.45em;
+}
+
+.container,
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.home a {
+  text-transform: uppercase;
+}
+
+.home a:hover {
+  text-decoration: underline;
+}
+
+.home a,
+.nav-list a {
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.nav-list {
+  margin-top: 5px;
+}
+
+.container {
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  border: 1px solid #a2a2a2;
+  background-color: #f4f4f4;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+}
+
+.button {
+  color: #010165;
+  text-align: center;
+}
+.button:hover {
+  background-color: #010165;
+  color: #ffffff;
+}
+
+/* END OF HEADER/NAVIGATION STYLE */
+
+/* Section */
+h1 {
+  margin-top: 40px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #010165;
+  font-weight: 500;
+}
+
+/* card style  start*/
+img {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+.car-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.card-list-item {
+  display: flex;
+  padding: 1rem;
+}
+.card {
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card-img:hover {
+  filter: contrast(100%);
+}
+
+.card-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 16px;
+}
+.card-img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  filter: contrast(70%);
+  overflow: hidden;
+  position: relative;
+  transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+}
+
+.card-name {
+  color: #010165;
+  font-size: 20px;
+  font-weight: 300;
+}
+.price {
+  flex: 1 1 auto;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  color: #010165;
+}
+
+#span {
+  color: #010165;
+  display: block;
+  font-size: 24px;
+}
+input[type="checkbox"] {
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+}
+.view {
+  background-color: #efefef;
+  border: 1px solid #e8e8e8;
+  color: #010165;
+  width: auto;
+  padding: 10px 20px;
+  margin: 3px;
+  border: none;
+}
+/* card end */
+
+/* Modal Update Price Style Start */
+.update-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.update-modal-content {
+  background-color: #e8e8e8;
+  margin: 5% auto;
+  padding: 20px;
+  height: 550px;
+  width: 55%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.15);
+  animation-name: modalpriceopen;
+  animation-duration: 1s;
+}
+.close-update-modal {
+  color: #010165;
+  float: right;
+  font-size: 1.875em;
+}
+.close-update-modal:hover,
+.close-update-modal:focus {
+  cursor: pointer;
+  color: #fa4359;
+}
+
+.price-upadte-form {
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
+  padding: 45px;
+  margin: 0 auto 100px;
+  max-width: 450px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.form-container-update input,
+select {
+  font-family: "Catamaran", sans-serif;
+  outline: 1;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+form input:focus {
+  border-radius: 5px;
+  border: 2px solid #0693cd;
+  outline: none;
+}
+
+.form-container-update input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+input[type="submit"]:hover {
+  color: green;
+  background: white;
+  border: 1px solid green;
+  outline: none;
+}
+form > h2 {
+  font-size: 1.09em;
+  color: #010165;
+}
+#car-price {
+  text-transform: capitalize;
+}
+/* Modal Update Price Style End */
+
+/* car-view-modal section start */
+.view-modal1 {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+  background-color: #e8e8e8;
+  margin: 5% auto;
+  width: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+.close1,
+.close2,
+.close3,
+.close4,
+.close5,
+.close6 {
+  color: #010165;
+  float: right;
+  font-size: 30px;
+}
+.close1:hover,
+.close1:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close2:hover,
+.close2:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close3:hover,
+.close3:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close4:hover,
+.close4:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close5:hover,
+.close5:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close6:hover,
+.close6:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.vehicle-details h2 {
+  margin: 0;
+}
+.vehicle-details {
+  background-color: #ddd;
+  padding: 15px;
+  color: #010165;
+}
+.vehicle-body {
+  padding: 10px 20px;
+}
+
+/* css rule set flag-AD-as-fraud-modal start  */
+.flag-modal1 {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+  background-color: #e8e8e8;
+  margin: 5% auto;
+  width: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+.close-1,
+.close-2,
+.close-3,
+.close-4,
+.close-5,
+.close-6 {
+  color: #010165;
+  float: right;
+  font-size: 30px;
+}
+.close-1:hover,
+.close-1:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-2:hover,
+.close-2:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-3:hover,
+.close-3:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-4:hover,
+.close-4:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-5:hover,
+.close-5:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.close-6:hover,
+.close-6:focus {
+  color: #fa4359;
+  text-decoration: none;
+  cursor: pointer;
+}
+.flag-details h2 {
+  margin: 0;
+}
+.flag-details {
+  background-color: #ddd;
+  padding: 15px;
+  color: #010165;
+}
+.flag-body {
+  padding: 10px 20px;
+}
+
+.flag-body input {
+  font-family: "Catamaran", sans-serif;
+  outline: 1;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.flag-body input[type="submit"] {
+  background-color: #5cb85c;
+  border-radius: 5px;
+  color: #010165;
+}
+.flag-body input[type="submit"]:hover {
+  color: green;
+  background: white;
+  border: 1px solid green;
+  outline: none;
+}
+
+/* css rule set flag-AD-as-fraud-modal end  */
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* car-view-modal section end */
+/* footer */
+#footer p {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  color: #010165;
+  font-weight: 300;
+}
+/* footer end */
+@keyframes modalpriceopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Modal Update Price Style End */
+
+/* MEDIA QUERIES for naviagtion bar */
+@media only screen and (max-width: 768px) {
+  img {
+    width: 100%;
+    padding: 30px;
+    margin: 0 auto;
+  }
+
+  body {
+    overflow: initial;
+  }
+
+  #footer p {
+    margin-bottom: 35px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  img {
+    margin: 0 auto;
+    padding: 20px;
+    width: 500px;
+  }
+
+  #footer p {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .container,
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .home {
+    margin: 0;
+    font-size: 0.9em;
+    padding: 4px;
+  }
+
+  h1,
+  p {
+    text-align: center;
+    color: #010165;
+    font-weight: 530;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .container,
+  .nav-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .home {
+    margin: 0;
+    font-size: 0.6em;
+    padding: 4px;
+  }
+
+  h1,
+  p {
+    text-align: center;
+    color: #010165;
+    font-weight: 530;
+  }
+}
+
+/* Media Queries car cards */
+
+@media only screen and (min-width: 640px) {
+  .card-list-item {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 896px) {
+  .card-list-item {
+    width: 33.3333%;
+  }
+}
+
+/* Media Queries for modal update price */
+@media only screen and (max-width: 418px) {
+  .update-modal-content {
+    margin: 45% auto;
+    padding: 10px;
+    width: 95%;
+  }
+  .form-container-update input,
+  select {
+    font-weight: 600;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .update-modal-content {
+    margin: 50% auto;
+    width: 95%;
+  }
+  .close-update-modal {
+    color: #010165;
+    float: right;
+    font-size: 45px;
+  }
+  .close-update-modal:hover {
+    cursor: pointer;
+    color: #fa4359;
+  }
+}
+/* update price end */
+
+@media only screen and (max-width: 320px) {
+  .container {
+    width: 350px;
+  }
+  .price {
+    margin-right: 170px;
+    color: #010165;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .price {
+    margin-right: 190px;
+    color: #010165;
+  }
+}
+
+/* view media query */
+@media only screen and (max-width: 415px) {
+  .modal-content {
+    background-color: #e8e8e8;
+    margin: 20% auto;
+    width: 320px;
+  }
+}

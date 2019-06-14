@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Car Advert|Update Price</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/advert.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/navbar.css">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+</head>
+
+<body>
+  <!-- header start -->
+  <header class="container">
+    <!-- hamburger start -->
+    <div class="hambuger-container" id="hambuger-contain">
+      <div class="hambuger1"></div>
+      <div class="hambuger2"></div>
+      <div class="hambuger3"></div>
+    </div>
+    <!-- hamburger end -->
+
+    <div class="home"><a href="index.html">Auto Mart</a></div>
+    <ul class="nav-list">
+      <li><a href="#" id="update-price-btn" class="button update-btn">Update Price</a></li>
+      <li><a href="purchase.html" class="button">Make Purchase</a></li>
+      <li><a href="index.html" class="button">Sign out</a></li>
+    </ul>
+
+  </header>
+  <!-- header ends here -->
+
+  <!-- update Modal start -->
+  <section class="update-price-modal">
+    <div id="update-price-modal" class="update-modal">
+      <div class="update-modal-content">
+        <span class="close-update-modal">&times;</span>
+        <div class="form-container-update">
+          <form action="#" class="price-upadte-form">
+            <h2>Add New Price</h2>
+            <input type="text" name="name" id="name" placeholder="Owner Fullname" required>
+            <select required name="make" id="make">
+              <option value="make" disabled selected>Make</option>
+              <option value="nissan">Nissan</option>
+              <option value="bmw">BMW</option>
+              <option value="mercedes benz">Mercedes Benz</option>
+              <option value="volkswagen">Volkswagen</option>
+              <option value="land rover">Land Rover</option>
+              <option value="honda">Honda</option>
+              <option value="audi">Audi</option>
+              <option value="bentley">Bentley</option>
+            </select>
+            <select required name="model" id="model">
+              <option value="model" disabled selected>Model</option>
+              <option value="c couple">C Couple</option>
+              <option value="1113">1113</option>
+              <option value="230e">230E</option>
+              <option value="300d">300D</option>
+              <option value="cla-class">CLA-Class</option>
+              <option value="clk">CLK</option>
+              <option value="e-class">E-Class</option>
+              <option value="m class">M Class</option>
+            </select>
+            <input type="number" name="car-price" id="car-price" min="0.00" max="10000000"
+              placeholder=" new vehicle price">
+            <input type="submit" value="Update Price">
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- update Modal end -->
+
+
+  <section>
+    <div class="advert-list">
+      <h1>Vehicle Advertisement</h1>
+    </div>
+  </section>
+
+  <!-- car advert image card -->
+  <section class="card-container">
+    <div class="car-cards">
+      <!-- card1 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/toyota-4R.jpg" alt="Toyota 4Runner">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Toyota 4Runner</div>
+            <p class="price">N2,500,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <div class="view-flag">
+              <button class="view view-btn1" id="btn-view1">View</button>
+              <button class="view" id="btn-flag-1">Report AD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card2 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/prius.jpg" alt="Volkswagen">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Volkswagen</div>
+            <p class="price">N3,500,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <div class="view-flag">
+              <button class="view view-btn2" id="btn-view2">View</button>
+              <button class="view" id="btn-flag-2">Report AD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card3 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/honda-suv.jpg" alt="Honda SUV">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Honda SUV</div>
+            <p class="price">N1,500,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <div class="view-flag">
+              <button class="view view-btn3" id="btn-view3">View</button>
+              <button class="view" id="btn-flag-3">Report AD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card4 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/mercedes-benz1.jpg" alt="Mercedes Benz">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Mercedes Benz</div>
+            <p class="price">N3,000,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <div class="view-flag">
+              <button class="view view-btn4" id="btn-view4">View</button>
+              <button class="view" id="btn-flag-4">Report AD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card5 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/nissanaltima.jpg" alt="Nissan Altima">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Nissan Altima</div>
+            <p class="price">N2,300,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <div class="view-flag">
+              <button class="view view-btn5" id="btn-view5">View</button>
+              <button class="view" id="btn-flag-5">Report AD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card6 -->
+      <div class="card-list-item">
+        <div class="card">
+          <div class="card-img">
+            <img src="./img/range-rover.jpg" alt="Range Rover">
+          </div>
+          <div class="card-content">
+            <div class="card-name">Range Rover</div>
+            <p class="price">N2,000,000</p>
+            <span id="span">
+              <input type="checkbox" name="sold" id="sold">Sold
+            </span>
+            <div class="view-flag">
+              <button class="view view-btn6" id="btn-view6">View</button>
+              <button class="view" id="btn-flag-6">Report AD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- car advert image card  end-->
+
+  <!-- view specific car start -->
+  <!-- view-modal1 -->
+  <div class="view-modal1" id="view-modal-1">
+    <div class="modal-content">
+      <div class="vehicle-details">
+        <span class="close1">&times;</span>
+        <h2>Vehicle Information</h2>
+      </div>
+      <div class="vehicle-body">
+        <img src="./img/toyota-4R.jpg" alt="Toyota 4Runner">
+        <p>Model: Mid-size SUV </p>
+        <p>Make: Toyota</p>
+        <p>Body Type: CrossOver</p>
+        <p>Status: New</p>
+        <p>Price : N2,500,000</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- view-modal2 -->
+  <div class="view-modal1" id="view-modal-2">
+    <div class="modal-content">
+      <div class="vehicle-details">
+        <span class="close2">&times;</span>
+        <h2>Vehicle Information</h2>
+      </div>
+      <div class="vehicle-body">
+        <img src="./img/prius.jpg" alt="Volkswagen">
+        <p>Model: M-Class </p>
+        <p>Make: Volkswagen</p>
+        <p>Body Type: Estate </p>
+        <p>Status: New</p>
+        <p>Price : N3,500,000</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- view-modal3 -->
+  <div class="view-modal1" id="view-modal-3">
+    <div class="modal-content">
+      <div class="vehicle-details">
+        <span class="close3">&times;</span>
+        <h2>Vehicle Information</h2>
+      </div>
+      <div class="vehicle-body">
+        <img src="./img/honda-suv.jpg" alt="Honda SUV">
+        <p>Model: E-Class </p>
+        <p>Make: Honda</p>
+        <p>Body Type: SUV</p>
+        <p>Status: New</p>
+        <p>Price : N2,500,000</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- view-modal4 -->
+  <div class="view-modal1" id="view-modal-4">
+    <div class="modal-content">
+      <div class="vehicle-details">
+        <span class="close4">&times;</span>
+        <h2>Vehicle Information</h2>
+      </div>
+      <div class="vehicle-body">
+        <img src="./img/mercedes-benz1.jpg" alt="Mercedes Benz">
+        <p>Model: Mid-size SUV </p>
+        <p>Make: Mercedes-Benz</p>
+        <p>Body Type: Hatchback</p>
+        <p>Status: Used</p>
+        <p>Price : N1,500,000</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- view-modal5 -->
+  <div class="view-modal1" id="view-modal-5">
+    <div class="modal-content">
+      <div class="vehicle-details">
+        <span class="close5">&times;</span>
+        <h2>Vehicle Information</h2>
+      </div>
+      <div class="vehicle-body">
+        <img src="./img/nissanaltima.jpg" alt="Nissan Altima">
+        <p>Model: C couple </p>
+        <p>Make: Nissan</p>
+        <p>Body Type: Sedan</p>
+        <p>Status: New</p>
+        <p>Price : N2,500,000</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- view-modal6 -->
+  <div class="view-modal1" id="view-modal-6">
+    <div class="modal-content">
+      <div class="vehicle-details">
+        <span class="close6">&times;</span>
+        <h2>Vehicle Information</h2>
+      </div>
+      <div class="vehicle-body">
+        <img src="./img/range-rover.jpg" alt="Range Rovers">
+        <p>Model: CLA-Class </p>
+        <p>Make: Land Rover</p>
+        <p>Body Type: PickUp</p>
+        <p>Status: New</p>
+        <p>Price : N2,000,000</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- view specific car start -->
+
+  <!-- flag-AD-as-fraud-modal start -->
+
+  <!-- flag 1 -->
+  <div class="flag-modal1" id="flag-modal-1">
+    <div class="modal-content">
+      <div class="flag-details">
+        <span class="close-1">&times;</span>
+        <h2>Report Advert</h2>
+      </div>
+      <div class="flag-body">
+        <input type="text" name="flag-1" id="flag-1" placeholder="Why flag?">
+        <input type="submit" value="flag Alert">
+      </div>
+    </div>
+  </div>
+
+  <!-- flag 2 -->
+  <div class="flag-modal1" id="flag-modal-2">
+    <div class="modal-content">
+      <div class="flag-details">
+        <span class="close-2">&times;</span>
+        <h2>Report Advert</h2>
+      </div>
+      <div class="flag-body">
+        <input type="text" name="flag-1" id="flag-1" placeholder="Why flag?">
+        <input type="submit" value="flag Alert">
+      </div>
+    </div>
+  </div>
+
+  <!-- flag 3 -->
+  <div class="flag-modal1" id="flag-modal-3">
+    <div class="modal-content">
+      <div class="flag-details">
+        <span class="close-3">&times;</span>
+        <h2>Report Advert</h2>
+      </div>
+      <div class="flag-body">
+        <input type="text" name="flag-1" id="flag-1" placeholder="Why flag?">
+        <input type="submit" value="flag Alert">
+      </div>
+    </div>
+  </div>
+
+  <!-- flag 4 -->
+  <div class="flag-modal1" id="flag-modal-4">
+    <div class="modal-content">
+      <div class="flag-details">
+        <span class="close-4">&times;</span>
+        <h2>Report Advert</h2>
+      </div>
+      <div class="flag-body">
+        <input type="text" name="flag-4" id="flag-4" placeholder="Why flag?">
+        <input type="submit" value="flag Alert">
+      </div>
+    </div>
+  </div>
+
+  <!-- flag 5 -->
+  <div class="flag-modal1" id="flag-modal-5">
+    <div class="modal-content">
+      <div class="flag-details">
+        <span class="close-5">&times;</span>
+        <h2>Report Advert</h2>
+      </div>
+      <div class="flag-body">
+        <input type="text" name="flag-5" id="flag-5" placeholder="Why flag?">
+        <input type="submit" value="flag Alert">
+      </div>
+    </div>
+  </div>
+
+
+  <!-- flag 6 -->
+  <div class="flag-modal1" id="flag-modal-6">
+    <div class="modal-content">
+      <div class="flag-details">
+        <span class="close-6">&times;</span>
+        <h2>Report Advert</h2>
+      </div>
+      <div class="flag-body">
+        <input type="text" name="flag-6" id="flag-6" placeholder="Why flag?">
+        <input type="submit" value="flag Alert">
+      </div>
+    </div>
+  </div>
+  <!-- flag-AD-as-fraud-modal end -->
+
+  <!-- footer start -->
+  <footer id="footer">
+    <p>&copy 2019 Auto Mart. All Rights Reserved.</p>
+  </footer>
+  <!-- footer end -->
+  <script src="js/flag.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/updatePrice.js"></script>
+  <script src="js/navbar.js"></script>
+
+</body>
+
+</html>
