@@ -9,7 +9,7 @@ const cars = [
     manufacturer: 'Mitsubishi',
     model: 'SUV',
     bodyType: 'car',
-    carImageUrl: 'url',
+    carImageUrl: 'mitsubishi.png',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const cars = [
     manufacturer: 'Mack',
     model: 'Diecast',
     bodyType: 'trailer',
-    carImageUrl: 'url',
+    carImageUrl: 'mack.jpeg',
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ const cars = [
     manufacturer: 'volkswagen',
     model: 'PickUp',
     bodyType: 'truck',
-    carImageUrl: 'url',
+    carImageUrl: 'volkswagen.jpg',
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const cars = [
     manufacturer: 'Toyota',
     model: 'Sienna',
     bodyType: 'van',
-    carImageUrl: 'url',
+    carImageUrl: 'toyota.png',
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const cars = [
     manufacturer: 'Peugeot',
     model: 'PickUp',
     bodyType: 'truck',
-    carImageUrl: 'url',
+    carImageUrl: 'peugeot.jpeg',
   },
 ];
 
