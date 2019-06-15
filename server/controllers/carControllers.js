@@ -5,7 +5,7 @@ import cars from '../models/carModels';
  */
 
 class Cars {
-  /**
+  /** Create a car sale ad.
    * @static
    * @returns {object} createCarSaleAD
    * @params {object} req
