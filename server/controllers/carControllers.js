@@ -13,8 +13,8 @@ class Cars {
    */
   static createCarSaleAD(req, res) {
     const {
-      state = 'new',
       status = 'available',
+      state = 'new',
       price,
       manufacturer,
       model,
