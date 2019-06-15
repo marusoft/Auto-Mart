@@ -44,5 +44,19 @@ class Cars {
       },
     });
   }
+
+  /** View all posted ads whether sold or available.
+   * @static
+   * @returns {object} ViewAllPostedAD
+   * @params {object} req
+   * @params {object} res
+   */
+  static ViewAllPostedAD(req, res) {
+    res.status(200).json({
+      status: 200,
+      data: cars,
+      message: 'All cars seen',
+    });
+  }
 }
 export default Cars;
