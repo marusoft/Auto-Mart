@@ -116,5 +116,24 @@ class CarsValidation {
     req.body.bodyType = bodyType.toLowerCase();
     return next();
   }
+
+  /**  View a specific car.
+   * @static
+   * @returns {object} validateSpecifyCar
+   * @params {object} req
+   * @params {object} res
+   */
+  static validateSpecifyCar(req, res, next) {
+    const { id } = req.params;
+    const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
+    if (!findSpecificCar) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Cannot find the specify car',
+      });
+    }
+    req.body.findSpecificCar = findSpecificCar;
+    return next();
+  }
 }
 export default CarsValidation;

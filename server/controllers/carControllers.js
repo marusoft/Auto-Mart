@@ -5,7 +5,7 @@ import cars from '../models/carModels';
  */
 
 class Cars {
-  /** Create a car sale ad.
+  /** Create a car sale AD.
    * @static
    * @returns {object} createCarSaleAD
    * @params {object} req
@@ -45,7 +45,7 @@ class Cars {
     });
   }
 
-  /** View all posted ads whether sold or available.
+  /** View all posted ADs whether sold or available.
    * @static
    * @returns {object} ViewAllPostedAD
    * @params {object} req
@@ -56,6 +56,28 @@ class Cars {
       status: 200,
       data: cars,
       message: 'All cars seen',
+    });
+  }
+
+  /**  View a specific car.
+   * @static
+   * @returns {object} ViewASpecificCar
+   * @params {object} req
+   * @params {object} res
+   */
+  static ViewASpecificCar(req, res) {
+    const { id } = req.params;
+    const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
+    if (!findSpecificCar) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Cannot find the specify car',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: findSpecificCar,
+      message: 'Specify car seen',
     });
   }
 }
