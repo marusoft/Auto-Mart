@@ -80,5 +80,20 @@ class Cars {
       message: 'Specify car seen',
     });
   }
+
+  /**  Delete a specific car AD.
+   * @static
+   * @returns {object} deleteASpecificCarAD
+   * @params {object} req
+   * @params {object} res
+   */
+  static deleteASpecificCarAD(req, res) {
+    const { findSpecificCar } = req.body;
+    cars.splice(findSpecificCar, 1);
+    return res.status(200).json({
+      status: 200,
+      data: 'Car Ad successfully deleted',
+    });
+  }
 }
 export default Cars;
