@@ -10,5 +10,6 @@ carRouter.post('/car', CarsValidation.validateCarsDetails, Cars.createCarSaleAD)
 carRouter.get('/car', Cars.ViewAllPostedAD);
 carRouter.get('/car/:id', CarsValidation.validateSpecifyCar, Cars.ViewASpecificCar);
 carRouter.delete('/car/:id', CarsValidation.validateSpecifyCar, Cars.deleteASpecificCarAD);
+carRouter.patch('/car/:id/status', Cars.updateCarStatus);
 
 export default carRouter;
