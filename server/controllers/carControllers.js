@@ -123,5 +123,37 @@ class Cars {
       data: findCarId,
     });
   }
+
+  /** Update the price of a car.
+   * @static
+   * @returns {object} updateCarPrice
+   * @params {object} req
+   * @params {object} res
+   */
+  static updateCarPrice(req, res) {
+    const { id } = req.params;
+    let { price } = req.body;
+    const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
+    if (!price) {
+      return res.status(400).json({
+        status: 400,
+        error: 'add new price...',
+      });
+    }
+    if (price) {
+      price = price.trim();
+      if (!/^\d+$/.test(price)) {
+        return res.status(400).json({
+          status: 400,
+          error: 'Only numbers are acceptable for price input',
+        });
+      }
+    }
+    findSpecificCar.price = price;
+    return res.status(200).json({
+      status: 200,
+      data: findSpecificCar,
+    });
+  }
 }
 export default Cars;
