@@ -95,5 +95,33 @@ class Cars {
       data: 'Car Ad successfully deleted',
     });
   }
+
+  /**  Mark a posted car Ad as sold.
+   * @static
+   * @returns {object} updateCarStatus
+   * @params {object} req
+   * @params {object} res
+   */
+  static updateCarStatus(req, res) {
+    const id = Number(req.params.id);
+    const findCarId = cars.find(car => car.id === id);
+    if (!findCarId) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Invalid car id',
+      });
+    }
+    if (findCarId.status === 'sold') {
+      return res.status(302).json({
+        status: 302,
+        message: 'Car is already mark as Sold',
+      });
+    }
+    findCarId.status = 'sold';
+    return res.status(200).json({
+      status: 200,
+      data: findCarId,
+    });
+  }
 }
 export default Cars;

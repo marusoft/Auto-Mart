@@ -1,41 +1,29 @@
 import cars from './models/carModels';
 import users from './models/usersModels';
 
+// eslint-disable-next-line import/prefer-default-export
 export const isCarOwner = (req, res, next) => {
-  const { email } = req.body;
-  const { id } = req.params;
-  const findUser = users.find(user => user.email === email);
-  const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
-  if (findUser.id !== findSpecificCar.owner) {
+  const owner = req.body;
+  const verifyOwner = users.find(user => owner === user.firstName && user.lastName);
+  if (!verifyOwner) {
     return res.status(401).json({
-      status: 401,
-      error: 'You can not edit this ad',
+      success: 401,
+      message: 'You need to create an account',
     });
   }
   return next();
 };
-
-export const isAdmin = (req, res, next) => {
-  // eslint-disable-next-line no-shadow
-  const isAdmin = req.body;
-  if (isAdmin === true) {
-    return next();
+export const isAdminUser = (req, res, next) => {
+  const id = Number(req.params.id);
+  const findCarId = cars.find(car => car.id === id);
+  const isAdmin = false;
+  if (!isAdmin && findCarId) {
+    const { findSpecificCar } = req.body;
+    cars.splice(findSpecificCar, 1);
+    return res.status(200).json({
+      status: 200,
+      data: 'Car Ad successfully deleted',
+    });
   }
-
-  return res.status(401).json({
-    status: 401,
-    error: 'You do not have permissions to access this route',
-  });
-};
-
-export const validateIsAdmin = (req, res, next) => {
-  const { email } = req.body;
-  const foundUser = users.find(user => user.email === email);
-  if (foundUser.isAdmin) {
-    return next();
-  }
-  return res.status(401).json({
-    status: 401,
-    error: 'Permission denied',
-  });
+  return next();
 };
