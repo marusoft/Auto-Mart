@@ -1,7 +1,6 @@
 import cars from './models/carModels';
 import users from './models/usersModels';
 
-// eslint-disable-next-line import/prefer-default-export
 export const isCarOwner = (req, res, next) => {
   const owner = req.body;
   const verifyOwner = users.find(user => owner === user.firstName && user.lastName);
