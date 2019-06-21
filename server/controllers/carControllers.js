@@ -154,41 +154,60 @@ class Cars {
       status, state, manufacturer, bodyType,
     } = req.query;
 
-    if (status) {
-      const carsByStatus = cars.filter(car => car.status === status);
-      return res.status(200).json({
-        status: 200,
-        data: [...carsByStatus],
-      });
-    }
-    if (bodyType) {
-      const carsByType = cars.filter(car => car.bodyType === bodyType);
-      return res.status(200).json({
-        status: 200,
-        data: [...carsByType],
-      });
-    }
-    if (status && manufacturer) {
-      // eslint-disable-next-line max-len
-      const carsByManufacturer = cars.filter(car => car.status === status && car.manufacturer === manufacturer);
-      return res.status(200).json({
-        status: 200,
-        data: [...carsByManufacturer],
-      });
+    if (status && state) {
+      const carsByStatusState = cars
+        .filter(car => car
+          .status === status && car
+          .state === state);
+      return res
+        .status(200)
+        .json({
+          status: 200,
+          data: [...carsByStatusState],
+        });
     }
     if (state && manufacturer) {
-      // eslint-disable-next-line max-len
-      const carsByManufacturer = cars.filter(car => car.state === state && car.manufacturer === manufacturer);
-      return res.status(200).json({
-        status: 200,
-        data: [...carsByManufacturer],
-      });
+      const carsByManufacturer = cars
+        .filter(car => car
+          .state === state && car
+          .manufacturer === manufacturer);
+      res
+        .status(200)
+        .json({
+          status: 200,
+          data: [...carsByManufacturer],
+        });
     }
-    if (status && state) {
-      const carsByStatusState = cars.filter(car => car.status === status && car.state === state);
+    if (status && manufacturer) {
+      const carsByManufacturer = cars
+        .filter(car => car
+          .status === status && car
+          .manufacturer === manufacturer);
+      return res
+        .status(200)
+        .json({
+          status: 200,
+          data: [...carsByManufacturer],
+        });
+    }
+    if (status) {
+      const carsByStatus = cars
+        .filter(car => car
+          .status === status);
+      return res
+        .status(200)
+        .json({
+          status: 200,
+          data: [...carsByStatus],
+        });
+    }
+    if (bodyType) {
+      const type = cars
+        .filter(car => car
+          .bodyType === bodyType);
       return res.status(200).json({
         status: 200,
-        data: [...carsByStatusState],
+        data: [...type],
       });
     }
 
