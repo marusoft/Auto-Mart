@@ -1,4 +1,5 @@
 import users from '../models/usersModels';
+import Helper from '../helpers/HelperUtils';
 /**
  * @class Users
  */
@@ -22,8 +23,10 @@ class Users {
       password,
       address,
     };
+    const token = Helper.generateToken(newUser);
     users.push(newUser);
     res.status(201).json({
+      token,
       newUser,
       message: 'Successfully created',
     });
