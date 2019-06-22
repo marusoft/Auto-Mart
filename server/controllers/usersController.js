@@ -26,6 +26,7 @@ class Users {
     const token = Helper.generateToken(newUser);
     users.push(newUser);
     res.status(201).json({
+      status: 201,
       token,
       newUser,
       message: 'Successfully created',
@@ -42,8 +43,11 @@ class Users {
     const { email, password } = req.body;
     const foundUserEmail = users.find(user => user.email === email);
     const foundUserPassword = users.find(pass => pass.password === password);
+    const token = Helper.generateToken(foundUserEmail);
     if (foundUserEmail && foundUserPassword) {
       res.status(200).json({
+        data: 200,
+        token,
         message: 'You signed in ...',
       });
     } else {
