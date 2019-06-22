@@ -15,6 +15,7 @@ class Users {
     const {
       email, firstName, lastName, password, address,
     } = req.body;
+    const hashedPassword = Helper.hashPassword(password);
     const newUser = {
       id: users.length + 1,
       email,
@@ -22,13 +23,16 @@ class Users {
       lastName,
       password,
       address,
+      hashedPassword,
     };
     const token = Helper.generateToken(newUser);
     users.push(newUser);
     res.status(201).json({
       status: 201,
-      token,
-      newUser,
+      data: {
+        token,
+        newUser,
+      },
       message: 'Successfully created',
     });
   }
@@ -46,8 +50,10 @@ class Users {
     const token = Helper.generateToken(foundUserEmail);
     if (foundUserEmail && foundUserPassword) {
       res.status(200).json({
-        data: 200,
-        token,
+        status: 200,
+        data: {
+          token,
+        },
         message: 'You signed in ...',
       });
     } else {
