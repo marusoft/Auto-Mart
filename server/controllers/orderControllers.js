@@ -57,13 +57,11 @@ class Orders {
     if (!newPurchasePrice.trim() === '' || !/^\d+$/.test(newPurchasePrice)) {
       return res.status(400).json({
         status: 400,
-        message: 'input price can only numbers',
+        error: 'input price can only numbers',
       });
     }
-    let oldPurchasePrice;
-    let id;
-    let carId;
-    let status;
+
+    let oldPurchasePrice; let id; let carId; let status;
 
     const { orderId } = req.params;
     const { email } = req.body;
