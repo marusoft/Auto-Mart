@@ -1,4 +1,4 @@
-const flags = [
+const flag = [
   {
     id: 1,
     carId: 1,
@@ -21,4 +21,4 @@ const flags = [
     description: 'Because of unstrusted place of advert',
   },
 ];
-export default flags;
+export default flag;

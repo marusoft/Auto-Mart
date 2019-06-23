@@ -1,5 +1,5 @@
-import cars from './models/carModels';
-import users from './models/usersModels';
+import cars from '../models/carModels';
+import users from '../models/usersModels';
 
 export const isCarOwner = (req, res, next) => {
   const owner = req.body;
