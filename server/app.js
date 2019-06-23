@@ -4,6 +4,7 @@ import logger from 'morgan';
 import userRouter from './routes/usersRoutes';
 import carRouter from './routes/carRoutes';
 import orderRouter from './routes/orderRoutes';
+import flagRouter from './routes/flagRoutes';
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1', userRouter);
 app.use('/api/v1', carRouter);
 app.use('/api/v1', orderRouter);
+app.use('/api/v1', flagRouter);
 
 app.get('*', (req, res) => res.status(200).send({
   message: 'It all start from localhost!!!',

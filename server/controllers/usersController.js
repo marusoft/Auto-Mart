@@ -21,9 +21,8 @@ class Users {
       email,
       firstName,
       lastName,
-      password,
+      password: hashedPassword,
       address,
-      hashedPassword,
     };
     const token = Helper.generateToken(newUser);
     users.push(newUser);
