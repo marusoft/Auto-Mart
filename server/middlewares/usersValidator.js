@@ -30,7 +30,7 @@ class UsersValidation {
     const validation = new validator(req.body, constraint);
     if (validation.fails()) {
       return res.status(400).json({
-        status: 'Bad Request',
+        status: 400,
         error: validation.errors.errors,
       });
     }
@@ -38,8 +38,8 @@ class UsersValidation {
     const FoundEmailInModels = users.find(user => user.email === email);
     if (FoundEmailInModels) {
       return res.status(409).json({
-        status: 'Conflict',
-        error: 'Email already registered, proceed to sigin...',
+        status: 409,
+        error: 'Conflict, Email already registered, proceed to sigin...',
       });
     }
     req.body.email = email;
@@ -67,7 +67,7 @@ class UsersValidation {
     const validation = new validator(req.body, constraint);
     if (validation.fails()) {
       return res.status(400).json({
-        status: 'Bad Request',
+        status: 400,
         error: validation.errors.errors,
       });
     }
@@ -75,15 +75,15 @@ class UsersValidation {
     const FoundEmailInModels = users.find(user => user.email === email);
     if (!FoundEmailInModels) {
       return res.status(401).json({
-        status: 'Unauthorized',
-        error: 'Cannot verify user details',
+        status: 401,
+        error: 'Unauthorized, Cannot verify user details',
       });
     }
     password = password.trim();
     if (FoundEmailInModels && password !== FoundEmailInModels.password) {
       return res.status(401).json({
-        status: 'Unauthorized',
-        error: 'Input details does to match',
+        status: 401,
+        error: 'Unauthorized, Input details does to match',
       });
     }
     req.body.FoundEmailInModels = FoundEmailInModels;

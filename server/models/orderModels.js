@@ -11,7 +11,7 @@ const orders = [
     buyerId: 1,
     carId: 1,
     amount: 2000000,
-    status: 'accepted',
+    status: 'pending',
   },
   {
     id: 3,
