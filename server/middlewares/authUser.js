@@ -51,7 +51,6 @@ class UserAuthentication {
       res.status(status).json({ status, error });
       return;
     }
-
     req.user = payload;
     next();
   }
@@ -65,6 +64,7 @@ class UserAuthentication {
    */
   static verifyAdmin(req, res, next) {
     const payload = UserAuthentication.verifyAuthHeader(req);
+
     let error;
     let status;
 

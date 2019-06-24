@@ -57,7 +57,7 @@ class Orders {
     if (!newPurchasePrice.trim() === '' || !/^\d+$/.test(newPurchasePrice)) {
       return res.status(400).json({
         status: 400,
-        error: 'input price can only numbers',
+        error: 'input price can only be numbers',
       });
     }
 
@@ -66,9 +66,11 @@ class Orders {
     const { orderId } = req.params;
     const { email } = req.body;
     const findUser = users.find(user => user.email === email);
+    console.log('finduser', findUser);
     const userId = findUser.id;
     const findOrderToUpdatePrice = orders
       .find(order => order.id === Number(orderId) && order.buyerId === userId);
+    console.log('findOrderToUpdatePrice', findOrderToUpdatePrice);
     if (!findOrderToUpdatePrice) {
       return res.status(404).json({
         status: 404,

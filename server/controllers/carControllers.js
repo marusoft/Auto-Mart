@@ -54,7 +54,7 @@ class Cars {
    */
   static ViewASpecificCar(req, res) {
     const { id } = req.params;
-    const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
+    const findSpecificCar = cars.find(car => car.id === Number(id));
     if (!findSpecificCar) {
       return res.status(404).json({
         status: 404,
@@ -149,9 +149,10 @@ class Cars {
    * @params {object} req
    * @params {object} res
    */
-  static ViewAllPostedADCar(req, res) {
-    const {
-      status, state, manufacturer, bodyType,
+  static ViewAllUnsoldCars(req, res, next) {
+    let {
+      // eslint-disable-next-line prefer-const
+      status, state, manufacturer, bodyType, minPrice, maxPrice,
     } = req.query;
 
     if (status && state) {
@@ -163,7 +164,7 @@ class Cars {
         .status(200)
         .json({
           status: 200,
-          data: [...carsByStatusState],
+          data: carsByStatusState,
         });
     }
     if (state && manufacturer) {
@@ -171,11 +172,11 @@ class Cars {
         .filter(car => car
           .state === state && car
           .manufacturer === manufacturer);
-      res
+      return res
         .status(200)
         .json({
           status: 200,
-          data: [...carsByManufacturer],
+          data: carsByManufacturer,
         });
     }
     if (status && manufacturer) {
@@ -187,7 +188,7 @@ class Cars {
         .status(200)
         .json({
           status: 200,
-          data: [...carsByManufacturer],
+          data: carsByManufacturer,
         });
     }
     if (status) {
@@ -198,7 +199,7 @@ class Cars {
         .status(200)
         .json({
           status: 200,
-          data: [...carsByStatus],
+          data: carsByStatus,
         });
     }
     if (bodyType) {
@@ -210,10 +211,60 @@ class Cars {
         data: [...type],
       });
     }
+    if (req.query.status) {
+      status = status.trim().toLowerCase();
+      if (status && !minPrice && !maxPrice) {
+        const findCarBystatus = cars.filter(car => car.status === status);
+        if (findCarBystatus.length === 0) {
+          return res.status(404).json({
+            status: 404,
+            error: 'Sorry, this does not exist',
+          });
+        }
+        return res.status(200).json({
+          status: 200,
+          data: {
+            findCarBystatus,
+          },
+        });
+      }
+      if (status && minPrice && maxPrice) {
+        minPrice = Number(minPrice.trim());
+        maxPrice = Number(maxPrice.trim());
+        const findCarsByPriceRange = cars
+          .filter(car => car.status === status && Number(car.price) >= minPrice
+        && Number(car.price) <= maxPrice);
+        if (findCarsByPriceRange.length === 0) {
+          return res.status(404).json({
+            status: 404,
+            error: 'There is no result for your search now',
+          });
+        }
+        return res.status(200).json({
+          status: 200,
+          data: {
+            findCarsByPriceRange,
+          },
+        });
+      }
+    }
+    next();
+    return res.status(404).json({
+      status: 404,
+      error: 'There seems to be an issue with your search',
+    });
+  }
 
+  /**  View All Posted AD Car
+   * @static ViewAllPostedADCar
+   * @returns {object}
+   * @params {object} req
+   * @params {object} res
+   */
+  static ViewAllPostedADCar(req, res) {
     return res.status(200).json({
       status: 200,
-      data: [...cars],
+      data: cars,
       message: 'Success',
     });
   }
