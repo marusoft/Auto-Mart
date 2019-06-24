@@ -125,7 +125,7 @@ class CarsValidation {
    */
   static validateSpecifyCar(req, res, next) {
     const { id } = req.params;
-    const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
+    const findSpecificCar = cars.find(car => car.id === Number(id));
     if (!findSpecificCar) {
       return res.status(404).json({
         status: 404,
