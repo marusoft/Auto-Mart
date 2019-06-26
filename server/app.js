@@ -15,13 +15,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const initialRouter = express.Router();
+
 app.use('/api/v1', userRouter);
 app.use('/api/v1', carRouter);
 app.use('/api/v1', orderRouter);
 app.use('/api/v1', flagRouter);
+app.use('/', initialRouter);
 
-app.get('*', (req, res) => res.status(200).send({
-  message: 'It all start from localhost!!!',
+initialRouter.get('/api/v1', (req, res) => res.status(200).send({
+  message: 'Welcome To AutoMart MarketPlace',
+}));
+
+initialRouter.all('*', (req, res) => res.status(404).send({
+  error: 'Oops!, The page you\'re looking for doesn\'t exist',
 }));
 
 // eslint-disable-next-line no-console
