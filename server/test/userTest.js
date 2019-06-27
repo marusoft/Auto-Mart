@@ -10,8 +10,6 @@ chai.use(chaiHttp);
 
 const signupUrl = '/api/v1/auth/signup';
 const signinUrl = '/api/v1/auth/signin';
-// eslint-disable-next-line max-len
-const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJhYmR1bGxhaGJhYmExQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6Im1hcnVzb2Z0IiwibGFzdE5hbWUiOiJrZWhpbmRlb2xhIiwicGFzc3dvcmQiOiIkMmEkMTAkaWM3ZzIvak85WkNvNE1zTGdTaDBQLjZXNzAvVlpRSkI0YncuT1drZ1hpYWlWNHJQUmRpTk8iLCJhZGRyZXNzIjoiYW5kZWxhIGVwaWMgdG93ZXIiLCJpYXQiOjE1NjE0OTQ5MTR9.Yk3QHNrbYGocL75pPNl_UiIZHGJikMoG5pw6QF78bOI';
 
 describe('Test API', () => {
   it('should return 200 for home page', (done) => {
