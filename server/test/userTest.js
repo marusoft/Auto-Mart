@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 const signupUrl = '/api/v1/auth/signup';
 const signinUrl = '/api/v1/auth/signin';
 // eslint-disable-next-line max-len
-// const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJhYmR1bGxhaGJhYmExQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6Im1hcnVzb2Z0IiwibGFzdE5hbWUiOiJrZWhpbmRlb2xhIiwicGFzc3dvcmQiOiIkMmEkMTAkaWM3ZzIvak85WkNvNE1zTGdTaDBQLjZXNzAvVlpRSkI0YncuT1drZ1hpYWlWNHJQUmRpTk8iLCJhZGRyZXNzIjoiYW5kZWxhIGVwaWMgdG93ZXIiLCJpYXQiOjE1NjE0OTQ5MTR9.Yk3QHNrbYGocL75pPNl_UiIZHGJikMoG5pw6QF78bOI';
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJhYmR1bGxhaGJhYmExQGdtYWlsLmNvbSIsImZpcnN0TmFtZSI6Im1hcnVzb2Z0IiwibGFzdE5hbWUiOiJrZWhpbmRlb2xhIiwicGFzc3dvcmQiOiIkMmEkMTAkaWM3ZzIvak85WkNvNE1zTGdTaDBQLjZXNzAvVlpRSkI0YncuT1drZ1hpYWlWNHJQUmRpTk8iLCJhZGRyZXNzIjoiYW5kZWxhIGVwaWMgdG93ZXIiLCJpYXQiOjE1NjE0OTQ5MTR9.Yk3QHNrbYGocL75pPNl_UiIZHGJikMoG5pw6QF78bOI';
 
 describe('Test API', () => {
   it('should return 200 for home page', (done) => {
@@ -41,7 +41,7 @@ describe('Test API', () => {
       });
   });
 });
-// Create users
+// Create users test
 describe('Test User Route', () => {
   describe('POST/ Create Users', () => {
     it('should return 201 for successful register', (done) => {
@@ -161,12 +161,72 @@ describe('Test User Route', () => {
         });
       done();
     });
-    it('should return 201 for successful register', (done) => {
+    it('should return 400 for undefined user address', (done) => {
       const userDetails = {
         email: 'kehinde@automart.com',
         firstName: 'kehinde',
         lastName: 'alimi',
         password: 'xyzabc12',
+        isAdmin: true,
+      };
+      chai.request(app)
+        .post(signupUrl)
+        .send(userDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body.error).to.be.a('object');
+        });
+      done();
+    });
+    it('should return 400 for invalid firstName character length', (done) => {
+      const userDetails = {
+        id: 1,
+        email: 'kehinde@automart.com',
+        firstName: 'ke',
+        lastName: 'alimi',
+        password: 'xyzabc12',
+        address: '3, Olourunosebi street, Kekereowo, Lagos.',
+        isAdmin: true,
+      };
+      chai.request(app)
+        .post(signupUrl)
+        .send(userDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body.error).to.be.a('object');
+        });
+      done();
+    });
+    it('should return 400 for invalid lastName character length', (done) => {
+      const userDetails = {
+        id: 1,
+        email: 'kehinde@automart.com',
+        firstName: 'kehinde',
+        lastName: 'al',
+        password: 'xyzabc12',
+        address: '3, Olourunosebi street, Kekereowo, Lagos.',
+        isAdmin: true,
+      };
+      chai.request(app)
+        .post(signupUrl)
+        .send(userDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body.error).to.be.a('object');
+        });
+      done();
+    });
+    it('should return 400 for invalid password character length', (done) => {
+      const userDetails = {
+        id: 1,
+        email: 'kehinde@automart.com',
+        firstName: 'kehinde',
+        lastName: 'alimi',
+        password: 'xyz12',
+        address: '3, Olourunosebi street, Kekereowo, Lagos.',
         isAdmin: true,
       };
       chai.request(app)
@@ -200,7 +260,7 @@ describe('Test User Route', () => {
         });
       done();
     });
-    it('should return 401 for incorrect Login details', (done) => {
+    it('should return 401 for incorrect password Login detail', (done) => {
       const userLoginDetails = {
         email: 'alimi@automart.com',
         password: 'xyzabc',
@@ -231,7 +291,7 @@ describe('Test User Route', () => {
         });
       done();
     });
-    it('should return 401 for undefined Login details', (done) => {
+    it('should return 401 for incorect email Login detail', (done) => {
       const userLoginDetails = {
         email: 'ali##JJJ@automart.com',
         password: 'xyzabc12',
@@ -247,22 +307,97 @@ describe('Test User Route', () => {
         });
       done();
     });
-    // it('should return 401 for incorect password and email details', (done) => {
-    //   const userLoginDetails = {
-    //     email: 'ali##JJJ@automart.com',
-    //     password: 'xyzabc12@@@@',
-    //   };
-    //   chai.request(app)
-    //     .post(signinUrl)
-    //     .send(userLoginDetails)
-    //     .end((err, res) => {
-    //       expect(res).to.have.status(400);
-    //       expect(res.status).to.equal(400);
-    //       expect(res.body).to.be.a('object');
-    //       expect(res.body.error).to.equal('Unauthorized, Cannot verify user details');
-    //     });
-    //   done();
-    // });
+    it('should return 401 for incorect password and email details', (done) => {
+      const userLoginDetails = {
+        email: 'aliJJJ@automart.com',
+        password: 'xyzabc12@@@@',
+      };
+      chai.request(app)
+        .post(signinUrl)
+        .send(userLoginDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.a('object');
+          expect(res.body.error).to.equal('Unauthorized, Cannot verify user details');
+        });
+      done();
+    });
+    it('should return 400 for undefined email Login detail', (done) => {
+      const userLoginDetails = {
+        password: 'xyzabc12',
+      };
+      chai.request(app)
+        .post(signupUrl)
+        .send(userLoginDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body.error).to.be.a('object');
+        });
+      done();
+    });
+    it('should return 400 for undefined Login password detail', (done) => {
+      const userLoginDetails = {
+        email: 'alimi@automart.com',
+      };
+      chai.request(app)
+        .post(signupUrl)
+        .send(userLoginDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body.error).to.be.a('object');
+        });
+      done();
+    });
+    it('should return 400 for invalid password character length Login detail', (done) => {
+      const userLoginDetails = {
+        email: 'alimi@automart.com',
+        password: 'xyz',
+      };
+      chai.request(app)
+        .post(signupUrl)
+        .send(userLoginDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body.error).to.be.a('object');
+        });
+      done();
+    });
+    it('should return 401 for incorrect email Login detail', (done) => {
+      const userLoginDetails = {
+        email: 'ali@automart.com',
+        password: 'xyzabc12',
+      };
+      chai.request(app)
+        .post(signinUrl)
+        .send(userLoginDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.a('object');
+          expect(res.body.error).to.equal('Unauthorized, Cannot verify user details');
+        });
+      done();
+    });
+    it('should return 401 for incorrect email Login detail', (done) => {
+      const userLoginDetails = {
+        email: 'alimi@automart.com',
+        password: 'xyzabc123h',
+      };
+      chai.request(app)
+        .post(signinUrl)
+        .send(userLoginDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.status).to.equal(401);
+          expect(res.body).to.be.a('object');
+          expect(res.body.error).to.equal('Unauthorized, Input details does to match');
+        });
+      done();
+    });
   });
 });
 // end of user test
