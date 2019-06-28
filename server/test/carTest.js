@@ -99,28 +99,32 @@ describe('TEST CAR endpoint routes', () => {
           done(err);
         });
     });
-    it('should delete specify car id.', (done) => {
-      chai
-        .request(app)
-        .delete(`${defaultUrl}/car/2`)
-        .set('authorization', `Bearer ${adminToken}`)
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.status).to.equal(200);
-          expect(res.body.data).to.equal('Car Ad successfully deleted');
-          done(err);
+    describe('ADMIN DELETE Car Route', () => {
+      describe('ADMIN DELETE Car', () => {
+        it('should delete specify car id.', (done) => {
+          chai
+            .request(app)
+            .delete(`${defaultUrl}/car/2`)
+            .set('authorization', `Bearer ${adminToken}`)
+            .end((err, res) => {
+              expect(res).to.have.status(200);
+              expect(res.status).to.equal(200);
+              expect(res.body.data).to.equal('Car Ad successfully deleted');
+              done(err);
+            });
         });
-    });
-    it('should delete specify car id.', (done) => {
-      chai
-        .request(app)
-        .delete(`${defaultUrl}/car/2`)
-        .set('authorization', `Bearer ${adminToken}`)
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.have.property('data');
-          done(err);
+        it('should delete specify car id.', (done) => {
+          chai
+            .request(app)
+            .delete(`${defaultUrl}/car/2`)
+            .set('authorization', `Bearer ${adminToken}`)
+            .end((err, res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.have.property('data');
+              done(err);
+            });
         });
+      });
     });
     it('should not delete specify car with an undefined id.', (done) => {
       chai
@@ -154,7 +158,6 @@ describe('TEST CAR endpoint routes', () => {
           expect(res).to.have.status(401);
           expect(res.status).to.equal(401);
           expect(res.body).to.have.property('error');
-          // expect(res.body.error).to.equal('The provided token cannot be authenticated.');
           done(err);
         });
     });
@@ -184,6 +187,422 @@ describe('TEST CAR endpoint routes', () => {
 // Test case for users
 describe('TEST CAR endpoint routes ', () => {
   describe('POST /Car', () => {
-
+    it('should return 201 for new Car Advert Successfully created', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.status).to.equal(201);
+          expect(res.body.data).to.be.a('object');
+          expect(res.body.message).to.equal('Car Advert Successfully created');
+        });
+      done();
+    });
+    it('should return 201 for used Car Advert Successfully created', (done) => {
+      const carDetails = {
+        state: 'used',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(201);
+          expect(res.status).to.equal(201);
+          expect(res.body.data).to.be.a('object');
+          expect(res.body.message).to.equal('Car Advert Successfully created');
+        });
+      done();
+    });
+    it('should return 401 for invalid user token', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.have.property('error');
+          expect(res.body.error).to.equal('The provided token cannot be authenticated.');
+        });
+      done();
+    });
+    it('should return error if token is empty.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', '')
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(401);
+          expect(res.body).to.have.property('error');
+        });
+      done();
+    });
+    it('should return error if state is not new or used.', (done) => {
+      const carDetails = {
+        state: 'nnnrt45',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Car state can either be new or used.');
+        });
+      done();
+    });
+    // it('should return error if state is undefined.', (done) => {
+    //   const carDetails = {
+    //     status: 'available',
+    //     price: '3500000',
+    //     manufacturer: 'Mitsubishi',
+    //     model: 'SUV',
+    //     bodyType: 'Car',
+    //     carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+    //   };
+    //   chai.request(app)
+    //     .post(`${defaultUrl}/car`)
+    //     .set('authorization', `Bearer ${userToken}`)
+    //     .send(carDetails)
+    //     .end((err, res) => {
+    //       expect(res).to.have.status(404);
+    //       expect(res.status).to.equal(404);
+    //       expect(res.body).to.be.a('object');
+    //       expect(res.body.message).to.equal('please specify the state of the car.');
+    //     });
+    //   done();
+    // });
+    it('should return error if status is undefined.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'favailablevdf',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.status).to.equal(400);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Car status can either be available or sold');
+        });
+      done();
+    });
+    // it('should return error if status is undefined.', (done) => {
+    //   const carDetails = {
+    //     state: 'new',
+    //     price: '3500000',
+    //     manufacturer: 'Mitsubishi',
+    //     model: 'SUV',
+    //     bodyType: 'Car',
+    //     carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+    //   };
+    //   chai.request(app)
+    //     .post(`${defaultUrl}/car`)
+    //     .set('authorization', `Bearer ${userToken}`)
+    //     .send(carDetails)
+    //     .end((err, res) => {
+    //       expect(res).to.have.status(404);
+    //       expect(res.status).to.equal(404);
+    //       expect(res.body).to.be.a('object');
+    //       expect(res.body.message).to.equal('please specify the status of the car.');
+    //     });
+    //   done();
+    // });
+    it('should return error if price is undefined.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(406);
+          expect(res.status).to.equal(406);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Please specify car price.');
+        });
+      done();
+    });
+    it('should return error if price is not number.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: 'rrrrrrr',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(406);
+          expect(res.status).to.equal(406);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Only numbers are acceptable as Price.');
+        });
+      done();
+    });
+    it('should return error if manufacturer is not defined.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.status).to.equal(404);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('please specify the manufacturer of the car.');
+        });
+      done();
+    });
+    it('should return error if manufacturer is not alphabets characters.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi345',
+        model: 'SUV',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(406);
+          expect(res.status).to.equal(406);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Only Alphabets input are acceptable.');
+        });
+      done();
+    });
+    it('should return error if model is not defined', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.status).to.equal(404);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('please specify the Vehicle model.');
+        });
+      done();
+    });
+    it('should return error if model is not alphabets characters.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV1233',
+        bodyType: 'Car',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(406);
+          expect(res.status).to.equal(406);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Only Alphabets input are acceptable.');
+        });
+      done();
+    });
+    it('should return error if bodyType is not defined', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.status).to.equal(404);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('please specify the bodyType of the car.');
+        });
+      done();
+    });
+    it('should return error if model is not alphabets characters.', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car457',
+        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(406);
+          expect(res.status).to.equal(406);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Only Alphabets input are acceptable.');
+        });
+      done();
+    });
+    it('should return error if car image url is not found', (done) => {
+      const carDetails = {
+        state: 'new',
+        status: 'available',
+        price: '3500000',
+        manufacturer: 'Mitsubishi',
+        model: 'SUV',
+        bodyType: 'Car',
+      };
+      chai.request(app)
+        .post(`${defaultUrl}/car`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(carDetails)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.status).to.equal(404);
+          expect(res.body).to.be.a('object');
+          expect(res.body.message).to.equal('Please upload an image for this vehicle.');
+        });
+      done();
+    });
+    it('should view specify car id.', (done) => {
+      chai
+        .request(app)
+        .get(`${defaultUrl}/car/3`)
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property('data');
+          expect(res.body.message).to.equal('Specify car seen.');
+        });
+      done();
+    });
+    it('should not view specify car with an invalid id.', (done) => {
+      chai
+        .request(app)
+        .get(`${defaultUrl}/car/9999`)
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body).to.have.property('error');
+          expect(res.body.error).to.equal('Cannot find the specify car');
+        });
+      done();
+    });
+  });
+});
+// update car route
+describe('TEST  for CAR Update endpoint routes ', () => {
+  describe('PATCH api/v1/Car/:id/status', () => {
+    it('should not update car status with an invalid id.', (done) => {
+      chai
+        .request(app)
+        .patch(`${defaultUrl}/car/9999/status`)
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(404);
+          expect(res.body).to.have.property('error');
+          expect(res.body.error).to.equal('Invalid car id');
+        });
+      done();
+    });
+    it('should not update car that is already sold.', (done) => {
+      chai
+        .request(app)
+        .patch(`${defaultUrl}/car/1/status`)
+        .set('authorization', `Bearer ${userToken}`)
+        .end((err, res) => {
+          expect(res).to.have.status(302);
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Car is already mark as Sold');
+        });
+      done();
+    });
   });
 });

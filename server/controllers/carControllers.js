@@ -14,7 +14,7 @@ class Cars {
   static createCarSaleAD(req, res) {
     const {
       status = 'available',
-      state = 'new',
+      state,
       price,
       manufacturer,
       model,
@@ -22,6 +22,7 @@ class Cars {
       carImageUrl,
     } = req.body;
     const id = cars[cars.length - 1].id + 1;
+    // const owner = req.user.payload.id;
     const owner = req.body.id;
     const createdOn = new Date();
     const newCreatedCarAD = {
@@ -58,13 +59,13 @@ class Cars {
     if (!findSpecificCar) {
       return res.status(404).json({
         status: 404,
-        error: 'Cannot find the specify car',
+        error: 'Cannot find the specify car.',
       });
     }
     return res.status(200).json({
       status: 200,
       data: findSpecificCar,
-      message: 'Specify car seen',
+      message: 'Specify car seen.',
     });
   }
 
