@@ -14,8 +14,8 @@ class CarsValidation {
    */
   static validateCarsDetails(req, res, next) {
     let {
-      state = 'new',
-      status = 'available',
+      state,
+      status,
       price,
       manufacturer,
       model,
@@ -23,8 +23,8 @@ class CarsValidation {
       // eslint-disable-next-line prefer-const
       carImageUrl,
     } = req.body;
-    if (state === undefined) {
-      return res.status(404).json({
+    if (!state) {
+      return res.status(400).json({
         message: 'please specify the state of the car.',
       });
     }
@@ -37,9 +37,9 @@ class CarsValidation {
       }
     }
 
-    if (status === undefined) {
-      return res.status(404).json({
-        message: 'please specify the status of the car',
+    if (!status) {
+      return res.status(400).json({
+        message: 'please specify the status of the car.',
       });
     }
     if (status) {
@@ -51,8 +51,8 @@ class CarsValidation {
       }
     }
 
-    if (price === undefined) {
-      return res.status(406).json({
+    if (!price) {
+      return res.status(400).json({
         message: 'Please specify car price.',
       });
     }
@@ -64,8 +64,8 @@ class CarsValidation {
         });
       }
     }
-    if (manufacturer === undefined) {
-      return res.status(404).json({
+    if (!manufacturer) {
+      return res.status(400).json({
         message: 'please specify the manufacturer of the car.',
       });
     }
@@ -77,8 +77,8 @@ class CarsValidation {
         });
       }
     }
-    if (model === undefined) {
-      return res.status(404).json({
+    if (!model) {
+      return res.status(400).json({
         message: 'please specify the Vehicle model.',
       });
     }
@@ -90,8 +90,8 @@ class CarsValidation {
         });
       }
     }
-    if (bodyType === undefined) {
-      return res.status(404).json({
+    if (!bodyType) {
+      return res.status(400).json({
         message: 'please specify the bodyType of the car.',
       });
     }
@@ -103,8 +103,8 @@ class CarsValidation {
         });
       }
     }
-    if (carImageUrl === undefined) {
-      return res.status(404).json({
+    if (!carImageUrl) {
+      return res.status(400).json({
         message: 'Please upload an image for this vehicle.',
       });
     }

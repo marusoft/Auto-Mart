@@ -23,7 +23,7 @@ class Cars {
     } = req.body;
     const id = cars[cars.length - 1].id + 1;
     // const owner = req.user.payload.id;
-    const owner = req.body.id;
+    const owner = req.user.id;
     const createdOn = new Date();
     const newCreatedCarAD = {
       id,
@@ -91,8 +91,9 @@ class Cars {
    * @params {object} res
    */
   static updateCarStatus(req, res) {
-    const id = Number(req.params.id);
-    const findCarId = cars.find(car => car.id === id);
+    const { id } = req.params;
+    const val = Number(id);
+    const findCarId = cars.find(car => car.id === val);
     if (!findCarId) {
       return res.status(404).json({
         status: 404,
@@ -209,7 +210,7 @@ class Cars {
           .bodyType === bodyType);
       return res.status(200).json({
         status: 200,
-        data: [...type],
+        data: type,
       });
     }
     if (req.query.status) {
