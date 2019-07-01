@@ -11,15 +11,17 @@ class FlagValidation {
    * @param {*} next
    */
   static validateFlagDetails(req, res, next) {
+    // eslint-disable-next-line prefer-const
     let { reason, description } = req.body;
+
     if (reason === undefined) {
       return res.status(404).json({
-        error: 'Please specify the reason for reason this AD',
+        error: 'Please specify the reason for this AD',
       });
     }
     if (reason) {
-      reason = reason.trim();
-      if (/[^a-zA-Z]/.test(reason)) {
+      reason = reason.toLowerCase().trim();
+      if (/[^a-zA-Z ]/.test(reason)) {
         return res.status(406).json({
           message: 'Only Alphabets input are acceptable',
         });
@@ -27,12 +29,12 @@ class FlagValidation {
     }
     if (description === undefined) {
       return res.status(404).json({
-        error: 'Please specify the reason for reason this AD',
+        error: 'Please specify the description for this AD',
       });
     }
     if (description) {
-      description = description.trim();
-      if (/[^a-zA-Z]/.test(reason)) {
+      description = description.toLowerCase().trim();
+      if (/[^a-zA-Z ]/.test(description)) {
         return res.status(406).json({
           message: 'Only Alphabets input are acceptable',
         });

@@ -77,6 +77,7 @@ class Cars {
    */
   static deleteASpecificCarAD(req, res) {
     const { findSpecificCar } = req.body;
+    console.log('delete');
     cars.splice(findSpecificCar, 1);
     return res.status(200).json({
       status: 200,
@@ -217,6 +218,7 @@ class Cars {
       status = status.trim().toLowerCase();
       if (status && !minPrice && !maxPrice) {
         const findCarBystatus = cars.filter(car => car.status === status);
+        console.log('status', findCarBystatus);
         if (findCarBystatus.length === 0) {
           return res.status(404).json({
             status: 404,

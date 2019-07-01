@@ -9,7 +9,8 @@
     "clean": "rm -rf build .nyc_output coverage && mkdir build",
     "start": "npm run build && node ./build/app.js",
     "start:dev": "nodemon --exec babel-node ./server/app",
-    "test": "nyc --reporter=html --reporter=text mocha ./server/test/*.js --require @babel/register --exit"
+    "test": "nyc --reporter=html --reporter=text mocha ./server/test/*.js --require @babel/register --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov"
   },
   "repository": {
     "type": "git",

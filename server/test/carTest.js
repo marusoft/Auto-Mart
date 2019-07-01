@@ -7,6 +7,7 @@ const { should, expect } = chai;
 should();
 
 chai.use(chaiHttp);
+
 const defaultUrl = '/api/v1';
 const signinUrl = '/api/v1/auth/signin';
 let adminToken;
@@ -189,7 +190,7 @@ describe('TEST CAR endpoint routes', () => {
 describe('TEST CAR endpoint routes ', () => {
   describe('POST /Car', () => {
     it('should return 201 for new Car Advert Successfully created', (done) => {
-      const carDetailsMe = {
+      const carDetails = {
         state: 'new',
         status: 'available',
         price: '3500000',
@@ -201,7 +202,7 @@ describe('TEST CAR endpoint routes ', () => {
       chai.request(app)
         .post(`${defaultUrl}/car`)
         .set('authorization', `Bearer ${userToken}`)
-        .send(carDetailsMe)
+        .send(carDetails)
         .end((err, res) => {
           expect(res).to.have.status(201);
           expect(res.status).to.equal(201);
@@ -567,7 +568,7 @@ describe('TEST CAR endpoint routes ', () => {
     it('should not view specify car with an invalid id.', (done) => {
       chai
         .request(app)
-        .get(`${defaultUrl}/car/9999`)
+        .get(`${defaultUrl}/car/somevalue`)
         .set('authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res).to.have.status(404);
@@ -740,13 +741,13 @@ describe('TEST for CAR Update endpoint routes ', () => {
     // it('Should not View all unsold cars within a price range..', (done) => {
     //   chai
     //     .request(app)
-    //     .get(`${defaultUrl}/car?status=available&minPrice=350&maxPrice=40`)
+    //     .get(`${defaultUrl}/car?status=available&minPrice=300&maxPrice=400`)
     //     .set('authorization', `Bearer ${userToken}`)
     //     .end((err, res) => {
     //       expect(res).to.have.status(404);
     //       expect(res.status).to.equal(404);
     //       expect(res.body).to.have.property('error');
-    //       // expect(res.body.error).to.equal('Sorry, this does not exist');
+    //       expect(res.body.error).to.equal('Sorry, this does not exist');
     //     });
     //   done();
     // });

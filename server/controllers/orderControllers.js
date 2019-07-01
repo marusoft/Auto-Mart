@@ -1,8 +1,6 @@
-
-import orders from '../models/orderModels';
-import cars from '../models/carModels';
 import users from '../models/usersModels';
-
+import cars from '../models/carModels';
+import orders from '../models/orderModels';
 /**
  * @class Orders
  */
@@ -17,6 +15,7 @@ class Orders {
     const { priceOffered, carId, status = 'pending' } = req.body;
     const id = orders[orders.length - 1].id + 1;
     const createdOn = new Date();
+
 
     const findCar = cars.find(car => car.id === Number(carId));
     if (!findCar) {
@@ -64,13 +63,11 @@ class Orders {
     let oldPurchasePrice; let id; let carId; let status;
 
     const { orderId } = req.params;
-    const { email } = req.body;
+    const { email } = req.user;
     const findUser = users.find(user => user.email === email);
-    console.log('finduser', findUser);
     const userId = findUser.id;
     const findOrderToUpdatePrice = orders
       .find(order => order.id === Number(orderId) && order.buyerId === userId);
-    console.log('findOrderToUpdatePrice', findOrderToUpdatePrice);
     if (!findOrderToUpdatePrice) {
       return res.status(404).json({
         status: 404,
@@ -94,6 +91,7 @@ class Orders {
         oldPurchasePrice,
         newPurchasePrice,
       };
+      console.log('order', updatePurchaseOrder);
       return res.status(200).json({
         status: 200,
         data: updatePurchaseOrder,
@@ -101,7 +99,7 @@ class Orders {
     }
     return res.status(422).json({
       status: 422,
-      message: 'Ooosh, order is no longer pending',
+      message: 'Ooosh, Order is no longer pending',
     });
   }
 }

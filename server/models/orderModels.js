@@ -15,24 +15,24 @@ const orders = [
   },
   {
     id: 3,
-    buyerId: 2,
-    carId: 2,
+    buyerId: 1,
+    carId: 1,
     amount: 4000000,
     status: 'rejected',
   },
   {
     id: 4,
-    buyerId: 1,
-    carId: 1,
+    buyerId: 2,
+    carId: 2,
     amount: 4000000,
-    status: 'accepted',
+    status: 'pending',
   },
   {
     id: 5,
-    buyer: 5,
-    carId: 5,
+    buyer: 2,
+    carId: 2,
     amount: 2000000,
-    status: 'pending',
+    status: 'accepted',
   },
 ];
 
