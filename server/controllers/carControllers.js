@@ -77,7 +77,6 @@ class Cars {
    */
   static deleteASpecificCarAD(req, res) {
     const { findSpecificCar } = req.body;
-    console.log('delete');
     cars.splice(findSpecificCar, 1);
     return res.status(200).json({
       status: 200,
