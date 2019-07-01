@@ -1,4 +1,6 @@
 import Helper from '../helpers/HelperUtils';
+import cars from '../models/carModels';
+import users from '../models/usersModels';
 
 
 /**
@@ -96,6 +98,34 @@ class UserAuthentication {
       return;
     }
     next();
+  }
+  /**
+   * @method isOwner
+   * @description check for car owner
+   * @param {object} req
+   * @param {object} res
+   * @returns
+   */
+
+  static isOwner(req, res, next) {
+    const { email } = req.user;
+    const { id } = req.params;
+    const value = Number(id);
+    const foundUser = users.find(user => user.email === email);
+    const foundCar = cars.find(car => car.id === value);
+    if (!foundCar) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Invalid car id',
+      });
+    }
+    if (foundUser.id !== foundCar.owner) {
+      return res.status(401).json({
+        status: 401,
+        error: 'You can not edit this ad',
+      });
+    }
+    return next();
   }
 }
 

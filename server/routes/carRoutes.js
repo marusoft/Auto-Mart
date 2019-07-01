@@ -23,12 +23,12 @@ carRouter.delete(
 );
 carRouter.patch(
   '/car/:id/status',
-  UserAuthentication.verifyUser,
+  UserAuthentication.verifyUser, UserAuthentication.isOwner,
   Cars.updateCarStatus,
 );
 carRouter.patch(
   '/car/:id/price',
-  UserAuthentication.verifyUser,
+  UserAuthentication.verifyUser, UserAuthentication.isOwner,
   Cars.updateCarPrice,
 );
 carRouter.get(

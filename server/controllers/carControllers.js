@@ -14,7 +14,7 @@ class Cars {
   static createCarSaleAD(req, res) {
     const {
       status = 'available',
-      state = 'new',
+      state,
       price,
       manufacturer,
       model,
@@ -22,7 +22,8 @@ class Cars {
       carImageUrl,
     } = req.body;
     const id = cars[cars.length - 1].id + 1;
-    const owner = req.body.id;
+    // const owner = req.user.payload.id;
+    const owner = req.user.id;
     const createdOn = new Date();
     const newCreatedCarAD = {
       id,
@@ -58,13 +59,13 @@ class Cars {
     if (!findSpecificCar) {
       return res.status(404).json({
         status: 404,
-        error: 'Cannot find the specify car',
+        error: 'Cannot find the specify car.',
       });
     }
     return res.status(200).json({
       status: 200,
       data: findSpecificCar,
-      message: 'Specify car seen',
+      message: 'Specify car seen.',
     });
   }
 
@@ -76,6 +77,7 @@ class Cars {
    */
   static deleteASpecificCarAD(req, res) {
     const { findSpecificCar } = req.body;
+    console.log('delete');
     cars.splice(findSpecificCar, 1);
     return res.status(200).json({
       status: 200,
@@ -90,8 +92,9 @@ class Cars {
    * @params {object} res
    */
   static updateCarStatus(req, res) {
-    const id = Number(req.params.id);
-    const findCarId = cars.find(car => car.id === id);
+    const { id } = req.params;
+    const val = Number(id);
+    const findCarId = cars.find(car => car.id === val);
     if (!findCarId) {
       return res.status(404).json({
         status: 404,
@@ -208,13 +211,14 @@ class Cars {
           .bodyType === bodyType);
       return res.status(200).json({
         status: 200,
-        data: [...type],
+        data: type,
       });
     }
     if (req.query.status) {
       status = status.trim().toLowerCase();
       if (status && !minPrice && !maxPrice) {
         const findCarBystatus = cars.filter(car => car.status === status);
+        console.log('status', findCarBystatus);
         if (findCarBystatus.length === 0) {
           return res.status(404).json({
             status: 404,
