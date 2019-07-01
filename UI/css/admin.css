@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url(../img/passenger-car-150155_640.png);
+  border: 0;
+  background-color: #f4f4f4;
   height: 100vh;
   background-size: cover;
   background-position: center;
@@ -14,13 +14,15 @@ body {
 }
 
 /* START OF HEADER/NAVIGATION STYLE */
-ul {
+.nav-list, li {
   margin: 0;
   padding: 0;
+}
+.nav-list li {
   list-style-type: none;
 }
 
-a {
+.nav-list, a {
   text-decoration: none;
   color: #010165;
 }
@@ -82,6 +84,7 @@ h1,
 p {
   color: #ffffff;
   font-size: 22px;
+  font-weight: 800;
 }
 h2 {
   font-size: 1.09em;
@@ -93,72 +96,50 @@ h1 {
   margin-top: 40px;
   margin-bottom: 15px;
   text-align: center;
+  font-weight: 500;
 }
 
 p {
   max-width: 600px;
   margin: auto;
   text-align: center;
+  font-weight: 500;
 }
-
 /* END SECTION */
 
-/* FORM STYLE START */
-.signup-page {
-  width: 360px;
-  padding: 10%, 0, 0;
-  margin: auto;
+/* DASHBOARD START */
+.dashboard-container {
+  display: flex;
 }
-
-.form-container input {
-  font-family: "Catamaran", sans-serif;
-  outline: 1;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
+.sidebar {
+  flex: 1;
+  height: 500px;
+  background-color: #ddd;
 }
-
-.form-container input[type="submit"] {
-  background-color: #5cb85c;
-  border: 0;
-  border-radius: 5px;
-  cursor: pointer;
-  color: #fff;
-  display: inline-block;
-  padding: 10px 20px;
-  width: auto;
-  font-size: 16px;
+.dashboard-content {
+  flex: 3;
+  height: 500px;
+  background-color: #ccc;
+  font-size: 22px;
   font-weight: bold;
-  line-height: 1.4;
 }
-
-input[type="submit"]:hover {
-  color: green;
-  background: white;
-  border: 1px solid green;
-  outline: none;
+.sidebar ul li {
+  padding: 20px;
+  border-bottom: 2px solid #010165;
+  list-style-type: none;
 }
-.form h2 {
-  font-size: 1em;
+.sidebar ul li:hover{
+  background: #a2a2a2;
+  color: #ffffff;
 }
-
-.alternate-form {
-  position: relative;
-  z-index: 1;
-  border-radius: 10px;
-  background: rgba(1, 1, 101, 0.8);
-  padding: 45px;
-  margin: 0 auto 100px;
-  max-width: 360px;
+.dash-head{
   text-align: center;
-  box-sizing: border-box;
-  display: none;
+  margin: 15px;
 }
-/* FORM STYLE END */
+#footer-dash p{
+  color: #010165;
+}
+/* DASHBOARD END */
 
 /* MEDIA QUERIES */
 @media only screen and (max-width: 768px) {
@@ -169,6 +150,7 @@ input[type="submit"]:hover {
   p {
     color: #ffffff;
     font-size: 22px;
+    font-weight: 800;
   }
 
   #footer p {
@@ -199,7 +181,7 @@ input[type="submit"]:hover {
   h1,
   p {
     text-align: center;
-    font-size: 20px;
+    font-weight: 530;
   }
 }
 @media only screen and (max-width: 320px) {
@@ -219,6 +201,7 @@ input[type="submit"]:hover {
   h1,
   p {
     text-align: center;
+    font-weight: 530;
   }
 }
 
@@ -237,5 +220,9 @@ input[type="submit"]:hover {
     margin: 0;
     font-size: 0.53em;
     padding: 4px;
+  }
+
+  p {
+    font-weight: 800;
   }
 }
