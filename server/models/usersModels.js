@@ -4,9 +4,9 @@ const users = [
     email: 'alimi@automart.com',
     firstName: 'kehinde',
     lastName: 'alimi',
-    password: 'xyzabc',
+    password: 'xyzabc12',
     address: '3, Olourunosebi street, Kekereowo, Lagos.',
-    isAmin: true,
+    isAdmin: true,
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const users = [
     lastName: 'omodada',
     password: 'omodada11',
     address: '3, Talomo-ola Street, ajumobikokantaanu, Lagos.',
-    isAmin: false,
+    isAdmin: false,
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const users = [
     lastName: 'olabimpe',
     password: 'solace123',
     address: '3, Ojatutu-nla Street, Kiamosa, Lagos.',
-    isAmin: true,
+    isAdmin: true,
   },
   {
     id: 4,
@@ -33,16 +33,16 @@ const users = [
     lastName: 'bisi',
     password: 'bisi123',
     address: '3, Sabogeri Street, Elewa Road, Lagos.',
-    isAmin: false,
+    isAdmin: false,
   },
   {
     id: 5,
     email: 'whocantell@automart.com',
     firstName: 'whocantell',
     lastName: 'adeleke',
-    password: 'adeleke1',
+    password: 'adeleke114',
     address: '3, Babaoni Street, Amorawa, Lagos.',
-    isAmin: true,
+    isAdmin: true,
   },
 ];
 

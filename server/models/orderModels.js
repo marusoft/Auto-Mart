@@ -1,39 +1,39 @@
-const order = [
+const orders = [
   {
     id: 1,
-    buyer: 1,
-    carId: 1,
+    buyerId: 2, // userId
+    carId: 2,
     amount: 3500000,
     status: 'pending',
   },
   {
     id: 2,
-    buyer: 2,
-    carId: 2,
+    buyerId: 1,
+    carId: 1,
     amount: 2000000,
-    status: 'accepted',
+    status: 'pending',
   },
   {
     id: 3,
-    buyer: 3,
-    carId: 3,
+    buyerId: 1,
+    carId: 1,
     amount: 4000000,
     status: 'rejected',
   },
   {
     id: 4,
-    buyer: 4,
-    carId: 4,
+    buyerId: 2,
+    carId: 2,
     amount: 4000000,
-    status: 'accepted',
+    status: 'pending',
   },
   {
     id: 5,
-    buyer: 5,
-    carId: 5,
+    buyer: 2,
+    carId: 2,
     amount: 2000000,
-    status: 'pending',
+    status: 'accepted',
   },
 ];
 
-export default order;
+export default orders;

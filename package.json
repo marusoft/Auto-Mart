@@ -4,8 +4,13 @@
   "description": "Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. With Auto Mart, users can sell their cars or buy from trusted dealerships or private sellers.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel ./server -d build",
+    "clean": "rm -rf build .nyc_output coverage && mkdir build",
+    "start": "npm run build && node ./build/app.js",
+    "start:dev": "nodemon --exec babel-node ./server/app",
+    "test": "nyc --reporter=html --reporter=text mocha ./server/test/*.js --require @babel/register --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov"
   },
   "repository": {
     "type": "git",
@@ -18,9 +23,16 @@
   },
   "homepage": "https://github.com/marusoft/Auto-Mart#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.1.4",
     "morgan": "^1.9.1",
+    "nyc": "^14.1.1",
     "validator.js": "^2.0.3",
     "validatorjs": "^3.15.1"
   },

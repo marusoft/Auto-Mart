@@ -1,4 +1,5 @@
 import users from '../models/usersModels';
+import Helper from '../helpers/HelperUtils';
 /**
  * @class Users
  */
@@ -14,17 +15,23 @@ class Users {
     const {
       email, firstName, lastName, password, address,
     } = req.body;
+    const hashedPassword = Helper.hashPassword(password);
     const newUser = {
       id: users.length + 1,
       email,
       firstName,
       lastName,
-      password,
+      password: hashedPassword,
       address,
     };
+    const token = Helper.generateToken(newUser);
     users.push(newUser);
     res.status(201).json({
-      newUser,
+      status: 201,
+      data: {
+        token,
+        newUser,
+      },
       message: 'Successfully created',
     });
   }
@@ -39,8 +46,13 @@ class Users {
     const { email, password } = req.body;
     const foundUserEmail = users.find(user => user.email === email);
     const foundUserPassword = users.find(pass => pass.password === password);
+    const token = Helper.generateToken(foundUserEmail);
     if (foundUserEmail && foundUserPassword) {
       res.status(200).json({
+        status: 200,
+        data: {
+          token,
+        },
         message: 'You signed in ...',
       });
     } else {
