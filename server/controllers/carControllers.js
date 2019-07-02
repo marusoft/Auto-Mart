@@ -217,7 +217,6 @@ class Cars {
       status = status.trim().toLowerCase();
       if (status && !minPrice && !maxPrice) {
         const findCarBystatus = cars.filter(car => car.status === status);
-        console.log('status', findCarBystatus);
         if (findCarBystatus.length === 0) {
           return res.status(404).json({
             status: 404,

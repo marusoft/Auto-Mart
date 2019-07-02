@@ -8,7 +8,7 @@ import flagRouter from './routes/flagRoutes';
 
 
 const app = express();
-const port = parseInt(process.env.PORT, 10) || 1440;
+const port = parseInt(process.env.PORT, 10) || 1450;
 
 app.use(logger('dev'));
 
