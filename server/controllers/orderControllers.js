@@ -91,7 +91,6 @@ class Orders {
         oldPurchasePrice,
         newPurchasePrice,
       };
-      console.log('order', updatePurchaseOrder);
       return res.status(200).json({
         status: 200,
         data: updatePurchaseOrder,

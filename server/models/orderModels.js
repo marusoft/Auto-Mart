@@ -29,7 +29,7 @@ const orders = [
   },
   {
     id: 5,
-    buyer: 2,
+    buyerId: 2,
     carId: 2,
     amount: 2000000,
     status: 'accepted',

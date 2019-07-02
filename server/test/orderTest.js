@@ -94,24 +94,24 @@ describe('Update the price of a purchase order, ORDER ROUTE TEST', () => {
         });
       done();
     });
-    // it('should not update the price of Purchase Order if car status is not pending', (done) => {
-    //   const updatePurchaseOrder = {
-    //     status: 'accepted',
-    //     newPurchasePrice: '440000',
-    //     email: 'moyosore@automart.com',
-    //   };
-    //   chai.request(app)
-    //     .patch(`${defaultUrl}/order/3/price`)
-    //     .set('authorization', `Bearer ${userToken}`)
-    //     .send(updatePurchaseOrder)
-    //     .end((err, res) => {
-    //       expect(res).to.have.status(422);
-    //       expect(res.status).to.equal(422);
-    //       // expect(res.body).to.be.a('object');
-    //       expect(res.body).to.have.property('message');
-    //       expect(res.body.message).to.equal('Ooosh, Order is no longer pending');
-    //     });
-    //   done();
-    // });
+    it('should not update the price of Purchase Order if car status is not pending', (done) => {
+      const updatePurchaseOrder = {
+        status: 'accepted',
+        newPurchasePrice: '440000',
+        // email: 'moyosore@automart.com',
+      };
+      chai.request(app)
+        .patch(`${defaultUrl}/order/5/price`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(updatePurchaseOrder)
+        .end((err, res) => {
+          expect(res).to.have.status(422);
+          expect(res.status).to.equal(422);
+          // expect(res.body).to.be.a('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Ooosh, Order is no longer pending');
+        });
+      done();
+    });
   });
 });
