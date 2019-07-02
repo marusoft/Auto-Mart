@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import Helper from '../helpers/HelperUtils';
 import cars from '../models/carModels';
 import users from '../models/usersModels';
@@ -50,8 +51,7 @@ class UserAuthentication {
     }
 
     if (error) {
-      res.status(status).json({ status, error });
-      return;
+      return res.status(status).json({ status, error });
     }
     req.user = payload;
     next();
@@ -73,29 +73,26 @@ class UserAuthentication {
     if (payload && payload.error === 'auth') {
       status = 401;
       error = 'No authorization header was specified';
-      res.status(status).json({
+      return res.status(status).json({
         status,
         error,
       });
-      return;
     }
 
     if (payload && payload.error === 'token') {
       status = 401;
       error = 'Token provided cannot be authenticated.';
-      res.status(status).json({
+      return res.status(status).json({
         status,
         error,
       });
-      return;
     }
 
     if (payload.isAdmin !== true) {
-      res.status(403).json({
+      return res.status(403).json({
         status: 403,
         error: 'Only admin can access this route',
       });
-      return;
     }
     next();
   }
