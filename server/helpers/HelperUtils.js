@@ -14,17 +14,17 @@ const salt = +process.env.SALT;
 export default class Helper {
   /**
    * @method generateToken
-   * @param {@} payload
+   * @param {string} payload
    * @returns token
    */
   static generateToken(payload) {
-    const token = jwt.sign(payload, secretKey);
+    const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
     return token;
   }
 
   /**
    * @method verifyToken
-   * @param {@} token
+   * @param {string} token
    * @returns payload
    */
   static verifyToken(token) {
@@ -38,7 +38,7 @@ export default class Helper {
 
   /**
    * @method hashPassword
-   * @param {@} password
+   * @param {string} password
    * @returns  hash password
    */
   static hashPassword(password) {
@@ -47,7 +47,7 @@ export default class Helper {
 
   /**
    * @method verifyPassword
-   * @param password
+   * @param {string} password
    * @param hash
    * @returns
    */

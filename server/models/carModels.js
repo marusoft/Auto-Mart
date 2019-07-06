@@ -1,7 +1,7 @@
 const cars = [
   {
     id: 1,
-    owner: 1,
+    owner: 1, // user id
     createdOn: new Date(),
     state: 'new',
     status: 'available',
