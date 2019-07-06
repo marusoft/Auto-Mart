@@ -1,4 +1,4 @@
-import pool from '../connection';
+import pool from '../../connection';
 
 const usersTable = `DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE users(

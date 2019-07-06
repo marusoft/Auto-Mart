@@ -1,4 +1,4 @@
-import pool from '../connection';
+import pool from '../../connection';
 
 const ordersTable = `
   DROP TYPE IF EXISTS order_status;

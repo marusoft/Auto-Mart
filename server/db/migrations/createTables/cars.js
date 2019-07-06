@@ -1,4 +1,4 @@
-import pool from '../connection';
+import pool from '../../connection';
 
 const carsTable = `
   DROP TYPE IF EXISTS car_status;
@@ -10,7 +10,6 @@ const carsTable = `
     state VARCHAR(100) NOT NULL,
     status car_status DEFAULT 'available',
     price FLOAT NOT NULL,
-    make VARCHAR(150) NOT NULL,
     manufacturer VARCHAR(150) NOT NULL,
     model VARCHAR(150) NOT NULL,
     bodyType VARCHAR(150) NOT NULL,
