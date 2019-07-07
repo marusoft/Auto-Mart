@@ -1,7 +1,7 @@
 import pool from '../../connection';
 
-const ordersTable = `
-  DROP TYPE IF EXISTS order_status;
+const ordersTable = `DROP TABLE IF EXISTS orders CASCADE;
+DROP TYPE IF EXISTS order_status;
   CREATE TYPE order_status as ENUM ('pending', 'accepted','rejected');
   CREATE TABLE IF NOT EXISTS orders(
     order_id SERIAL PRIMARY KEY NOT NULL,
