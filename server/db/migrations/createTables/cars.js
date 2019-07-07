@@ -1,7 +1,7 @@
 import pool from '../../connection';
 
-const carsTable = `
-  DROP TYPE IF EXISTS car_status;
+const carsTable = `DROP TABLE IF EXISTS cars CASCADE;
+DROP TYPE IF EXISTS car_status;
   CREATE TYPE car_status as ENUM ('available', 'sold');
   CREATE TABLE IF NOT EXISTS cars(
     id SERIAL PRIMARY KEY NOT NULL,

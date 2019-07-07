@@ -1,5 +1,7 @@
 import users from '../models/usersModels';
 import Helper from '../helpers/HelperUtils';
+import pool from '../db/connection';
+
 /**
  * @class Users
  */
@@ -7,33 +9,40 @@ import Helper from '../helpers/HelperUtils';
 class Users {
   /**
    * @static
-   * @returns {object} createUsers
+   * @method createUsers
+   * @returns {void}
    * @params {object} req
    * @params {object} res
    */
-  static createUsers(req, res) {
+  static async createUsers(req, res) {
     const {
-      email, firstName, lastName, password, address,
+      email, firstName, lastName, password, address, isAdmin,
     } = req.body;
     const hashedPassword = Helper.hashPassword(password);
-    const newUser = {
-      id: users.length + 1,
-      email,
-      firstName,
-      lastName,
-      password: hashedPassword,
-      address,
-    };
-    const token = Helper.generateToken(newUser);
-    users.push(newUser);
-    res.status(201).json({
-      status: 201,
-      data: {
-        token,
-        newUser,
-      },
-      message: 'Successfully created',
-    });
+    const sql = `INSERT INTO users(email, firstName, lastName, password, address, isAdmin) VALUES($1, $2, $3, $4, $5, $6)
+    RETURNING *`;
+    const values = [email, firstName, lastName, hashedPassword, address, isAdmin];
+    try {
+      const { rows } = await pool.query(sql, values);
+      const token = Helper.generateToken({ rows });
+      res.status(201).json({
+        status: 201,
+        data: {
+          token,
+          ...rows[0],
+
+        },
+        message: `${req.body.firstName}, your account was successfully created`,
+      });
+      return;
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        res.status(409).json({
+          status: 409,
+          error: 'User with that email already exist',
+        });
+      }
+    }
   }
 
   /**
