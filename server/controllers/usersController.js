@@ -27,7 +27,7 @@ class Users {
     try {
       const { rows } = await pool.query(sql, values);
       const token = Helper.generateToken({ rows });
-      res.status(201).json({
+      return res.status(201).json({
         status: 201,
         data: {
           token,
@@ -36,41 +36,44 @@ class Users {
         },
         message: `${req.body.firstName}, your account was successfully created`,
       });
-      return;
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        res.status(409).json({
+        return res.status(409).json({
           status: 409,
           error: 'User with that email already exist',
         });
       }
+      return res.status(500).json({
+        status: 500,
+        error: 'An internal error occurred at the server',
+      });
     }
   }
 
-  /**
-   * @static
-   * @returns {object} loginUsers
-   * @params {*} req
-   * @params {*} res
-   */
-  static loginUsers(req, res) {
-    const { email, password } = req.body;
-    const foundUserEmail = users.find(user => user.email === email);
-    const foundUserPassword = users.find(pass => pass.password === password);
-    const token = Helper.generateToken(foundUserEmail);
-    if (foundUserEmail && foundUserPassword) {
-      res.status(200).json({
-        status: 200,
-        data: {
-          token,
-        },
-        message: 'You signed in ...',
-      });
-    } else {
-      res.status(401).json({
-        error: 'You need to register or supply the correct input ...',
-      });
-    }
-  }
+  // /**
+  //  * @static
+  //  * @returns {object} loginUsers
+  //  * @params {*} req
+  //  * @params {*} res
+  //  */
+  // static loginUsers(req, res) {
+  //   const { email, password } = req.body;
+  //   const foundUserEmail = users.find(user => user.email === email);
+  //   const foundUserPassword = users.find(pass => pass.password === password);
+  //   const token = Helper.generateToken(foundUserEmail);
+  //   if (foundUserEmail && foundUserPassword) {
+  //     res.status(200).json({
+  //       status: 200,
+  //       data: {
+  //         token,
+  //       },
+  //       message: 'You signed in ...',
+  //     });
+  //   } else {
+  //     res.status(401).json({
+  //       error: 'You need to register or supply the correct input ...',
+  //     });
+  //   }
+  // }
 }
 export default Users;
