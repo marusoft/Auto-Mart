@@ -19,7 +19,7 @@ carRouter.get(
 carRouter.delete(
   '/car/:id', UserAuthentication.verifyAdmin,
   CarsValidation.validateSpecifyCar,
-  Cars.deleteASpecificCarAD,
+  Cars.adminDeleteASpecificCarAD,
 );
 carRouter.patch(
   '/car/:id/status',
