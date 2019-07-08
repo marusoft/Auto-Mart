@@ -52,20 +52,30 @@ class Cars {
    * @params {object} req
    * @params {object} res
    */
-  static ViewASpecificCar(req, res) {
+  static async ViewASpecificCar(req, res) {
     const { id } = req.params;
-    const findSpecificCar = cars.find(car => car.id === Number(id));
-    if (!findSpecificCar) {
-      return res.status(404).json({
-        status: 404,
-        error: 'Cannot find the specify car.',
+    const sql = 'SELECT * FROM cars WHERE id = $1';
+    const value = [id];
+    try {
+      const { rows } = await pool.query(sql, value);
+      const findSpecificCar = rows[0];
+      console.log('car', findSpecificCar);
+      if (!findSpecificCar) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Cannot find the specify car.',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: findSpecificCar,
+        message: 'Specify car seen.',
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
       });
     }
-    return res.status(200).json({
-      status: 200,
-      data: findSpecificCar,
-      message: 'Specify car seen.',
-    });
   }
 
   /**  Delete a specific car AD.
