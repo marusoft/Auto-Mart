@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-import regeneratorRuntime from 'regenerator-runtime';
-import users from '../models/usersModels';
 import Helper from '../helpers/HelperUtils';
 import pool from '../db/connection';
 
@@ -9,10 +6,10 @@ import pool from '../db/connection';
  */
 
 class Users {
-  /**
+  /** Create User
    * @static
    * @method createUsers
-   * @returns {void}
+   * @returns {object}
    * @params {object} req
    * @params {object} res
    */
@@ -50,30 +47,45 @@ class Users {
     }
   }
 
-  // /**
-  //  * @static
-  //  * @returns {object} loginUsers
-  //  * @params {*} req
-  //  * @params {*} res
-  //  */
-  // static loginUsers(req, res) {
-  //   const { email, password } = req.body;
-  //   const foundUserEmail = users.find(user => user.email === email);
-  //   const foundUserPassword = users.find(pass => pass.password === password);
-  //   const token = Helper.generateToken(foundUserEmail);
-  //   if (foundUserEmail && foundUserPassword) {
-  //     res.status(200).json({
-  //       status: 200,
-  //       data: {
-  //         token,
-  //       },
-  //       message: 'You signed in ...',
-  //     });
-  //   } else {
-  //     res.status(401).json({
-  //       error: 'You need to register or supply the correct input ...',
-  //     });
-  //   }
-  // }
+  /** Login User
+   * @static
+   * @returns {object} loginUsers
+   * @params {*} req
+   * @params {*} res
+   */
+  static async loginUsers(req, res) {
+    if (!req.body.email || !req.body.password) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Either password or email is incorrect',
+      });
+    }
+    const sql = 'SELECT * FROM users WHERE email = $1';
+    const value = [req.body.email];
+    try {
+      const { rows } = await pool.query(sql, value);
+      if (!rows[0]) {
+        return res.status(400).json({
+          status: 400,
+          error: 'Account details incorrect',
+        });
+      }
+      if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
+        return res.status(400).json({
+          error: 'Password does not match',
+        });
+      }
+      const token = Helper.generateToken(rows[0]);
+      return res.status(200).json({
+        status: 200,
+        data: {
+          token,
+        },
+        message: `Welcome back ${rows[0].firstname}, your login was successful`,
+      });
+    } catch (error) {
+      return res.status(400).send(error.message);
+    }
+  }
 }
 export default Users;

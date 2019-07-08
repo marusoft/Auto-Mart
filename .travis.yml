@@ -1,6 +1,31 @@
 language: node_js
 node_js:
   - "stable"
+env:
+global:
+  - export NODE_ENV=test
+dist: trusty
+addons:
+    postgresql: "9.6"
+services:
+  - postgresql
+notifications:
+  email: true
+cache:
+  directories:
+    - node_modules
+before_script:
+  - psql -c 'create database automartdb;' -U postgres
+  - npm install
+script: 
+  - npm test
+after_success:
+  - npm run coverage
+  - npm run coveralls
+
+language: node_js
+node_js:
+  - "stable"
 notifications:
   email: false
 cache:
@@ -9,7 +34,7 @@ cache:
 before_script:
   - npm install
 script: 
-  - npm test
+  - npm run test
 after_success:
   - npm run coverage
   - npm run report-coverage
