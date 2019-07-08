@@ -21,7 +21,7 @@ class CarsValidation {
       model,
       bodyType,
       // eslint-disable-next-line prefer-const
-      carImageUrl,
+      carImgUrl,
     } = req.body;
     if (!state) {
       return res.status(400).json({
@@ -103,7 +103,7 @@ class CarsValidation {
         });
       }
     }
-    if (!carImageUrl) {
+    if (!carImgUrl) {
       return res.status(400).json({
         message: 'Please upload an image for this vehicle.',
       });
