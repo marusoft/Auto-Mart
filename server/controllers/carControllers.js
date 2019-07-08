@@ -59,7 +59,6 @@ class Cars {
     try {
       const { rows } = await pool.query(sql, value);
       const findSpecificCar = rows[0];
-      console.log('car', findSpecificCar);
       if (!findSpecificCar) {
         return res.status(404).json({
           status: 404,
@@ -78,19 +77,34 @@ class Cars {
     }
   }
 
-  /**  Delete a specific car AD.
+  /**  Admin Delete a specific car AD.
    * @static
    * @returns {object} deleteASpecificCarAD
    * @params {object} req
    * @params {object} res
    */
-  static deleteASpecificCarAD(req, res) {
-    const { findSpecificCar } = req.body;
-    cars.splice(findSpecificCar, 1);
-    return res.status(200).json({
-      status: 200,
-      data: 'Car Ad successfully deleted',
-    });
+  static async adminDeleteASpecificCarAD(req, res) {
+    const id = Number(req.params.id);
+    const sql = 'DELETE FROM cars WHERE id = $1';
+    const value = [id];
+    try {
+      const { rows } = await pool.query(sql, value);
+      const foundCarTodelete = rows[0];
+      if (!foundCarTodelete) {
+        return res.status(404).json({
+          status: 404,
+          message: 'No Car AD to deleted',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: 'Car Ad successfully deleted',
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
   }
 
   /**  Mark a posted car Ad as sold.
