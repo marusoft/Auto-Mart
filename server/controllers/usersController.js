@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import regeneratorRuntime from 'regenerator-runtime';
 import Helper from '../helpers/HelperUtils';
 import pool from '../db/connection';
 

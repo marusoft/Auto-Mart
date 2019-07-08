@@ -15,7 +15,7 @@ cache:
   directories:
     - node_modules
 before_script:
-  - psql -c 'create database automart_test;' -U postgres
+  - psql -c 'create database automartdb;' -U postgres
   - npm install
 script: 
   - npm test
@@ -34,7 +34,7 @@ cache:
 before_script:
   - npm install
 script: 
-  - npm test
+  - npm run test
 after_success:
   - npm run coverage
   - npm run report-coverage
