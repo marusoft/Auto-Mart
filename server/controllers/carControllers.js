@@ -1,5 +1,6 @@
+import moment from 'moment';
 import cars from '../models/carModels';
-
+import pool from '../db/connection';
 /**
  * @class Cars
  */
@@ -11,40 +12,38 @@ class Cars {
    * @params {object} req
    * @params {object} res
    */
-  static createCarSaleAD(req, res) {
+  static async createCarSaleAD(req, res) {
     const {
-      status = 'available',
-      state,
-      price,
-      manufacturer,
-      model,
-      bodyType,
-      carImageUrl,
-    } = req.body;
-    const id = cars[cars.length - 1].id + 1;
-    // const owner = req.user.payload.id;
-    const owner = req.user.id;
-    const createdOn = new Date();
-    const newCreatedCarAD = {
-      id,
       owner,
-      createdOn,
+      status,
+      state,
+      price,
       manufacturer,
       model,
-      price,
-      state,
-      status,
       bodyType,
-      carImageUrl,
-    };
-    cars.push(newCreatedCarAD);
-    return res.status(201).json({
-      status: 201,
-      data: {
-        newCreatedCarAD,
-      },
-      message: 'Car Advert Successfully created',
-    });
+      carImgUrl,
+    } = req.body;
+    const createdOn = moment(new Date());
+    const sql = `INSERT INTO cars(owner_id, createdOn, state, status, price, manufacturer, model, bodyType, carImgUrl)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING *`;
+    const values = [owner, createdOn, state, status, price, manufacturer, model, bodyType,
+      carImgUrl];
+
+    try {
+      const { rows } = await pool.query(sql, values);
+      const newCarAD = rows[0];
+      return res.status(201).json({
+        status: 201,
+        data: {
+          newCarAD,
+        },
+        message: 'Car Advert Successfully created',
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
   }
 
   /**  View a specific car.
