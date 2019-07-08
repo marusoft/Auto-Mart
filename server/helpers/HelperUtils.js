@@ -39,7 +39,7 @@ export default class Helper {
   /**
    * @method hashPassword
    * @param {string} password
-   * @returns  hash password
+   * @returns {sring} hash password
    */
   static hashPassword(password) {
     return bcrypt.hashSync(password, salt);
@@ -51,7 +51,7 @@ export default class Helper {
    * @param hash
    * @returns
    */
-  static verifyPassword(password, hash) {
-    return bcrypt.compareSync(password, hash);
+  static verifyPassword(hashPassword, password) {
+    return bcrypt.compareSync(password, hashPassword);
   }
 }
