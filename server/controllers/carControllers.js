@@ -172,8 +172,6 @@ class Cars {
           error: 'No Car to Update Price',
         });
       }
-      const result = await pool.query(updateFoundCar, values);
-      const updateFoundCarPrice = result.rows[0];
       if (!price) {
         return res.status(400).json({
           status: 400,
@@ -189,6 +187,8 @@ class Cars {
           });
         }
       }
+      const result = await pool.query(updateFoundCar, values);
+      const updateFoundCarPrice = result.rows[0];
       return res.status(200).json({
         status: 200,
         data: updateFoundCarPrice,
