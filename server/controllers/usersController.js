@@ -15,12 +15,12 @@ class Users {
    */
   static async createUsers(req, res) {
     const {
-      email, firstName, lastName, password, address, isAdmin,
+      email, firstName, lastName, password, address,
     } = req.body;
     const hashedPassword = Helper.hashPassword(password);
-    const sql = `INSERT INTO users(email, firstName, lastName, password, address, isAdmin) VALUES($1, $2, $3, $4, $5, $6)
+    const sql = `INSERT INTO users(email, firstName, lastName, password, address) VALUES($1, $2, $3, $4, $5)
     RETURNING *`;
-    const values = [email, firstName, lastName, hashedPassword, address, isAdmin];
+    const values = [email, firstName, lastName, hashedPassword, address];
     try {
       const { rows } = await pool.query(sql, values);
       const token = Helper.generateToken({ rows });
