@@ -108,6 +108,49 @@ class Cars {
     }
   }
 
+   /**  Mark a posted car Ad as sold.
+   * @static
+   * @returns {object} updateCarStatus
+   * @params {object} req
+   * @params {object} res
+   */
+  static async updateCarStatus(req, res) {
+    const { id } = req.params;
+    let result;
+    const val = Number(id);
+    const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
+    try {
+      result = await pool.query(checkCarStatus, [val]);
+      if (result.rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Car id not found',
+        });
+      }
+
+      if (result.rows[0].status === 'sold') {
+        return res.status(302).json({
+          status: 302,
+          error: 'Status is already mark as sold',
+        });
+      }
+      const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 RETURNING *';
+      const value = ['sold', result.rows[0].id];
+
+      const { rows } = await pool.query(markCarAsSoldSql, value);
+      const statusUpdate = rows[0];
+      return res.status(200).json({
+        status: 200,
+        data: statusUpdate,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+
   /** Update the price of a car.
    * @static
    * @returns {object} updateCarPrice
