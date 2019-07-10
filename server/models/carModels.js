@@ -88,7 +88,7 @@ const cars = [
     owner: 2,
     createdOn: new Date(),
     state: 'used',
-    status: 'sold',
+    status: 'available',
     price: '3400000',
     manufacturer: 'Honda',
     model: 'SUV',

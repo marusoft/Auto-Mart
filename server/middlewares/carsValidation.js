@@ -71,9 +71,9 @@ class CarsValidation {
     }
     if (manufacturer) {
       manufacturer = manufacturer.trim();
-      if (/[^a-zA-Z]/.test(manufacturer)) {
+      if (/[^a-zA-Z ]/.test(manufacturer)) {
         return res.status(406).json({
-          message: 'Only Alphabets input are acceptable.',
+          message: 'Only Alphabets input characters are acceptable for manufacturer.',
         });
       }
     }
@@ -86,7 +86,7 @@ class CarsValidation {
       model = model.trim();
       if (/[^a-zA-Z]/.test(model)) {
         return res.status(406).json({
-          message: 'Only Alphabets input are acceptable.',
+          message: 'Only Alphabets input characters are acceptable for models.',
         });
       }
     }
@@ -99,7 +99,7 @@ class CarsValidation {
       bodyType = bodyType.trim();
       if (/[^a-zA-Z]/.test(bodyType)) {
         return res.status(406).json({
-          message: 'Only Alphabets input are acceptable.',
+          message: 'Only Alphabets input characters are acceptable for body type.',
         });
       }
     }

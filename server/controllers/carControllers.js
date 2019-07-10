@@ -13,8 +13,9 @@ class Cars {
    * @params {object} res
    */
   static async createCarSaleAD(req, res) {
+    // eslint-disable-next-line camelcase
+    const { user_id } = req.user;
     const {
-      owner,
       status,
       state,
       price,
@@ -26,7 +27,8 @@ class Cars {
     const createdOn = moment(new Date());
     const sql = `INSERT INTO cars(owner_id, createdOn, state, status, price, manufacturer, model, bodyType, carImgUrl)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *`;
-    const values = [owner, createdOn, state, status, price, manufacturer, model, bodyType,
+    // eslint-disable-next-line camelcase
+    const values = [user_id, createdOn, state, status, price, manufacturer, model, bodyType,
       carImgUrl];
 
     try {
@@ -55,9 +57,9 @@ class Cars {
   static async ViewASpecificCar(req, res) {
     const { id } = req.params;
     const sql = 'SELECT * FROM cars WHERE id = $1';
-    const value = [id];
+    const value = Number(id);
     try {
-      const { rows } = await pool.query(sql, value);
+      const { rows } = await pool.query(sql, [value]);
       const findSpecificCar = rows[0];
       if (!findSpecificCar) {
         return res.status(404).json({
@@ -84,16 +86,15 @@ class Cars {
    * @params {object} res
    */
   static async adminDeleteASpecificCarAD(req, res) {
-    const id = Number(req.params.id);
+    const { id } = req.params;
+    const val = Number(id);
     const sql = 'DELETE FROM cars WHERE id = $1';
-    const value = [id];
     try {
-      const { rows } = await pool.query(sql, value);
-      const foundCarTodelete = rows[0];
-      if (!foundCarTodelete) {
+      const { rowCount } = await pool.query(sql, [val]);
+      if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
-          message: 'No Car AD to deleted',
+          message: 'No Car AD to delete',
         });
       }
       return res.status(200).json({
@@ -105,35 +106,6 @@ class Cars {
         error: error.message,
       });
     }
-  }
-
-  /**  Mark a posted car Ad as sold.
-   * @static
-   * @returns {object} updateCarStatus
-   * @params {object} req
-   * @params {object} res
-   */
-  static updateCarStatus(req, res) {
-    const { id } = req.params;
-    const val = Number(id);
-    const findCarId = cars.find(car => car.id === val);
-    if (!findCarId) {
-      return res.status(404).json({
-        status: 404,
-        error: 'Invalid car id',
-      });
-    }
-    if (findCarId.status === 'sold') {
-      return res.status(302).json({
-        status: 302,
-        message: 'Car is already mark as Sold',
-      });
-    }
-    findCarId.status = 'sold';
-    return res.status(200).json({
-      status: 200,
-      data: findCarId,
-    });
   }
 
   /** Update the price of a car.
