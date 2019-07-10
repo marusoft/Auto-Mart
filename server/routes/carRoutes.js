@@ -39,7 +39,7 @@ carRouter.patch(
 carRouter.get(
   '/car', Cars.ViewAllUnsoldCars,
   UserAuthentication.verifyAdmin,
-  Cars.ViewAllPostedADCar,
+  Cars.AdminViewAllPostedADCar,
 );
 
 

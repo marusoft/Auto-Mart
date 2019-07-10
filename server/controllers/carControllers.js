@@ -312,18 +312,27 @@ class Cars {
     });
   }
 
-  /**  View All Posted AD Car
+  /** Admin View All Posted AD Car
+   * sold or unsold
    * @static ViewAllPostedADCar
    * @returns {object}
    * @params {object} req
    * @params {object} res
    */
-  static ViewAllPostedADCar(req, res) {
-    return res.status(200).json({
-      status: 200,
-      data: cars,
-      message: 'Success',
-    });
+  static async AdminViewAllPostedADCar(req, res) {
+    const allCars = 'SELECT * FROM cars';
+    try {
+      const { rows } = await pool.query(allCars);
+      return res.status(200).json({
+        status: 200,
+        data: rows,
+        message: 'Success',
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
   }
 }
 
