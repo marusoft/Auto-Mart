@@ -108,7 +108,7 @@ class Cars {
     }
   }
 
-   /**  Mark a posted car Ad as sold.
+  /**  Mark a posted car Ad as sold.
    * @static
    * @returns {object} updateCarStatus
    * @params {object} req
@@ -157,30 +157,47 @@ class Cars {
    * @params {object} req
    * @params {object} res
    */
-  static updateCarPrice(req, res) {
+  static async updateCarPrice(req, res) {
     const { id } = req.params;
+    const val = Number(id);
     let { price } = req.body;
-    const findSpecificCar = cars.find(car => car.id === parseInt(id, 10));
-    if (!price) {
-      return res.status(400).json({
-        status: 400,
-        error: 'add new price...',
-      });
-    }
-    if (price) {
-      price = price.trim();
-      if (!/^\d+$/.test(price)) {
-        return res.status(400).json({
-          status: 400,
-          error: 'Only numbers are acceptable for price input',
+    const findACar = 'SELECT * FROM cars WHERE id = $1';
+    const updateFoundCar = 'UPDATE cars SET price = $1 WHERE id = $2 RETURNING *';
+    const values = [price, val];
+    try {
+      const { rows } = await pool.query(findACar, [val]);
+      if (!rows[0]) {
+        return res.status(404).json({
+          status: 404,
+          error: 'No Car to Update Price',
         });
       }
+      const result = await pool.query(updateFoundCar, values);
+      const updateFoundCarPrice = result.rows[0];
+      if (!price) {
+        return res.status(400).json({
+          status: 400,
+          error: 'add new price...',
+        });
+      }
+      if (price) {
+        price = price.trim();
+        if (!/^\d+$/.test(price)) {
+          return res.status(400).json({
+            status: 400,
+            error: 'Only numbers are acceptable for price input',
+          });
+        }
+      }
+      return res.status(200).json({
+        status: 200,
+        data: updateFoundCarPrice,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
     }
-    findSpecificCar.price = price;
-    return res.status(200).json({
-      status: 200,
-      data: findSpecificCar,
-    });
   }
 
   /** View all posted ADs whether sold or available.
