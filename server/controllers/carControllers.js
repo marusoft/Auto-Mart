@@ -1,5 +1,4 @@
 import moment from 'moment';
-import cars from '../models/carModels';
 import pool from '../db/connection';
 /**
  * @class Cars
@@ -150,7 +149,6 @@ class Cars {
     }
   }
 
-
   /** Update the price of a car.
    * @static
    * @returns {object} updateCarPrice
@@ -200,116 +198,119 @@ class Cars {
     }
   }
 
-  /** View all posted ADs whether sold or available.
+  /** View all unsold cars of specific make,state
+   * status,manufacturer, body type and price range.
    * @static
    * @returns {object} ViewAllPostedAD
    * @params {object} req
    * @params {object} res
    */
-  static ViewAllUnsoldCars(req, res, next) {
+  static async ViewAllUnsoldCars(req, res, next) {
     let {
       // eslint-disable-next-line prefer-const
-      status, state, manufacturer, bodyType, minPrice, maxPrice,
+      status, state, manufacturer, bodyType,
     } = req.query;
-
-    if (status && state) {
-      const carsByStatusState = cars
-        .filter(car => car
-          .status === status && car
-          .state === state);
-      return res
-        .status(200)
-        .json({
-          status: 200,
-          data: carsByStatusState,
+    const carsByStatusStateNew = 'SELECT * FROM cars WHERE status = $1 AND state = $2';
+    if (status && state === 'new') {
+      try {
+        const values = ['available', 'new'];
+        const foundCarByStatusNew = await pool.query(carsByStatusStateNew, values);
+        return res
+          .status(200)
+          .json({
+            status: 200,
+            data: foundCarByStatusNew.rows,
+          });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
         });
+      }
+    }
+    const carsByStatusStateAndUsed = 'SELECT * FROM cars WHERE status = $1 AND state = $2';
+    if (status && state === 'used') {
+      try {
+        const values = ['available', 'used'];
+        const foundCarByStatusStateUsed = await pool.query(carsByStatusStateAndUsed, values);
+        return res
+          .status(200)
+          .json({
+            status: 200,
+            data: foundCarByStatusStateUsed.rows,
+          });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
+        });
+      }
     }
     if (state && manufacturer) {
-      const carsByManufacturer = cars
-        .filter(car => car
-          .state === state && car
-          .manufacturer === manufacturer);
-      return res
-        .status(200)
-        .json({
-          status: 200,
-          data: carsByManufacturer,
+      const carsByStateManufacturer = 'SELECT * FROM cars WHERE state = $1 AND manufacturer = $2';
+      try {
+        const values = ['used', manufacturer];
+        const foundCarByStateManufacturer = await pool.query(carsByStateManufacturer, values);
+        return res
+          .status(200)
+          .json({
+            status: 200,
+            data: foundCarByStateManufacturer.rows,
+          });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
         });
+      }
     }
     if (status && manufacturer) {
-      const carsByManufacturer = cars
-        .filter(car => car
-          .status === status && car
-          .manufacturer === manufacturer);
-      return res
-        .status(200)
-        .json({
-          status: 200,
-          data: carsByManufacturer,
+      const carsByStatusManufacturer = 'SELECT * FROM cars WHERE status = $1 AND manufacturer = $2';
+      try {
+        const values = ['available', manufacturer];
+        const foundCarByStatusManufacturer = await pool.query(carsByStatusManufacturer, values);
+        return res
+          .status(200)
+          .json({
+            status: 200,
+            data: foundCarByStatusManufacturer.rows,
+          });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
         });
+      }
     }
     if (status) {
-      const carsByStatus = cars
-        .filter(car => car
-          .status === status);
-      return res
-        .status(200)
-        .json({
+      const carsByStatus = 'SELECT * FROM cars WHERE status = $1';
+      try {
+        const value = ['available'];
+        const foundCarByStatus = await pool.query(carsByStatus, value);
+        return res.status(200).json({
           status: 200,
-          data: carsByStatus,
+          data: foundCarByStatus.rows,
         });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
+        });
+      }
     }
     if (bodyType) {
-      const type = cars
-        .filter(car => car
-          .bodyType === bodyType);
-      return res.status(200).json({
-        status: 200,
-        data: type,
-      });
-    }
-    if (req.query.status) {
-      status = status.trim().toLowerCase();
-      if (status && !minPrice && !maxPrice) {
-        const findCarBystatus = cars.filter(car => car.status === status);
-        if (findCarBystatus.length === 0) {
-          return res.status(404).json({
-            status: 404,
-            error: 'Sorry, this does not exist',
+      const carsByBodyType = 'SELECT * FROM cars WHERE bodytype = $1';
+      try {
+        const value = [bodyType];
+        const foundCarByBodyType = await pool.query(carsByBodyType, value);
+        return res
+          .status(200)
+          .json({
+            status: 200,
+            data: foundCarByBodyType.rows,
           });
-        }
-        return res.status(200).json({
-          status: 200,
-          data: {
-            findCarBystatus,
-          },
-        });
-      }
-      if (status && minPrice && maxPrice) {
-        minPrice = Number(minPrice.trim());
-        maxPrice = Number(maxPrice.trim());
-        const findCarsByPriceRange = cars
-          .filter(car => car.status === status && Number(car.price) >= minPrice
-        && Number(car.price) <= maxPrice);
-        if (findCarsByPriceRange.length === 0) {
-          return res.status(404).json({
-            status: 404,
-            error: 'There is no result for your search now',
-          });
-        }
-        return res.status(200).json({
-          status: 200,
-          data: {
-            findCarsByPriceRange,
-          },
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
         });
       }
     }
-    next();
-    return res.status(404).json({
-      status: 404,
-      error: 'There seems to be an issue with your search',
-    });
+    return next();
   }
 
   /** Admin View All Posted AD Car
