@@ -1,5 +1,6 @@
 import moment from 'moment';
 import pool from '../db/connection';
+
 /**
  * @class Cars
  */
@@ -340,7 +341,7 @@ class Cars {
 
   /** Admin View All Posted AD Car
    * sold or unsold
-   * @static ViewAllPostedADCar
+   * @static AdminViewAllPostedADCar
    * @returns {object}
    * @params {object} req
    * @params {object} res
