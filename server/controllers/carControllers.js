@@ -313,6 +313,31 @@ class Cars {
     return next();
   }
 
+  /** View all unsold cars
+   * within a price range.
+   * @static ViewAllUnsoldCarsPriceRange
+   * @returns {object}
+   * @params {object} req
+   * @params {object} res
+   */
+  static async ViewAllUnsoldCarsPriceRange(req, res) {
+    const { minPrice, maxPrice } = req.query;
+    const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${minPrice}' AND '${maxPrice}' `;
+    try {
+      const { rows } = await pool.query(findPriceRange);
+      return res.status(200).json({
+        status: 200,
+        data: {
+          rows,
+        },
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
   /** Admin View All Posted AD Car
    * sold or unsold
    * @static ViewAllPostedADCar
