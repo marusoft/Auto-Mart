@@ -37,7 +37,8 @@ carRouter.patch(
   Cars.updateCarPrice,
 );
 carRouter.get(
-  '/car', Cars.ViewAllUnsoldCars,
+  '/car', Cars.ViewAllUnsoldCarsPriceRange,
+  Cars.ViewAllUnsoldCars,
   UserAuthentication.verifyAdmin,
   Cars.AdminViewAllPostedADCar,
 );
