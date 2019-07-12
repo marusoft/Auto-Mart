@@ -15,13 +15,43 @@ class Orders {
     const { user_id } = req.user;
     // eslint-disable-next-line camelcase
     const { car_id, priceOffered } = req.body;
-    const sql = `INSERT INTO orders(buyer_id, car_id, priceOffered) VALUES($1, $2, $3)
-    RETURNING *`;
-    // eslint-disable-next-line camelcase
-    const values = [user_id, car_id, priceOffered];
+
+    const carSql = 'SELECT * FROM cars WHERE id = $1';
+    const value = Number(car_id);
+
     try {
-      const { rows } = await pool.query(sql, values);
-      const newPurchaseOrder = rows[0];
+      const { rows, rowCount } = await pool.query(carSql, [value]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Cannot find the specify car.',
+        });
+      }
+      const amount = rows[0].price;
+
+      const orderSql = `INSERT INTO orders(buyer_id, car_id, priceOffered) VALUES($1, $2, $3)
+    RETURNING *`;
+      // eslint-disable-next-line camelcase
+      const values = [user_id, car_id, priceOffered];
+      const purchaseOrder = await pool.query(orderSql, values);
+      const {
+        // eslint-disable-next-line camelcase
+        order_id,
+        createdon,
+        status,
+        priceoffered,
+      } = purchaseOrder.rows[0];
+
+      const newPurchaseOrder = {
+        order_id,
+        car_id,
+        createdon,
+        status,
+        amount,
+        priceoffered,
+
+      };
+
       return res.status(201).json({
         status: 201,
         data: {
