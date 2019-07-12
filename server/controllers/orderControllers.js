@@ -1,6 +1,5 @@
-import users from '../models/usersModels';
-import cars from '../models/carModels';
-import orders from '../models/orderModels';
+import pool from '../db/connection';
+
 /**
  * @class Orders
  */
@@ -11,38 +10,31 @@ class Orders {
    * @params {object} req
    * @params {object} res
    */
-  static CreateAPurchaseOrder(req, res) {
-    const { priceOffered, carId, status = 'pending' } = req.body;
-    const id = orders[orders.length - 1].id + 1;
-    const createdOn = new Date();
-
-
-    const findCar = cars.find(car => car.id === Number(carId));
-    if (!findCar) {
-      res.status(404).json({
-        status: 404,
-        error: 'Car cannot be found',
+  static async CreateAPurchaseOrder(req, res) {
+    // eslint-disable-next-line camelcase
+    const { user_id } = req.user;
+    // eslint-disable-next-line camelcase
+    const { car_id, priceOffered } = req.body;
+    const sql = `INSERT INTO orders(buyer_id, car_id, priceOffered) VALUES($1, $2, $3)
+    RETURNING *`;
+    // eslint-disable-next-line camelcase
+    const values = [user_id, car_id, priceOffered];
+    try {
+      const { rows } = await pool.query(sql, values);
+      const newPurchaseOrder = rows[0];
+      console.log('purchase', newPurchaseOrder);
+      return res.status(201).json({
+        status: 201,
+        data: {
+          newPurchaseOrder,
+        },
+        message: 'Purchase Order Successfully created',
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
       });
     }
-
-    const carIndexValue = findCar.id;
-    const { price } = findCar;
-
-    const newPurchaseOrder = {
-      id,
-      carIndexValue,
-      createdOn,
-      status,
-      price,
-      priceOffered,
-    };
-    orders.push(newPurchaseOrder);
-    return res.status(201).json({
-      status: 201,
-      data: {
-        newPurchaseOrder,
-      },
-    });
   }
 
   /** Update the price of a purchase order.

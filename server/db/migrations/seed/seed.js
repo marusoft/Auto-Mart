@@ -1,9 +1,12 @@
+import dotenv from 'dotenv';
 import moment from 'moment';
 import pool from '../../connection';
 import Helper from '../../../helpers/HelperUtils';
 
+dotenv.config();
 
-const hashedPassword = Helper.hashPassword('passcode');
+const password = process.env.PASSWORD;
+const hashedPassword = Helper.hashPassword(password);
 
 const addAllsqlTableQueries = `
       INSERT INTO users(email, firstName, lastName, password, address, isAdmin) 
@@ -16,10 +19,10 @@ const addAllsqlTableQueries = `
              (2, 1, '${moment(new Date())}', 'used', 'sold', 1500000, 'Mack', 'Diecast', 'Trailer', 'http://car-img.com/mack.jpeg'),
              (3, 2, '${moment(new Date())}', 'new', 'available', 2500000, 'Volkswagen', 'PickUp', 'Truck', 'http://some-car-img.com/volkswagen.jpg');
             
-      INSERT INTO orders(order_id, buyer_id, car_id, amount, status) 
-      VALUES (1, 2, 3, 5000000, 'pending'),
-             (2, 1, 3, 6000000, 'accepted'),
-             (3, 2, 1, 7000000, 'rejected');
+      INSERT INTO orders(order_id, buyer_id, car_id, createdOn,  status, priceOffered) 
+      VALUES (1, 2, 3, '${moment(new Date())}', 'pending', 5670000),
+             (2, 1, 3, '${moment(new Date())}', 'accepted', 69800000),
+             (3, 2, 1, '${moment(new Date())}', 'rejected', 79800000);
 
       INSERT INTO flag(flag_id, carId, createdOn, reason, description) 
       VALUES (1, 2, '${moment(new Date())}', 'weired demands', 'Because of weired demands'),
