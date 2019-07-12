@@ -22,7 +22,6 @@ class Orders {
     try {
       const { rows } = await pool.query(sql, values);
       const newPurchaseOrder = rows[0];
-      console.log('purchase', newPurchaseOrder);
       return res.status(201).json({
         status: 201,
         data: {

@@ -34,15 +34,8 @@ class Users {
         message: `${req.body.firstName}, your account was successfully created`,
       });
     } catch (error) {
-      if (error.routine === '_bt_check_unique') {
-        return res.status(409).json({
-          status: 409,
-          error: 'User with that email already exist',
-        });
-      }
-      return res.status(500).json({
-        status: 500,
-        error: 'An internal error occurred at the server',
+      return res.status(400).json({
+        error: error.message,
       });
     }
   }
