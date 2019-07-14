@@ -105,30 +105,23 @@ npm start
 
 <tr><td>GET</td> <td>api/v1/car</td> <td>View all unsold cars of specific make,state
    * status,manufacturer, body type and price range.</td></tr>
-    </table>
 
 <tr><td>GET</td> <td>api/v1/car?status=available&manufacturer=toyota</td> <td>View all unsold cars of a specific make (manufacturer).</td></tr>
-    </table>   
 
 <tr><td>GET</td> <td>api/v1/car?status=available&state=used</td> <td>View all unsold cars of a specific state(used).</td></tr>
-    </table>
 
-<tr><td>GET</td> <td>api/v1/car?status=available&state=new</td> <td>View all unsold cars of a specific state (new).</td></tr>
-    </table>              
+<tr><td>GET</td> <td>api/v1/car?status=available&state=new</td> <td>View all unsold cars of a specific state (new).</td></tr>             
 
-<tr><td>GET</td> <td>api/v1/car?bodyType=van</td> <td>View all cars of a specific body type.</td></tr>
-    </table> 
+<tr><td>GET</td> <td>api/v1/car?bodyType=van</td> <td>View all cars of a specific body type.</td></tr> 
 
 <tr><td>GET</td> <td>api/v1/car?status=available&minPrice=30000&maxPrice=378000000</td> <td>User can view all unsold cars within a price range.</td></tr>
-    </table> 
 
 <tr><td>POST</td> <td>api/v1/order</td>  <td>Create a purchase order</td></tr>    
 
 <tr><td>PATCH</td> <td>api/v1/order/:orderId/price</td>  <td>Update the price of a purchase order.</td></tr> 
 
 <tr><td>POST</td> <td>api/v1/flag</td>  <td>flag/report a posted AD as fraudulent.</td></tr>     
-
-
+ </table> 
 
 ## Author
 - Kehinde Morufudeen Alimi 
