@@ -99,9 +99,11 @@ npm start
 
 <tr><td>DELETE</td> <td>api/v1/car/:id</td>  <td>Admin Delete a specific car AD.</td></tr>
 
-<tr><td>PATCH</td> <td>api/v1/car/:id/status</td> <td>Mark a posted car Ad as sold.</td></tr>
+<tr><td>GET</td> <td>api/v1/car</td> <td>Admin can view all posted ads whether sold or unsold.</td></tr>
 
-<tr><td>PATCH</td> <td>api/v1/car/:id/price</td> <td>Update the price of a car.</td></tr>
+<tr><td>PATCH</td> <td>api/v1/car/:id/status</td><td>Mark a posted car Ad as sold.</td></tr>
+
+<tr><td>PATCH</td> <td>api/v1/car/:id/price</td><td>Update the price of a car.</td></tr>
 
 <tr><td>GET</td> <td>api/v1/car</td> <td>View all unsold cars of specific make,state
    * status,manufacturer, body type and price range.</td></tr>
