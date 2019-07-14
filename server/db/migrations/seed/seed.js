@@ -24,7 +24,7 @@ const addAllsqlTableQueries = `
              (2, 1, 3, '${moment(new Date())}', 'accepted', 69800000),
              (3, 2, 1, '${moment(new Date())}', 'rejected', 79800000);
 
-      INSERT INTO flag(flag_id, carId, createdOn, reason, description) 
+      INSERT INTO flag(flag_id, car_id, createdOn, reason, description) 
       VALUES (1, 2, '${moment(new Date())}', 'weired demands', 'Because of weired demands'),
              (2, 3, '${moment(new Date())}', 'pricing', 'Because of unstable price'),
              (3, 2, '${moment(new Date())}', 'place of advert', 'Because of unstrusted place of advert');       
