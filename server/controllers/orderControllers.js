@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import pool from '../db/connection';
 
 /**
@@ -11,13 +12,11 @@ class Orders {
    * @params {object} res
    */
   static async CreateAPurchaseOrder(req, res) {
-    // eslint-disable-next-line camelcase
     const { user_id } = req.user;
-    // eslint-disable-next-line camelcase
     const { car_id, priceOffered } = req.body;
+    const value = Number(car_id);
 
     const carSql = 'SELECT * FROM cars WHERE id = $1';
-    const value = Number(car_id);
 
     try {
       const { rows, rowCount } = await pool.query(carSql, [value]);
@@ -31,11 +30,9 @@ class Orders {
 
       const orderSql = `INSERT INTO orders(buyer_id, car_id, priceOffered) VALUES($1, $2, $3)
     RETURNING *`;
-      // eslint-disable-next-line camelcase
       const values = [user_id, car_id, priceOffered];
       const purchaseOrder = await pool.query(orderSql, values);
       const {
-        // eslint-disable-next-line camelcase
         order_id,
         createdon,
         status,
@@ -49,9 +46,7 @@ class Orders {
         status,
         amount,
         priceoffered,
-
       };
-
       return res.status(201).json({
         status: 201,
         data: {
@@ -60,7 +55,8 @@ class Orders {
         message: 'Purchase Order Successfully created',
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
+        status: 500,
         error: error.message,
       });
     }
@@ -72,55 +68,64 @@ class Orders {
    * @params {object} req
    * @params {object} res
    */
-  static updatePurchaseOrderPrice(req, res) {
-    const { newPurchasePrice } = req.body;
-    if (!newPurchasePrice.trim() === '' || !/^\d+$/.test(newPurchasePrice)) {
+  // eslint-disable-next-line consistent-return
+  static async updatePurchaseOrderPrice(req, res) {
+    const { newPriceOffered } = req.body;
+    if (!newPriceOffered.trim() === '' || !/^\d+$/.test(newPriceOffered)) {
       return res.status(400).json({
         status: 400,
-        error: 'input price can only be numbers',
+        error: 'input offer price can only be numbers',
       });
     }
-
-    let oldPurchasePrice; let id; let carId; let status;
-
     const { orderId } = req.params;
-    const { email } = req.user;
-    const findUser = users.find(user => user.email === email);
-    const userId = findUser.id;
-    const findOrderToUpdatePrice = orders
-      .find(order => order.id === Number(orderId) && order.buyerId === userId);
-    if (!findOrderToUpdatePrice) {
-      return res.status(404).json({
-        status: 404,
-        message: 'Order cannot be found',
+    const val = Number(orderId);
+    let oldPriceOffered;
+
+    try {
+      const findOrder = 'SELECT * FROM orders WHERE order_id = $1';
+      const { rows, rowCount } = await pool.query(findOrder, [val]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Purchase order not found',
+        });
+      }
+      const previousPrice = rows[0].amount;
+      if (rowCount !== 0 && rows[0].status !== 'pending') {
+        return res.status(422).json({
+          status: 422,
+          error: 'Oosh, this order is no longer pending',
+        });
+      }
+      if (rowCount !== 0 && rows[0].status === 'pending') {
+        const updateNewPrice = 'UPDATE orders SET priceOffered = $1 WHERE order_id  = $2 RETURNING * ';
+        const value = [newPriceOffered, val];
+        const updateOrder = await pool.query(updateNewPrice, value);
+        if (updateOrder.rowCount !== 0) {
+          const {
+            order_id,
+            car_id,
+            status,
+          } = updateOrder.rows[0];
+          oldPriceOffered = previousPrice;
+          const updatePurchaseOrder = {
+            order_id,
+            car_id,
+            status,
+            oldPriceOffered,
+            newPriceOffered,
+          };
+          return res.status(200).json({
+            status: 200,
+            data: updatePurchaseOrder,
+          });
+        }
+      }
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
       });
     }
-    if (findOrderToUpdatePrice && findOrderToUpdatePrice.status === 'pending') {
-      oldPurchasePrice = findOrderToUpdatePrice.amount;
-
-      // eslint-disable-next-line prefer-destructuring
-      id = findOrderToUpdatePrice.id;
-      // eslint-disable-next-line prefer-destructuring
-      carId = findOrderToUpdatePrice.carId;
-      // eslint-disable-next-line prefer-destructuring
-      status = findOrderToUpdatePrice.status;
-
-      const updatePurchaseOrder = {
-        id,
-        carId,
-        status,
-        oldPurchasePrice,
-        newPurchasePrice,
-      };
-      return res.status(200).json({
-        status: 200,
-        data: updatePurchaseOrder,
-      });
-    }
-    return res.status(422).json({
-      status: 422,
-      message: 'Ooosh, Order is no longer pending',
-    });
   }
 }
 export default Orders;
