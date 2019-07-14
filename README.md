@@ -35,6 +35,7 @@ Below are the features Auto-Mart app
 - User can view all unsold cars.<br/>
 - User can view all unsold cars within a price range.<br/>
 - Admin can delete a posted AD record.<br/>
+- Admin can view all posted ads whether sold or unsold.<br/>
 
 ## Optional Features
 - User can reset password.<br/>
