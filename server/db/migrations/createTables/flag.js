@@ -3,11 +3,11 @@ import pool from '../../connection';
 const flagsTable = ` DROP TABLE IF EXISTS flag;
   CREATE TABLE IF NOT EXISTS flag(
     flag_id SERIAL PRIMARY KEY NOT NULL,
-    carId  INTEGER NOT NULL,
+    car_id  INTEGER NOT NULL,
     createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     reason VARCHAR(225) NOT NULL,
     description VARCHAR(225) NOT NULL,
-    FOREIGN KEY (carId) REFERENCES cars(id) ON DELETE CASCADE
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
   )`;
 
 /**
