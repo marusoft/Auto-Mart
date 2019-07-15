@@ -127,7 +127,7 @@ class CarsValidation {
     const { id } = req.params;
     const value = Number(id);
     const findCar = 'SELECT * FROM cars WHERE id = $1';
-    const findSpecificCar = await pool.query(findCar, value);
+    const findSpecificCar = await pool.query(findCar, [value]);
     if (!findSpecificCar) {
       return res.status(404).json({
         status: 404,

@@ -15,7 +15,6 @@ class Cars {
    * @params {object} res
    */
   static async createCarSaleAD(req, res) {
-    // eslint-disable-next-line camelcase
     const id = req.user.user_id;
     const {
       status,
@@ -26,11 +25,11 @@ class Cars {
       body_type,
       img_url,
     } = req.body;
-    const createdOn = moment(new Date());
-    const sql = `INSERT INTO cars(owner_id, createdOn, state, status, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    const created_on = moment(new Date());
+    const sql = `INSERT INTO cars(owner_id, created_on, state, status, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *`;
     // eslint-disable-next-line camelcase
-    const values = [id, createdOn, state, status, price, manufacturer, model, body_type,
+    const values = [id, created_on, state, status, price, manufacturer, model, body_type,
       img_url];
 
     try {
@@ -76,7 +75,7 @@ class Cars {
       });
     } catch (error) {
       return res.status(400).json({
-        error: error.message,
+        error,
       });
     }
   }
@@ -297,7 +296,7 @@ class Cars {
       }
     }
     if (body_type) {
-      const carsByBodyType = 'SELECT * FROM cars WHERE bodytype = $1';
+      const carsByBodyType = 'SELECT * FROM cars WHERE body_type = $1';
       try {
         const value = [body_type];
         const foundCarByBodyType = await pool.query(carsByBodyType, value);
@@ -323,22 +322,25 @@ class Cars {
    * @params {object} req
    * @params {object} res
    */
-  static async ViewAllUnsoldCarsPriceRange(req, res) {
+  static async ViewAllUnsoldCarsPriceRange(req, res, next) {
     const { min_price, max_price } = req.query;
-    const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${min_price}' AND '${max_price}' `;
-    try {
-      const { rows } = await pool.query(findPriceRange);
-      return res.status(200).json({
-        status: 200,
-        data: {
-          rows,
-        },
-      });
-    } catch (error) {
-      return res.status(400).json({
-        error: error.message,
-      });
+    if (min_price && max_price) {
+      const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${min_price}' AND '${max_price}' `;
+      try {
+        const { rows } = await pool.query(findPriceRange);
+        return res.status(200).json({
+          status: 200,
+          data: {
+            rows,
+          },
+        });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
+        });
+      }
     }
+    return next();
   }
 
   /** Admin View All Posted AD Car
@@ -358,7 +360,7 @@ class Cars {
         message: 'Success',
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         error: error.message,
       });
     }

@@ -87,7 +87,7 @@ class UserAuthentication {
       });
     }
 
-    if (payload.isadmin !== true) {
+    if (payload.is_admin !== true) {
       return res.status(403).json({
         status: 403,
         error: 'Only admin can access this route',
