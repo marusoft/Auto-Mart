@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Helper from '../helpers/HelperUtils';
 import pool from '../db/connection';
 
@@ -15,12 +16,12 @@ class Users {
    */
   static async createUsers(req, res) {
     const {
-      email, firstName, lastName, password, address,
+      email, first_name, last_name, password, address,
     } = req.body;
     const hashedPassword = Helper.hashPassword(password);
-    const sql = `INSERT INTO users(email, firstName, lastName, password, address) VALUES($1, $2, $3, $4, $5)
+    const sql = `INSERT INTO users(email, first_name, last_name, password, address) VALUES($1, $2, $3, $4, $5)
     RETURNING *`;
-    const values = [email, firstName, lastName, hashedPassword, address];
+    const values = [email, first_name, last_name, hashedPassword, address];
     try {
       const { rows } = await pool.query(sql, values);
       const token = Helper.generateToken({ rows });
@@ -31,7 +32,7 @@ class Users {
           ...rows[0],
 
         },
-        message: `${req.body.firstName}, your account was successfully created`,
+        message: `${req.body.first_name}, your account was successfully created`,
       });
     } catch (error) {
       return res.status(400).json({
@@ -74,7 +75,7 @@ class Users {
         data: {
           token,
         },
-        message: `Welcome back ${rows[0].firstname}, your login was successful`,
+        message: `Welcome back ${rows[0].first_name}, your login was successful`,
       });
     } catch (error) {
       return res.status(400).send(error.message);

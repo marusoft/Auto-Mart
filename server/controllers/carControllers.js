@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable camelcase */
 import moment from 'moment';
 import pool from '../db/connection';
 
@@ -14,22 +16,22 @@ class Cars {
    */
   static async createCarSaleAD(req, res) {
     // eslint-disable-next-line camelcase
-    const { user_id } = req.user;
+    const id = req.user.user_id;
     const {
       status,
       state,
       price,
       manufacturer,
       model,
-      bodyType,
-      carImgUrl,
+      body_type,
+      img_url,
     } = req.body;
     const createdOn = moment(new Date());
-    const sql = `INSERT INTO cars(owner_id, createdOn, state, status, price, manufacturer, model, bodyType, carImgUrl)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    const sql = `INSERT INTO cars(owner_id, createdOn, state, status, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *`;
     // eslint-disable-next-line camelcase
-    const values = [user_id, createdOn, state, status, price, manufacturer, model, bodyType,
-      carImgUrl];
+    const values = [id, createdOn, state, status, price, manufacturer, model, body_type,
+      img_url];
 
     try {
       const { rows } = await pool.query(sql, values);
@@ -56,10 +58,10 @@ class Cars {
    */
   static async ViewASpecificCar(req, res) {
     const { id } = req.params;
-    const sql = 'SELECT * FROM cars WHERE id = $1';
+    const findOneCarSql = 'SELECT * FROM cars WHERE id = $1';
     const value = Number(id);
     try {
-      const { rows } = await pool.query(sql, [value]);
+      const { rows } = await pool.query(findOneCarSql, [value]);
       const findSpecificCar = rows[0];
       if (!findSpecificCar) {
         return res.status(404).json({
@@ -88,9 +90,9 @@ class Cars {
   static async adminDeleteASpecificCarAD(req, res) {
     const { id } = req.params;
     const val = Number(id);
-    const sql = 'DELETE FROM cars WHERE id = $1';
+    const deleteSql = 'DELETE FROM cars WHERE id = $1';
     try {
-      const { rowCount } = await pool.query(sql, [val]);
+      const { rowCount } = await pool.query(deleteSql, [val]);
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -208,8 +210,8 @@ class Cars {
    */
   static async ViewAllUnsoldCars(req, res, next) {
     let {
-      // eslint-disable-next-line prefer-const
-      status, state, manufacturer, bodyType,
+
+      status, state, manufacturer, body_type,
     } = req.query;
     const carsByStatusStateNew = 'SELECT * FROM cars WHERE status = $1 AND state = $2';
     if (status && state === 'new') {
@@ -294,10 +296,10 @@ class Cars {
         });
       }
     }
-    if (bodyType) {
+    if (body_type) {
       const carsByBodyType = 'SELECT * FROM cars WHERE bodytype = $1';
       try {
-        const value = [bodyType];
+        const value = [body_type];
         const foundCarByBodyType = await pool.query(carsByBodyType, value);
         return res
           .status(200)
@@ -322,8 +324,8 @@ class Cars {
    * @params {object} res
    */
   static async ViewAllUnsoldCarsPriceRange(req, res) {
-    const { minPrice, maxPrice } = req.query;
-    const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${minPrice}' AND '${maxPrice}' `;
+    const { min_price, max_price } = req.query;
+    const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${min_price}' AND '${max_price}' `;
     try {
       const { rows } = await pool.query(findPriceRange);
       return res.status(200).json({

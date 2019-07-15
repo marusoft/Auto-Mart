@@ -6,15 +6,15 @@ DROP TYPE IF EXISTS car_status;
   CREATE TABLE IF NOT EXISTS cars(
     id SERIAL PRIMARY KEY NOT NULL,
     owner_id INTEGER NOT NULL,
-    createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     state VARCHAR(100) NOT NULL,
     status car_status DEFAULT 'available',
     price FLOAT NOT NULL,
     manufacturer VARCHAR(150) NOT NULL,
     model VARCHAR(150) NOT NULL,
-    bodyType VARCHAR(150) NOT NULL,
+    body_type VARCHAR(150) NOT NULL,
     FOREIGN KEY (owner_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    carImgUrl TEXT NOT NULL
+    img_url TEXT NOT NULL
   )`;
 
 /**

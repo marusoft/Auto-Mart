@@ -14,7 +14,7 @@ class Flag {
    * @params {object} res
    */
   static async flagPostedAdAsFraud(req, res) {
-    const createdOn = moment(new Date());
+    const created_on = moment(new Date());
     const { car_id, reason, description } = req.body;
 
     const value = Number(car_id);
@@ -28,9 +28,9 @@ class Flag {
         });
       }
 
-      const flagSql = `INSERT INTO flag(car_id, createdOn, reason, description) VALUES($1, $2, $3, $4)
+      const flagSql = `INSERT INTO flag(car_id, created_on, reason, description) VALUES($1, $2, $3, $4)
       RETURNING *`;
-      const values = [value, createdOn, reason, description];
+      const values = [value, created_on, reason, description];
       const reportAD = await pool.query(flagSql, values);
       const data = reportAD.rows[0];
       return res.status(201).json({

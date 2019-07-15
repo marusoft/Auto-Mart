@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable prefer-const */
 import validator from 'validatorjs';
 import pool from '../db/connection';
 import Helper from '../helpers/HelperUtils';
@@ -15,14 +17,13 @@ class UsersValidation {
    */
   static async ValidateUserSignUpInput(req, res, next) {
     let {
-      // eslint-disable-next-line prefer-const
-      email, firstName, lastName, password, address,
+      email, first_name, last_name, password, address,
     } = req.body;
 
     const constraint = {
       email: 'required|email|min:12|max:30',
-      firstName: 'required|min:3|max:20|alpha',
-      lastName: 'required|min:3|max:20|alpha',
+      first_name: 'required|min:3|max:20|alpha',
+      last_name: 'required|min:3|max:20|alpha',
       password: 'required|min:8|max:14',
       address: 'required',
     };
@@ -53,8 +54,8 @@ class UsersValidation {
     }
 
     req.body.email = email;
-    req.body.firstName = firstName.toLowerCase().trim();
-    req.body.lastName = lastName.toLowerCase().trim();
+    req.body.first_name = first_name.toLowerCase().trim();
+    req.body.last_name = last_name.toLowerCase().trim();
     req.body.password = password.trim();
     req.body.address = address.trim();
     return next();

@@ -4,11 +4,11 @@ const usersTable = `DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE users(
     user_id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    firstName VARCHAR(130) NOT NULL,
-    lastName VARCHAR(130) NOT NULL,
+    first_name VARCHAR(130) NOT NULL,
+    last_name VARCHAR(130) NOT NULL,
     password VARCHAR(255) NOT NULL,
     address VARCHAR(200) NOT NULL,
-    isAdmin BOOLEAN DEFAULT false NOT NULL
+    is_admin BOOLEAN DEFAULT false NOT NULL
   )`;
 
 
