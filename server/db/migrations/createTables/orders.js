@@ -7,9 +7,9 @@ DROP TYPE IF EXISTS order_status;
     order_id SERIAL PRIMARY KEY NOT NULL,
     buyer_id INTEGER NOT NULL,
     car_id  INTEGER NOT NULL,
-    createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status order_status DEFAULT 'pending',
-    priceOffered FLOAT NOT NULL,
+    price_offered FLOAT NOT NULL,
     FOREIGN KEY (buyer_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
   )`;

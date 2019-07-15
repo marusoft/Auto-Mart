@@ -1,3 +1,7 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-unused-vars */
+
 /* eslint-disable camelcase */
 import pool from '../db/connection';
 
@@ -12,8 +16,8 @@ class Orders {
    * @params {object} res
    */
   static async CreateAPurchaseOrder(req, res) {
-    const { user_id } = req.user;
-    const { car_id, priceOffered } = req.body;
+    const id = req.user.user_id;
+    const { car_id, price_offered } = req.body;
     const value = Number(car_id);
 
     const carSql = 'SELECT * FROM cars WHERE id = $1';
@@ -28,24 +32,24 @@ class Orders {
       }
       const amount = rows[0].price;
 
-      const orderSql = `INSERT INTO orders(buyer_id, car_id, priceOffered) VALUES($1, $2, $3)
+      const orderSql = `INSERT INTO orders(buyer_id, car_id, price_offered) VALUES($1, $2, $3)
     RETURNING *`;
-      const values = [user_id, car_id, priceOffered];
+      const values = [id, car_id, price_offered];
       const purchaseOrder = await pool.query(orderSql, values);
       const {
         order_id,
-        createdon,
+        created_on,
         status,
-        priceoffered,
+        price_offered,
       } = purchaseOrder.rows[0];
 
       const newPurchaseOrder = {
         order_id,
         car_id,
-        createdon,
+        created_on,
         status,
         amount,
-        priceoffered,
+        price_offered,
       };
       return res.status(201).json({
         status: 201,
@@ -70,8 +74,8 @@ class Orders {
    */
   // eslint-disable-next-line consistent-return
   static async updatePurchaseOrderPrice(req, res) {
-    const { newPriceOffered } = req.body;
-    if (!newPriceOffered.trim() === '' || !/^\d+$/.test(newPriceOffered)) {
+    const { new_price_offered } = req.body;
+    if (!new_price_offered.trim() === '' || !/^\d+$/.test(new_price_offered)) {
       return res.status(400).json({
         status: 400,
         error: 'input offer price can only be numbers',
@@ -79,7 +83,7 @@ class Orders {
     }
     const { orderId } = req.params;
     const val = Number(orderId);
-    let oldPriceOffered;
+    let old_price_offered;
 
     try {
       const findOrder = 'SELECT * FROM orders WHERE order_id = $1';
@@ -98,8 +102,8 @@ class Orders {
         });
       }
       if (rowCount !== 0 && rows[0].status === 'pending') {
-        const updateNewPrice = 'UPDATE orders SET priceOffered = $1 WHERE order_id  = $2 RETURNING * ';
-        const value = [newPriceOffered, val];
+        const updateNewPrice = 'UPDATE orders SET price_offered = $1 WHERE order_id  = $2 RETURNING * ';
+        const value = [new_price_offered, val];
         const updateOrder = await pool.query(updateNewPrice, value);
         if (updateOrder.rowCount !== 0) {
           const {
@@ -107,13 +111,13 @@ class Orders {
             car_id,
             status,
           } = updateOrder.rows[0];
-          oldPriceOffered = previousPrice;
+          old_price_offered = previousPrice;
           const updatePurchaseOrder = {
             order_id,
             car_id,
             status,
-            oldPriceOffered,
-            newPriceOffered,
+            old_price_offered,
+            new_price_offered,
           };
           return res.status(200).json({
             status: 200,

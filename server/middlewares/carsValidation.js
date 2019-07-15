@@ -1,5 +1,5 @@
-import cars from '../models/carModels';
-
+/* eslint-disable camelcase */
+import pool from '../db/connection';
 /**
  * Car Validation
  * @class CarsValidation
@@ -19,9 +19,9 @@ class CarsValidation {
       price,
       manufacturer,
       model,
-      bodyType,
+      body_type,
       // eslint-disable-next-line prefer-const
-      carImgUrl,
+      img_url,
     } = req.body;
     if (!state) {
       return res.status(400).json({
@@ -90,20 +90,20 @@ class CarsValidation {
         });
       }
     }
-    if (!bodyType) {
+    if (!body_type) {
       return res.status(400).json({
         message: 'please specify the bodyType of the car.',
       });
     }
-    if (bodyType) {
-      bodyType = bodyType.trim();
-      if (/[^a-zA-Z]/.test(bodyType)) {
+    if (body_type) {
+      body_type = body_type.trim();
+      if (/[^a-zA-Z]/.test(body_type)) {
         return res.status(406).json({
           message: 'Only Alphabets input characters are acceptable for body type.',
         });
       }
     }
-    if (!carImgUrl) {
+    if (!img_url) {
       return res.status(400).json({
         message: 'Please upload an image for this vehicle.',
       });
@@ -113,7 +113,7 @@ class CarsValidation {
     req.body.price = price;
     req.body.manufacturer = manufacturer.toLowerCase();
     req.body.model = model.toLowerCase();
-    req.body.bodyType = bodyType.toLowerCase();
+    req.body.body_type = body_type.toLowerCase();
     return next();
   }
 
@@ -123,9 +123,11 @@ class CarsValidation {
    * @params {object} req
    * @params {object} res
    */
-  static validateSpecifyCar(req, res, next) {
+  static async validateSpecifyCar(req, res, next) {
     const { id } = req.params;
-    const findSpecificCar = cars.find(car => car.id === Number(id));
+    const value = Number(id);
+    const findCar = 'SELECT * FROM cars WHERE id = $1';
+    const findSpecificCar = await pool.query(findCar, value);
     if (!findSpecificCar) {
       return res.status(404).json({
         status: 404,
