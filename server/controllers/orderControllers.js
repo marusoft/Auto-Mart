@@ -16,12 +16,12 @@ class Orders {
     const userid = req.user.id;
     const { car_id } = req.body;
     const value = Number(car_id);
-
+console.log('val', value);
     const carSql = 'SELECT * FROM cars WHERE id = $1';
 
     try {
       const { rows, rowCount } = await pool.query(carSql, [value]);
-      console.log("Row order",rowCount)
+      console.log('Row order', rowCount);
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -62,7 +62,6 @@ class Orders {
         message: 'Purchase Order Successfully created',
       });
     } catch (error) {
-   
       return res.status(500).json({
         status: 500,
         error: error.message,
@@ -137,7 +136,6 @@ class Orders {
         }
       }
     } catch (error) {
-   
       return res.status(400).json({
         error: error.message,
       });
