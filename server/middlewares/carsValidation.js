@@ -114,6 +114,7 @@ class CarsValidation {
     req.body.manufacturer = manufacturer.toLowerCase();
     req.body.model = model.toLowerCase();
     req.body.body_type = body_type.toLowerCase();
+    req.body.img_url = img_url.toLowerCase();
     return next();
   }
 
