@@ -95,8 +95,8 @@ class Orders {
     let new_price_offered;
 
     try {
-      const findOrder = 'SELECT * FROM orders WHERE id = $1';
-      const { rows, rowCount } = await pool.query(findOrder, [val,req.user.id]);
+      const findOrder = 'SELECT * FROM orders WHERE id = $1 and buyer_id = $2';
+      const { rows, rowCount } = await pool.query(findOrder, [val, req.user.id]);
       old_price_offered = rows[0].amount;
       if (rowCount === 0) {
         return res.status(404).json({
