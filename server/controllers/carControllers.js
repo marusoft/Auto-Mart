@@ -41,7 +41,7 @@ console.log("My body",req.body)
         img_url,
       } = rows[0];
       console.log("Rows me",rows)
-      return res.status(201).jsonowner({
+      return res.status(201).json({
         status: 201,
         data: {
           model,
