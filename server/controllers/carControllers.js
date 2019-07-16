@@ -23,7 +23,7 @@ class Cars {
     const sql = `INSERT INTO cars(owner_id, state, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`;
     // eslint-disable-next-line camelcase
-    const values = [id, req.body.state, req.body.status, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
+    const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
       req.body.img_url];
 
     try {
