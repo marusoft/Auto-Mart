@@ -57,7 +57,7 @@ class CarsValidation {
       });
     }
     if (price) {
-      price = price.trim();
+      // price = price.trim();
       if (!/^\d+$/.test(price)) {
         return res.status(406).json({
           message: 'Only numbers are acceptable as Price.',

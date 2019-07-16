@@ -87,7 +87,8 @@ class UsersValidation {
       const findIfUserExist = 'SELECT * FROM users WHERE email = $1';
       const value = [email];
       const { rows } = await pool.query(findIfUserExist, value);
-      const foundEmail = rows[0];
+      console.log('HERE', rows);
+      const foundEmail = rows[0].email;
       if (!foundEmail) {
         return res.status(401).json({
           status: 401,
