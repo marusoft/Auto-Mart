@@ -13,16 +13,12 @@ const addAllsqlTableQueries = `
       VALUES ('alimi@automart.com', 'kehinde', 'alimi', '${hashedPassword}', '3, Olourunosebi street, Oni, Lagos.', true),
              ('moyosore@automart.com', 'moyosore', 'omodada', '${hashedPassword}', '3,Talomoola Street, ajumobi, Lagos.', false);
 
-      INSERT INTO cars(id, owner, created_on, state, status, price, manufacturer, model, body_type, img_url) 
-      VALUES (1, 2, '${moment(new Date())}', 'new', 'available', 4000000, 'Peugeot', 'SUV', 'Car', 
+      INSERT INTO cars(owner, state, status, price, manufacturer, model, body_type, img_url) 
+      VALUES ( 2, 'new', 'available', 4000000, 'Peugeot', 'SUV', 'Car', 
              'http://car-img.com/peugeot.jpg'),
-             (2, 1, '${moment(new Date())}', 'used', 'sold', 1500000, 'Mack', 'Diecast', 'Trailer', 'http://car-img.com/mack.jpeg'),
-             (3, 2, '${moment(new Date())}', 'new', 'available', 2500000, 'Volkswagen', 'PickUp', 'Truck', 'http://some-car-img.com/volkswagen.jpg');
-            
-      INSERT INTO orders(id, buyer_id, car_id, created_on,  status, price_offered) 
-      VALUES (1, 2, 3, '${moment(new Date())}', 'pending', 5670000),
-             (2, 1, 3, '${moment(new Date())}', 'accepted', 69800000),
-             (3, 2, 1, '${moment(new Date())}', 'rejected', 79800000);
+             (1, 'used', 'sold', 1500000, 'Mack', 'Diecast', 'Trailer', 'http://car-img.com/mack.jpeg'),
+             (2, 'new', 'available', 2500000, 'Volkswagen', 'PickUp', 'Truck', 'http://some-car-img.com/volkswagen.jpg');
+
 
       INSERT INTO flag(id, car_id, created_on, reason, description) 
       VALUES (1, 2, '${moment(new Date())}', 'weired demands', 'Because of weired demands'),
