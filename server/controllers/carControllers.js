@@ -78,6 +78,7 @@ class Cars {
     const value = Number(id);
     try {
       const { rows } = await pool.query(findOneCarSql, [value]);
+      console.log("Rows me1",rows)
       const {
         id,
         owner_id,
@@ -134,6 +135,7 @@ class Cars {
     const deleteSql = 'DELETE FROM cars WHERE id = $1';
     try {
       const { rowCount } = await pool.query(deleteSql, [val]);
+      console.log("Rows me2",rows)
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -165,6 +167,7 @@ class Cars {
     const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
     try {
       result = await pool.query(checkCarStatus, [val]);
+      console.log("Rows me3",rows)
       if (result.rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -182,6 +185,7 @@ class Cars {
       const value = ['sold', result.rows[0].id];
 
       const { rows } = await pool.query(markCarAsSoldSql, value);
+      console.log("Rows me4",rows)
       const {
         id,
         owner_id,
