@@ -23,7 +23,7 @@ class Cars {
     const sql = `INSERT INTO cars(owner_id, created_on, state, status, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *`;
     // eslint-disable-next-line camelcase
-    const values = [id, created_on, req.body.state, req.body.status, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
+    const values = [id, req.body.state, req.body.status, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
       req.body.img_url];
 
     try {
@@ -57,8 +57,8 @@ class Cars {
         message: 'Car Advert Successfully created',
       });
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(500).json({
+        status: 500,
         error: error.message,
       });
     }
