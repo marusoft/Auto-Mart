@@ -61,7 +61,7 @@ class Orders {
         message: 'Purchase Order Successfully created',
       });
     } catch (error) {
-      console.log('error', error);
+   
       return res.status(500).json({
         status: 500,
         error: error.message,
@@ -136,7 +136,7 @@ class Orders {
         }
       }
     } catch (error) {
-      console.log('error', error);
+   
       return res.status(400).json({
         error: error.message,
       });
