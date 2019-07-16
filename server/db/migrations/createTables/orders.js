@@ -9,7 +9,7 @@ DROP TYPE IF EXISTS order_status;
     car_id  INTEGER NOT NULL,
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status order_status DEFAULT 'pending',
-    price_offered VARCHAR(50) NOT NULL,
+    amount VARCHAR(50) NOT NULL,
     FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
   )`;
