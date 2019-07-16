@@ -97,12 +97,15 @@ class UsersValidation {
       }
       password = password.trim();
       if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
+        console.log('your lips dey break');
         return res.status(400).json({
+          status: 400,
           error: 'Password is incorrect',
         });
       }
     } catch (error) {
       return res.status(500).json({
+        status: 500,
         error: error.message,
       });
     }

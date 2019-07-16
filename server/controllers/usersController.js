@@ -78,7 +78,7 @@ class Users {
         message: `Welcome back ${rows[0].first_name}, your login was successful`,
       });
     } catch (error) {
-      return res.status(400).send(error.message);
+      return res.status(400).send(error);
     }
   }
 }
