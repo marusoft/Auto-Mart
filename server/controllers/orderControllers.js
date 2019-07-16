@@ -32,15 +32,15 @@ class Orders {
       }
       const amount = rows[0].price;
 
-      const orderSql = `INSERT INTO orders(buyer_id, car_id, price_offered) VALUES($1, $2, $3)
+      const orderSql = `INSERT INTO orders(buyer_id, car_id, price) VALUES($1, $2, $3)
     RETURNING *`;
-      const values = [userid, value, req.body.price_offered];
+      const values = [userid, value, req.body.price];
       const purchaseOrder = await pool.query(orderSql, values);
       const {
         id,
         created_on,
         status,
-        price_offered,
+        price,
       } = purchaseOrder.rows[0];
 
       // const newPurchaseOrder = {
@@ -49,7 +49,7 @@ class Orders {
       //   created_on,
       //   status,
       //   amount,
-      //   price_offered,
+      //   price,
       // };
       return res.status(201).json({
         status: 201,
@@ -59,7 +59,7 @@ class Orders {
           created_on,
           status,
           amount,
-          price_offered,
+          price,
         },
         message: 'Purchase Order Successfully created',
       });
@@ -94,7 +94,7 @@ class Orders {
     try {
       const findOrder = 'SELECT * FROM orders WHERE id = $1';
       const { rows, rowCount } = await pool.query(findOrder, [val]);
-      old_price_offered = rows[0].price_offered;
+      old_price_offered = rows[0].price;
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -108,7 +108,7 @@ class Orders {
         });
       }
       if (rowCount !== 0 && rows[0].status === 'pending') {
-        const updateNewPrice = 'UPDATE orders SET price_offered = $1 WHERE id  = $2 RETURNING * ';
+        const updateNewPrice = 'UPDATE orders SET price = $1 WHERE id  = $2 RETURNING * ';
         const value = [price, val];
         const updateOrder = await pool.query(updateNewPrice, value);
         new_price_offered = price;
