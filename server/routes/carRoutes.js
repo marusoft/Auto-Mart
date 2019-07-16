@@ -19,7 +19,6 @@ carRouter.get(
 );
 
 carRouter.delete('/car/:id',
-  UserAuthentication.verifyAdmin,
   CarsValidation.validateSpecifyCar,
   Cars.adminDeleteASpecificCarAD);
 
@@ -40,7 +39,6 @@ carRouter.get(
   '/car',
   Cars.ViewAllUnsoldCarsPriceRange,
   Cars.ViewAllUnsoldCars,
-  UserAuthentication.verifyAdmin,
   Cars.AdminViewAllPostedADCar,
 );
 
