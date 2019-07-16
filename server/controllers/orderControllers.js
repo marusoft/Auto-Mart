@@ -25,7 +25,7 @@ class Orders {
       console.log('Row order', rowCount);
       if (rowCount === 0) {
         return res.status(404).json({
-          status: 404,
+          status: 400,
           error: 'Cannot find the specify car.',
         });
       }
