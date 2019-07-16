@@ -30,17 +30,17 @@ class Orders {
           error: 'Cannot find the specify car.',
         });
       }
-      const amount = rows[0].price;
+      const price = rows[0].price;
 
-      const orderSql = `INSERT INTO orders(buyer_id, car_id, price) VALUES($1, $2, $3)
+      const orderSql = `INSERT INTO orders(buyer_id, car_id, amount) VALUES($1, $2, $3)
     RETURNING *`;
-      const values = [userid, value, req.body.price];
+      const values = [userid, value, req.body.amount];
       const purchaseOrder = await pool.query(orderSql, values);
       const {
         id,
         created_on,
         status,
-        price,
+        amount,
       } = purchaseOrder.rows[0];
 
       // const newPurchaseOrder = {

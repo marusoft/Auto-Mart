@@ -14,23 +14,23 @@ class OrderValidation {
 
   // eslint-disable-next-line consistent-return
   static validateOrdersDetails(req, res, next) {
-    let { price } = req.body;
+    let { amount } = req.body;
     console.log("Validate order",req.body)
-    if (!price) {
+    if (!amount) {
       return res.status(404).json({
-        error: 'Please offer price is required',
+        error: 'Please offer amount is required',
       });
     }
-    if (price) {
+    if (amount) {
       // price = price.trim();
-      if (!/^\d+$/.test(price)) {
+      if (!/^\d+$/.test(amount)) {
         return res.status(406).json({
-          message: 'price offered should be numbers only',
+          message: 'amount offered should be numbers only',
         });
       }
     }
 
-    req.body.price = price;
+    req.body.price = amount;
     next();
   }
 }
