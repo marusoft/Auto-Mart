@@ -128,11 +128,12 @@ class Cars {
    */
   static async adminDeleteASpecificCarAD(req, res) {
     const { findSpecificCar } = req.body;
+    console.log('delete', findSpecificCar);
     // const val = Number(id);
-    const deleteSql = 'DELETE FROM cars WHERE id = $1';
+    const deleteSql = 'DELETE FROM cars WHERE id = $1 RETURNING *';
     try {
       const { rowCount } = await pool.query(deleteSql, [findSpecificCar.id]);
-      console.log('Rows me2', rows);
+      console.log('Rows me2', rowCount);
       if (rowCount !== 0) {
         return res.status(200).json({
           status: 200,
