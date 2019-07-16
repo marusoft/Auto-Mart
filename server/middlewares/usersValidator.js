@@ -48,7 +48,7 @@ class UsersValidation {
         });
       }
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         error: error.message,
       });
     }
@@ -91,7 +91,7 @@ class UsersValidation {
       if (!foundEmail) {
         return res.status(401).json({
           status: 401,
-          error: `${req.body.email} does not exit, Please register an account or signup`,
+          error: `${req.body.email} does not exist, Please register an account or signup`,
         });
       }
       password = password.trim();
@@ -101,7 +101,7 @@ class UsersValidation {
         });
       }
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         error: error.message,
       });
     }

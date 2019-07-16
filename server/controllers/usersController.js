@@ -35,7 +35,7 @@ class Users {
         message: `${req.body.first_name}, your account was successfully created`,
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         error: error.message,
       });
     }

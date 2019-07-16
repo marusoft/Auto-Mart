@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 const defaultUrl = '/api/v1';
 const signinUrl = '/api/v1/auth/signin';
 let adminToken;
-const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJtb3lvc29yZUBhdXRvbWFydC5jb20iLCJmaXJzdE5hbWUiOiJtb3lvc29yZSIsImxhc3ROYW1lIjoib21vZGFkYSIsInBhc3N3b3JkIjoib21vZGFkYTExIiwiYWRkcmVzcyI6IjMsIFRhbG9tby1vbGEgU3RyZWV0LCBhanVtb2Jpa29rYW50YWFudSwgTGFnb3MuIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU2MTYyNzYzN30.j9jhfFpk8e24E85GIVZK1Y-4HQHJ_rE5-qofG6jiE5M';
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im1veW9zb3JlQGF1dG9tYXJ0LmNvbSIsImZpcnN0X25hbWUiOiJtb3lvc29yZSIsImxhc3RfbmFtZSI6Im9tb2RhZGEiLCJwYXNzd29yZCI6IiQyYSQxMCRMakFNVWZxRWZqV3BuMFpFSGdBazlPaWpWUnQuekhEcEV4RUIzU0VFY052bmM5YkQ0ZmJBeSIsImFkZHJlc3MiOiIzLFRhbG9tb29sYSBTdHJlZXQsIGFqdW1vYmksIExhZ29zLiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNTYzMjU4MDIyLCJleHAiOjE1NjMzNDQ0MjJ9.uHQwuo94AVCprlkraelEX4iWmn0Dh730JU1MFD18yoc';
 
 // create token for an admin
 describe('Login and create token for an admin', () => {
@@ -19,7 +19,7 @@ describe('Login and create token for an admin', () => {
     it('it should signin an admin ', (done) => {
       const adminDetails = {
         email: 'alimi@automart.com',
-        password: 'xyzabc12',
+        password: 'passcode',
       };
       chai.request(app)
         .post(signinUrl)
@@ -106,7 +106,7 @@ describe('TEST CAR endpoint routes', () => {
         it('should delete specify car id.', (done) => {
           chai
             .request(app)
-            .delete(`${defaultUrl}/car/2`)
+            .delete(`${defaultUrl}/car/24`)
             .set('authorization', `Bearer ${adminToken}`)
             .end((err, res) => {
               expect(res).to.have.status(200);
@@ -118,7 +118,7 @@ describe('TEST CAR endpoint routes', () => {
         it('should delete specify car id.', (done) => {
           chai
             .request(app)
-            .delete(`${defaultUrl}/car/2`)
+            .delete(`${defaultUrl}/car/25`)
             .set('authorization', `Bearer ${adminToken}`)
             .end((err, res) => {
               expect(res).to.have.status(200);
@@ -135,7 +135,8 @@ describe('TEST CAR endpoint routes', () => {
         .set('authorization', `Bearer ${adminToken}`)
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('error');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('No Car AD to delete');
           done(err);
         });
     });
@@ -196,8 +197,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -218,8 +219,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -240,8 +241,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -261,8 +262,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -281,8 +282,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_yrl: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -302,8 +303,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -324,8 +325,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -345,8 +346,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -366,8 +367,8 @@ describe('TEST CAR endpoint routes ', () => {
         status: 'available',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -388,8 +389,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: 'rrrrrrr',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -409,8 +410,8 @@ describe('TEST CAR endpoint routes ', () => {
         status: 'available',
         price: '3500000',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -431,8 +432,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi345',
         model: 'SUV',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -442,7 +443,7 @@ describe('TEST CAR endpoint routes ', () => {
           expect(res).to.have.status(406);
           expect(res.status).to.equal(406);
           expect(res.body).to.be.a('object');
-          expect(res.body.message).to.equal('Only Alphabets input are acceptable.');
+          expect(res.body.message).to.equal('Only Alphabets input characters are acceptable for manufacturer.');
         });
       done();
     });
@@ -452,8 +453,8 @@ describe('TEST CAR endpoint routes ', () => {
         status: 'available',
         price: '3500000',
         manufacturer: 'Mitsubishi',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -474,8 +475,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV1233',
-        bodyType: 'Car',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -496,7 +497,7 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -517,8 +518,8 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car457',
-        carImageUrl: 'http://some-car-imag.com/mitsubishi.png',
+        body_type: 'Car457',
+        img_url: 'http://some-car-imag.com/mitsubishi.png',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
@@ -528,7 +529,7 @@ describe('TEST CAR endpoint routes ', () => {
           expect(res).to.have.status(406);
           expect(res.status).to.equal(406);
           expect(res.body).to.be.a('object');
-          expect(res.body.message).to.equal('Only Alphabets input are acceptable.');
+          expect(res.body.message).to.equal('Only Alphabets input characters are acceptable for body type.');
         });
       done();
     });
@@ -539,7 +540,7 @@ describe('TEST CAR endpoint routes ', () => {
         price: '3500000',
         manufacturer: 'Mitsubishi',
         model: 'SUV',
-        bodyType: 'Car',
+        body_type: 'Car',
       };
       chai.request(app)
         .post(`${defaultUrl}/car`)
