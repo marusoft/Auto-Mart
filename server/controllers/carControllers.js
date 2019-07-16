@@ -127,24 +127,21 @@ class Cars {
    * @params {object} res
    */
   static async adminDeleteASpecificCarAD(req, res) {
-    const { id } = req.params;
-    const val = Number(id);
+    const { findSpecificCar } = req.body;
+    // const val = Number(id);
     const deleteSql = 'DELETE FROM cars WHERE id = $1';
     try {
-      const { rowCount } = await pool.query(deleteSql, [val]);
+      const { rowCount } = await pool.query(deleteSql, [findSpecificCar.id]);
       console.log('Rows me2', rows);
-      if (rowCount === 0) {
-        return res.status(404).json({
-          status: 404,
-          message: 'No Car AD to delete',
+      if (rowCount !== 0) {
+        return res.status(200).json({
+          status: 200,
+          data: 'Car Ad successfully deleted',
         });
       }
-      return res.status(200).json({
-        status: 200,
-        data: 'Car Ad successfully deleted',
-      });
     } catch (error) {
       return res.status(400).json({
+        status: 400,
         error: error.message,
       });
     }

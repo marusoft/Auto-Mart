@@ -18,10 +18,6 @@ carRouter.get(
   Cars.ViewASpecificCar,
 );
 
-carRouter.delete('/car/:id',
-  UserAuthentication.verifyUser,
-  CarsValidation.validateSpecifyCar,
-  Cars.adminDeleteASpecificCarAD);
 
 carRouter.patch(
   '/car/:id/status',
@@ -44,6 +40,11 @@ carRouter.get(
   UserAuthentication.verifyUser,
   Cars.AdminViewAllPostedADCar,
 );
+
+carRouter.delete('/car/:id',
+  UserAuthentication.verifyUser,
+  CarsValidation.validateSpecifyCar,
+  Cars.adminDeleteASpecificCarAD);
 
 
 export default carRouter;
