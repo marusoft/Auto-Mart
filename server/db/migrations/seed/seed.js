@@ -13,7 +13,7 @@ const addAllsqlTableQueries = `
       VALUES ('alimi@automart.com', 'kehinde', 'alimi', '${hashedPassword}', '3, Olourunosebi street, Oni, Lagos.', true),
              ('moyosore@automart.com', 'moyosore', 'omodada', '${hashedPassword}', '3,Talomoola Street, ajumobi, Lagos.', false);
 
-      INSERT INTO cars(id, owner_id, created_on, state, status, price, manufacturer, model, body_type, img_url) 
+      INSERT INTO cars(id, owner, created_on, state, status, price, manufacturer, model, body_type, img_url) 
       VALUES (1, 2, '${moment(new Date())}', 'new', 'available', 4000000, 'Peugeot', 'SUV', 'Car', 
              'http://car-img.com/peugeot.jpg'),
              (2, 1, '${moment(new Date())}', 'used', 'sold', 1500000, 'Mack', 'Diecast', 'Trailer', 'http://car-img.com/mack.jpeg'),

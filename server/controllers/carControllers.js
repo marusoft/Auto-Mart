@@ -20,7 +20,7 @@ class Cars {
     const { id } = req.user;
 
     // const created_on = moment(new Date());
-    const sql = `INSERT INTO cars(owner_id, state, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7)
+    const sql = `INSERT INTO cars(owner, state, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`;
     // eslint-disable-next-line camelcase
     const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
@@ -30,7 +30,7 @@ class Cars {
       const { rows } = await pool.query(sql, values);
       const {
         id,
-        owner_id,
+        owner,
         created_on,
         status,
         state,
@@ -46,7 +46,7 @@ class Cars {
         data: {
           model,
           id,
-          owner_id,
+          owner,
           created_on,
           status,
           state,
@@ -81,7 +81,7 @@ class Cars {
       console.log("Rows me1",rows)
       const {
         id,
-        owner_id,
+        owner,
         created_on,
         status,
         state,
@@ -102,7 +102,7 @@ class Cars {
         // data: findSpecificCar,
         data: {
           id,
-          owner_id,
+          owner,
           created_on,
           status,
           state,
@@ -188,7 +188,7 @@ class Cars {
       console.log("Rows me4",rows)
       const {
         id,
-        owner_id,
+        owner,
         created_on,
         status,
         state,
@@ -203,7 +203,7 @@ class Cars {
         status: 200,
         data: {
           id,
-          owner_id,
+          owner,
           created_on,
           status,
           state,

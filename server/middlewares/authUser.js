@@ -119,7 +119,7 @@ class UserAuthentication {
         });
       }
       // eslint-disable-next-line camelcase
-      if (userid !== rows[0].owner_id) {
+      if (userid !== rows[0].owner) {
         return res.status(401).json({
           status: 401,
           error: 'You can not edit this AD',

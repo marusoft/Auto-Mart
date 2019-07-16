@@ -5,7 +5,7 @@ DROP TYPE IF EXISTS car_status;
   CREATE TYPE car_status as ENUM ('available', 'sold');
   CREATE TABLE IF NOT EXISTS cars(
     id SERIAL PRIMARY KEY NOT NULL,
-    owner_id INTEGER NOT NULL,
+    owner INTEGER NOT NULL,
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     state VARCHAR(100) NOT NULL,
     status car_status DEFAULT 'available',
@@ -13,7 +13,7 @@ DROP TYPE IF EXISTS car_status;
     manufacturer VARCHAR(150) NOT NULL,
     model VARCHAR(150) NOT NULL,
     body_type VARCHAR(150) NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (owner) REFERENCES users(id) ON DELETE CASCADE,
     img_url TEXT NOT NULL
   )`;
 
