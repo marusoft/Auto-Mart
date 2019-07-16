@@ -15,6 +15,7 @@ class OrderValidation {
   // eslint-disable-next-line consistent-return
   static validateOrdersDetails(req, res, next) {
     let { price_offered } = req.body;
+    console.log("Validate order",req.body)
     if (!price_offered) {
       return res.status(404).json({
         error: 'Please offer price is required',
