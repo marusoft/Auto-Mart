@@ -19,8 +19,8 @@ class Cars {
   static async createCarSaleAD(req, res) {
     const { id } = req.user;
 
-    const created_on = moment(new Date());
-    const sql = `INSERT INTO cars(owner_id, created_on, state, status, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    // const created_on = moment(new Date());
+    const sql = `INSERT INTO cars(owner_id, state, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *`;
     // eslint-disable-next-line camelcase
     const values = [id, req.body.state, req.body.status, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
@@ -40,9 +40,11 @@ class Cars {
         body_type,
         img_url,
       } = rows[0];
+      console.log("Rows me",rows)
       return res.status(201).json({
         status: 201,
         data: {
+          model,
           id,
           owner_id,
           created_on,
@@ -50,7 +52,6 @@ class Cars {
           state,
           price,
           manufacturer,
-          model,
           body_type,
           img_url,
         },
