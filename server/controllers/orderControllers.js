@@ -141,7 +141,9 @@ class Orders {
         }
       }
     } catch (error) {
+      console.log("Error me",error.message)
       return res.status(400).json({
+        status: 400,
         error: error.message,
       });
     }
