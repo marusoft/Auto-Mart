@@ -157,55 +157,84 @@ class Cars {
    * @params {object} res
    */
   static async updateCarStatus(req, res) {
-    const { id } = req.params;
-    let result;
-    const val = Number(id);
-    const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
-    try {
-      result = await pool.query(checkCarStatus, [val]);
-      console.log('Rows me3', rows);
-      if (result.rowCount === 0) {
-        return res.status(404).json({
+
+    const { findSpecificCar } = req.body;
+
+    const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
+    if (findSpecificCar.status === 'available') {
+      try {
+        const { rows, rowCount } = await pool.query(markCarAsSoldSql, ['sold', findSpecificCar.id, req.user.id]);
+        if (rowCount !== 0) {
+          return res.status(200).json({
+            status: 200,
+            data: rows[0],
+          });
+        } return res.status(404).json({
           status: 404,
-          error: 'Car id not found',
+          error: 'This ad does not exist',
+        });
+        
+      } catch (error) {
+        return res.status(500).json({
+          status: 500,
+          error: error.message,
         });
       }
-
-      if (result.rows[0].status === 'sold') {
-        return res.status(302).json({
-          status: 302,
-          error: 'Status is already mark as sold',
-        });
-      }
-      const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
-      const value = ['sold', result.rows[0].id, req.user.id];
-
-      const { rows } = await pool.query(markCarAsSoldSql, value);
-      console.log('Rows me4', rows);
-      // const {
-      //   id,
-      //   owner,
-      //   created_on,
-      //   status,
-      //   state,
-      //   price,
-      //   manufacturer,
-      //   model,
-      //   body_type,
-      //   img_url,
-      // } = rows[0];
-      // const statusUpdate = rows[0];
-      return res.status(200).json({
-        status: 200,
-        data: rows[0],
-      });
-    } catch (error) {
-      console.log('I will be wise now');
-      return res.status(400).json({
-        status: 400,
-        error: error.message,
-      });
     }
+    return res.status(422).json({
+      status: 422,
+      error: 'This ad has already been marked as sold'
+    });
+
+    // const { findSpecificCar } = req.body;
+    // let result;
+    // const val = Number(id);
+    // const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
+    // try {
+    //   result = await pool.query(checkCarStatus, [val]);
+    //   console.log('Rows me3', rows);
+    //   if (result.rowCount === 0) {
+    //     return res.status(404).json({
+    //       status: 404,
+    //       error: 'Car id not found',
+    //     });
+    //   }
+
+    //   if (result.rows[0].status === 'sold') {
+    //     return res.status(302).json({
+    //       status: 302,
+    //       error: 'Status is already mark as sold',
+    //     });
+    //   }
+    //   const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
+    //   const value = ['sold', result.rows[0].id, req.user.id];
+
+    //   const { rows } = await pool.query(markCarAsSoldSql, value);
+    //   console.log('Rows me4', rows);
+    //   // const {
+    //   //   id,
+    //   //   owner,
+    //   //   created_on,
+    //   //   status,
+    //   //   state,
+    //   //   price,
+    //   //   manufacturer,
+    //   //   model,
+    //   //   body_type,
+    //   //   img_url,
+    //   // } = rows[0];
+    //   // const statusUpdate = rows[0];
+    //   return res.status(200).json({
+    //     status: 200,
+    //     data: rows[0],
+    //   });
+    // } catch (error) {
+    //   console.log('I will be wise now');
+    //   return res.status(400).json({
+    //     status: 400,
+    //     error: error.message,
+    //   });
+    // }
   }
 
   /** Update the price of a car.
