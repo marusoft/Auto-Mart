@@ -159,6 +159,7 @@ class Cars {
   static async updateCarStatus(req, res) {
 
     const { findSpecificCar } = req.body;
+    console.log('>>>', findSpecificCar);
 
     const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
     if (findSpecificCar.status === 'available') {

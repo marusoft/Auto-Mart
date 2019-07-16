@@ -25,6 +25,7 @@ carRouter.delete('/car/:id',
 carRouter.patch(
   '/car/:id/status',
   UserAuthentication.verifyUser,
+  CarsValidation.validateSpecifyCar,
   /* UserAuthentication.isOwner, */
   Cars.updateCarStatus,
 );
