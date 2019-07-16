@@ -25,7 +25,7 @@ class Cars {
     // eslint-disable-next-line camelcase
     const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
       req.body.img_url];
-console.log("My body",req.body)
+    console.log('My body', req.body);
     try {
       const { rows } = await pool.query(sql, values);
       const {
@@ -40,7 +40,7 @@ console.log("My body",req.body)
         body_type,
         img_url,
       } = rows[0];
-      console.log("Rows me",rows)
+      console.log('Rows me', rows);
       return res.status(201).json({
         status: 201,
         data: {
@@ -77,7 +77,7 @@ console.log("My body",req.body)
     const value = Number(id);
     try {
       const { rows } = await pool.query(findOneCarSql, [value]);
-      console.log("Rows me1",rows)
+      console.log('Rows me1', rows);
       const {
         id,
         owner,
@@ -114,7 +114,6 @@ console.log("My body",req.body)
         message: 'Specify car seen.',
       });
     } catch (error) {
-   
       return res.status(400).json({
         error,
       });
@@ -128,13 +127,12 @@ console.log("My body",req.body)
    * @params {object} res
    */
   static async adminDeleteASpecificCarAD(req, res) {
-
     const { id } = req.params;
     const val = Number(id);
     const deleteSql = 'DELETE FROM cars WHERE id = $1';
     try {
       const { rowCount } = await pool.query(deleteSql, [val]);
-      console.log("Rows me2",rows)
+      console.log('Rows me2', rows);
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -146,7 +144,6 @@ console.log("My body",req.body)
         data: 'Car Ad successfully deleted',
       });
     } catch (error) {
-   
       return res.status(400).json({
         error: error.message,
       });
@@ -166,7 +163,7 @@ console.log("My body",req.body)
     const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
     try {
       result = await pool.query(checkCarStatus, [val]);
-      console.log("Rows me3",rows)
+      console.log('Rows me3', rows);
       if (result.rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -180,43 +177,32 @@ console.log("My body",req.body)
           error: 'Status is already mark as sold',
         });
       }
-      const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 RETURNING *';
-      const value = ['sold', result.rows[0].id];
+      const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
+      const value = ['sold', result.rows[0].id, req.user.id];
 
       const { rows } = await pool.query(markCarAsSoldSql, value);
-      console.log("Rows me4",rows)
-      const {
-        id,
-        owner,
-        created_on,
-        status,
-        state,
-        price,
-        manufacturer,
-        model,
-        body_type,
-        img_url,
-      } = rows[0];
+      console.log('Rows me4', rows);
+      // const {
+      //   id,
+      //   owner,
+      //   created_on,
+      //   status,
+      //   state,
+      //   price,
+      //   manufacturer,
+      //   model,
+      //   body_type,
+      //   img_url,
+      // } = rows[0];
       // const statusUpdate = rows[0];
       return res.status(200).json({
         status: 200,
-        data: {
-          id,
-          owner,
-          created_on,
-          status,
-          state,
-          price,
-          manufacturer,
-          model,
-          body_type,
-          img_url,
-
-        },
+        data: rows[0],
       });
     } catch (error) {
-   
+      console.log('I will be wise now');
       return res.status(400).json({
+        status: 400,
         error: error.message,
       });
     }
@@ -265,7 +251,6 @@ console.log("My body",req.body)
 
       });
     } catch (error) {
-   
       return res.status(400).json({
         error: error.message,
       });
@@ -296,7 +281,6 @@ console.log("My body",req.body)
             data: foundCarByStatusNew.rows,
           });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -314,7 +298,6 @@ console.log("My body",req.body)
             data: foundCarByStatusStateUsed.rows,
           });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -332,7 +315,6 @@ console.log("My body",req.body)
             data: foundCarByStateManufacturer.rows,
           });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -350,7 +332,6 @@ console.log("My body",req.body)
             data: foundCarByStatusManufacturer.rows,
           });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -366,7 +347,6 @@ console.log("My body",req.body)
           data: foundCarByStatus.rows,
         });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -384,7 +364,6 @@ console.log("My body",req.body)
             data: foundCarByBodyType.rows,
           });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -413,7 +392,6 @@ console.log("My body",req.body)
           },
         });
       } catch (error) {
-     
         return res.status(400).json({
           error: error.message,
         });
@@ -439,7 +417,6 @@ console.log("My body",req.body)
         message: 'Success',
       });
     } catch (error) {
-   
       return res.status(500).json({
         error: error.message,
       });
