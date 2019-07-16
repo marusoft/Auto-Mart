@@ -46,5 +46,4 @@ carRouter.delete('/car/:id',
   CarsValidation.validateSpecifyCar,
   Cars.adminDeleteASpecificCarAD);
 
-
 export default carRouter;
