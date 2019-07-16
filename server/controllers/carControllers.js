@@ -362,8 +362,8 @@ class Cars {
           data: foundCarByStatus.rows,
         });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
-          console.log('error', error);
           error: error.message,
         });
       }
