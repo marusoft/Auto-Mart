@@ -90,13 +90,14 @@ class Orders {
     }
     const { orderId } = req.params;
     const val = Number(orderId);
+    // const { id } = req.user.payload
     let old_price_offered;
     let new_price_offered;
 
     try {
       const findOrder = 'SELECT * FROM orders WHERE id = $1';
-      const { rows, rowCount } = await pool.query(findOrder, [val]);
-      old_price_offered = rows[0].price;
+      const { rows, rowCount } = await pool.query(findOrder, [val,req.user.id]);
+      old_price_offered = rows[0].amount;
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
@@ -110,8 +111,8 @@ class Orders {
         });
       }
       if (rowCount !== 0 && rows[0].status === 'pending') {
-        const updateNewPrice = 'UPDATE orders SET price = $1 WHERE id  = $2 RETURNING * ';
-        const value = [price, val];
+        const updateNewPrice = 'UPDATE orders SET amount = $1 WHERE buyer_id  = $2 RETURNING * ';
+        const value = [price, val,req.user.id];
         const updateOrder = await pool.query(updateNewPrice, value);
         new_price_offered = price;
         if (updateOrder.rowCount !== 0) {
