@@ -114,6 +114,7 @@ class Cars {
         message: 'Specify car seen.',
       });
     } catch (error) {
+      console.log('error', error);
       return res.status(400).json({
         error,
       });
@@ -143,6 +144,7 @@ class Cars {
         data: 'Car Ad successfully deleted',
       });
     } catch (error) {
+      console.log('error', error);
       return res.status(400).json({
         error: error.message,
       });
@@ -209,6 +211,7 @@ class Cars {
         },
       });
     } catch (error) {
+      console.log('error', error);
       return res.status(400).json({
         error: error.message,
       });
@@ -222,7 +225,6 @@ class Cars {
    * @params {object} res
    */
   static async updateCarPrice(req, res) {
-    console.log(req.body);
     const { id } = req.params;
     const val = Number(id);
     let { price } = req.body;
@@ -259,6 +261,7 @@ class Cars {
 
       });
     } catch (error) {
+      console.log('error', error);
       return res.status(400).json({
         error: error.message,
       });
@@ -289,6 +292,7 @@ class Cars {
             data: foundCarByStatusNew.rows,
           });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
           error: error.message,
         });
@@ -306,6 +310,7 @@ class Cars {
             data: foundCarByStatusStateUsed.rows,
           });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
           error: error.message,
         });
@@ -323,6 +328,7 @@ class Cars {
             data: foundCarByStateManufacturer.rows,
           });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
           error: error.message,
         });
@@ -340,6 +346,7 @@ class Cars {
             data: foundCarByStatusManufacturer.rows,
           });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
           error: error.message,
         });
@@ -356,6 +363,7 @@ class Cars {
         });
       } catch (error) {
         return res.status(400).json({
+          console.log('error', error);
           error: error.message,
         });
       }
@@ -372,6 +380,7 @@ class Cars {
             data: foundCarByBodyType.rows,
           });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
           error: error.message,
         });
@@ -400,6 +409,7 @@ class Cars {
           },
         });
       } catch (error) {
+        console.log('error', error);
         return res.status(400).json({
           error: error.message,
         });
@@ -425,6 +435,7 @@ class Cars {
         message: 'Success',
       });
     } catch (error) {
+      console.log('error', error);
       return res.status(500).json({
         error: error.message,
       });
