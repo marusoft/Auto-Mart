@@ -58,7 +58,6 @@ console.log("My body",req.body)
         message: 'Car Advert Successfully created',
       });
     } catch (error) {
-   console.log("Car error",error.message);
       return res.status(500).json({
         status: 500,
         error: error.message,

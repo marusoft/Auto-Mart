@@ -14,9 +14,10 @@ class Orders {
    */
   static async CreateAPurchaseOrder(req, res) {
     const userid = req.user.id;
+    console.log('val', req.body);
     const { car_id } = req.body;
     const value = Number(car_id);
-console.log('val', value);
+
     const carSql = 'SELECT * FROM cars WHERE id = $1';
 
     try {
