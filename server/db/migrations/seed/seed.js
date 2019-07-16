@@ -19,12 +19,12 @@ const addAllsqlTableQueries = `
              (2, 1, '${moment(new Date())}', 'used', 'sold', 1500000, 'Mack', 'Diecast', 'Trailer', 'http://car-img.com/mack.jpeg'),
              (3, 2, '${moment(new Date())}', 'new', 'available', 2500000, 'Volkswagen', 'PickUp', 'Truck', 'http://some-car-img.com/volkswagen.jpg');
             
-      INSERT INTO orders(order_id, buyer_id, car_id, created_on,  status, price_offered) 
+      INSERT INTO orders(id, buyer_id, car_id, created_on,  status, price_offered) 
       VALUES (1, 2, 3, '${moment(new Date())}', 'pending', 5670000),
              (2, 1, 3, '${moment(new Date())}', 'accepted', 69800000),
              (3, 2, 1, '${moment(new Date())}', 'rejected', 79800000);
 
-      INSERT INTO flag(flag_id, car_id, created_on, reason, description) 
+      INSERT INTO flag(id, car_id, created_on, reason, description) 
       VALUES (1, 2, '${moment(new Date())}', 'weired demands', 'Because of weired demands'),
              (2, 3, '${moment(new Date())}', 'pricing', 'Because of unstable price'),
              (3, 2, '${moment(new Date())}', 'place of advert', 'Because of unstrusted place of advert');       

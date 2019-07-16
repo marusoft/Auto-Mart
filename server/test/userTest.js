@@ -45,7 +45,7 @@ describe('Test User Route', () => {
   describe('POST/ Create Users', () => {
     it('should return 201 for successful register', (done) => {
       const userDetails = {
-        user_id: 1,
+        id: 1,
         email: ' alimi@automart.com ',
         first_name: 'kehinde',
         last_name: 'alimi',
@@ -67,7 +67,7 @@ describe('Test User Route', () => {
 
     it('should return 409 for existing Email', (done) => {
       const userDetails = {
-        user_id: 1,
+        id: 1,
         email: ' alimi@automart.com ',
         first_name: 'kehinde',
         last_name: 'alimi',
@@ -143,7 +143,7 @@ describe('Test User Route', () => {
     });
     it('should return 400 for empty password', (done) => {
       const userDetails = {
-        user_id: 1,
+        id: 1,
         email: 'alimi@automart.com',
         first_name: 'kehinde',
         last_name: 'alimi',
@@ -180,7 +180,7 @@ describe('Test User Route', () => {
     });
     it('should return 400 for invalid firstName character length', (done) => {
       const userDetails = {
-        user_id: 1,
+        id: 1,
         email: 'alimi@automart.com',
         first_name: 'ke',
         last_name: 'alimi',
@@ -200,7 +200,7 @@ describe('Test User Route', () => {
     });
     it('should return 400 for invalid lastName character length', (done) => {
       const userDetails = {
-        user_id: 1,
+        id: 1,
         email: 'alimi@automart.com',
         first_name: 'kehinde',
         last_name: 'al',

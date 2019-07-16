@@ -9,11 +9,11 @@ DROP TYPE IF EXISTS car_status;
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     state VARCHAR(100) NOT NULL,
     status car_status DEFAULT 'available',
-    price FLOAT NOT NULL,
+    price VARCHAR(50) NOT NULL,
     manufacturer VARCHAR(150) NOT NULL,
     model VARCHAR(150) NOT NULL,
     body_type VARCHAR(150) NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE,
     img_url TEXT NOT NULL
   )`;
 

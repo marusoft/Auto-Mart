@@ -2,7 +2,7 @@ import pool from '../../connection';
 
 const flagsTable = ` DROP TABLE IF EXISTS flag;
   CREATE TABLE IF NOT EXISTS flag(
-    flag_id SERIAL PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     car_id  INTEGER NOT NULL,
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     reason VARCHAR(225) NOT NULL,

@@ -21,7 +21,7 @@ class OrderValidation {
       });
     }
     if (price_offered) {
-      price_offered = price_offered.trim();
+      // price_offered = price_offered.trim();
       if (!/^\d+$/.test(price_offered)) {
         return res.status(406).json({
           message: 'price offered should be numbers only',

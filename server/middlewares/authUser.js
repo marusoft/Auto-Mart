@@ -104,7 +104,8 @@ class UserAuthentication {
    */
 
   static async isOwner(req, res, next) {
-    const id = req.user.user_id;
+    // eslint-disable-next-line prefer-destructuring
+    const userid = req.user.id;
     const carId = req.params.id;
     const value = Number(carId);
     // let foundCar;
@@ -118,7 +119,7 @@ class UserAuthentication {
         });
       }
       // eslint-disable-next-line camelcase
-      if (id !== rows[0].owner_id) {
+      if (userid !== rows[0].owner_id) {
         return res.status(401).json({
           status: 401,
           error: 'You can not edit this AD',
