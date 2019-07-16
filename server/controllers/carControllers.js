@@ -25,7 +25,7 @@ class Cars {
     // eslint-disable-next-line camelcase
     const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
       req.body.img_url];
-
+console.log("My body",req.body)
     try {
       const { rows } = await pool.query(sql, values);
       const {
@@ -41,7 +41,7 @@ class Cars {
         img_url,
       } = rows[0];
       console.log("Rows me",rows)
-      return res.status(201).json({
+      return res.status(201).jsonowner({
         status: 201,
         data: {
           model,
@@ -58,7 +58,7 @@ class Cars {
         message: 'Car Advert Successfully created',
       });
     } catch (error) {
-   
+   console.log("Car error",error.message);
       return res.status(500).json({
         status: 500,
         error: error.message,
