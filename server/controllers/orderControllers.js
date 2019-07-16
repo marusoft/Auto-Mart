@@ -21,6 +21,7 @@ class Orders {
 
     try {
       const { rows, rowCount } = await pool.query(carSql, [value]);
+      console.log("Row order",rowCount)
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
