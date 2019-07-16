@@ -111,8 +111,8 @@ class Orders {
         });
       }
       if (rowCount !== 0 && rows[0].status === 'pending') {
-        const updateNewPrice = 'UPDATE orders SET amount = $1 WHERE buyer_id  = $2 RETURNING * ';
-        const value = [price, val,req.user.id];
+        const updateNewPrice = 'UPDATE orders SET amount = $1 WHERE id  = $2 and buyer_id = $3 RETURNING * ';
+        const value = [price, val, req.user.id];
         const updateOrder = await pool.query(updateNewPrice, value);
         new_price_offered = price;
         if (updateOrder.rowCount !== 0) {
