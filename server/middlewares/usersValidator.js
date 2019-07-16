@@ -88,27 +88,28 @@ class UsersValidation {
       const value = [email];
       const { rows } = await pool.query(findIfUserExist, value);
       console.log('HERE', rows);
-      const foundEmail = rows[0].email;
-      if (!foundEmail) {
+      // const foundEmail = rows[0].email;
+      if (!rows[0]) {
         return res.status(401).json({
           status: 401,
           error: `${req.body.email} does not exist, Please register an account or signup`,
         });
       }
       password = password.trim();
-      if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
-        console.log('your lips dey break');
-        return res.status(400).json({
-          status: 400,
-          error: 'Password is incorrect',
-        });
-      }
+      // if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
+      //   console.log('your lips dey break');
+      //   return res.status(400).json({
+      //     status: 400,
+      //     error: 'Password is incorrect',
+      //   });
+      // }
     } catch (error) {
       return res.status(500).json({
         status: 500,
         error: error.message,
       });
     }
+    req.body.email = email;
     req.body.password = password;
     return next();
   }

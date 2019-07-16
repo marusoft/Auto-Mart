@@ -48,35 +48,35 @@ class Users {
    * @params {*} res
    */
   static async loginUsers(req, res) {
-    if (!req.body.email || !req.body.password) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Either password or email is incorrect',
-      });
-    }
+    const { email } = req.body;
+    // if (!req.body.email || !req.body.password) {
+    //   return res.status(400).json({
+    //     status: 400,
+    //     error: 'Either password or email is incorrect',
+    //   });
+    // }
     const sql = 'SELECT * FROM users WHERE email = $1';
-    const value = [req.body.email];
+    const value = [email];
     try {
       const { rows } = await pool.query(sql, value);
-      if (!rows[0]) {
-        return res.status(400).json({
-          status: 400,
-          error: 'Account details incorrect',
-        });
-      }
-      if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
-        return res.status(400).json({
+      if (rows[0]) {
+        const result = Helper.verifyPassword(rows[0].password, req.body.password);
+        if (result) {
+          const token = Helper.generateToken(rows[0]);
+          return res.status(200).json({
+            status: 200,
+            data: {
+              token,
+              message: `Welcome back ${rows[0].first_name}, your login was successful`,
+            },
+          });
+        }
+
+        return res.status(401).json({
+          status: 401,
           error: 'Password does not match',
         });
       }
-      const token = Helper.generateToken(rows[0]);
-      return res.status(200).json({
-        status: 200,
-        data: {
-          token,
-        },
-        message: `Welcome back ${rows[0].first_name}, your login was successful`,
-      });
     } catch (error) {
       return res.status(400).send(error);
     }
