@@ -15,8 +15,8 @@ class Orders {
   static async CreateAPurchaseOrder(req, res) {
     const userid = req.user.id;
     console.log('val', req.body);
-    const { car_id } = req.body;
-    const value = Number(car_id);
+    // const { car_id } = req.body;
+    const value = Number(req.body.car_id);
 
     const carSql = 'SELECT * FROM cars WHERE id = $1';
 
@@ -38,9 +38,10 @@ class Orders {
       const purchaseOrder = await pool.query(orderSql, values);
       const {
         id,
-        created_on,
-        status,
+        car_id,
         amount,
+        status,
+        created_on,
       } = purchaseOrder.rows[0];
 
       // const newPurchaseOrder = {
@@ -64,6 +65,7 @@ class Orders {
         message: 'Purchase Order Successfully created',
       });
     } catch (error) {
+      console.log("My 500 order",error.message)
       return res.status(500).json({
         status: 500,
         error: error.message,
