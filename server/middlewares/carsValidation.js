@@ -140,4 +140,5 @@ class CarsValidation {
     return next();
   }
 }
+
 export default CarsValidation;
