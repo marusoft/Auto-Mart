@@ -14,7 +14,6 @@ class Orders {
    */
   static async CreateAPurchaseOrder(req, res) {
     const userid = req.user.id;
-    console.log('val', req.body);
     // const { car_id } = req.body;
     const value = Number(req.body.car_id);
 
@@ -22,15 +21,13 @@ class Orders {
 
     try {
       const { rows, rowCount } = await pool.query(carSql, [value]);
-      console.log('Row order', rowCount);
       if (rowCount === 0) {
-        console.log('Row order', rowCount);
         return res.status(404).json({
           status: 400,
           error: 'Cannot find the specify car.',
         });
       }
-      const price = rows[0].price;
+      const { price } = rows[0];
 
       const orderSql = `INSERT INTO orders(buyer_id, car_id, amount) VALUES($1, $2, $3)
     RETURNING *`;
@@ -65,7 +62,6 @@ class Orders {
         message: 'Purchase Order Successfully created',
       });
     } catch (error) {
-      console.log("My 500 order",error.message)
       return res.status(500).json({
         status: 500,
         error: error.message,
@@ -141,7 +137,6 @@ class Orders {
         }
       }
     } catch (error) {
-      console.log("Error me",error.message)
       return res.status(400).json({
         status: 400,
         error: error.message,

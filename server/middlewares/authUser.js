@@ -118,7 +118,6 @@ class UserAuthentication {
           error: 'Car not found',
         });
       }
-      // eslint-disable-next-line camelcase
       if (userid !== rows[0].owner) {
         return res.status(401).json({
           status: 401,

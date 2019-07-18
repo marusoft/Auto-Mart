@@ -1,4 +1,5 @@
 /* eslint-disable prefer-destructuring */
+/* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 import pool from '../db/connection';
 /**
@@ -21,7 +22,6 @@ class CarsValidation {
       manufacturer,
       model,
       body_type,
-      // eslint-disable-next-line prefer-const
       img_url,
     } = req.body;
     if (!state) {
@@ -58,7 +58,7 @@ class CarsValidation {
       });
     }
     if (price) {
-      // price = price.trim();
+      price = price.trim();
       if (!/^\d+$/.test(price)) {
         return res.status(406).json({
           message: 'Only numbers are acceptable as Price.',
