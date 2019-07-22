@@ -2,7 +2,6 @@
 /* eslint-disable prefer-const */
 import validator from 'validatorjs';
 import pool from '../db/connection';
-import Helper from '../helpers/HelperUtils';
 
 /**
  * UsersValidation
@@ -49,7 +48,7 @@ class UsersValidation {
       }
     } catch (error) {
       return res.status(500).json({
-        error: error.message,
+        error,
       });
     }
 
@@ -87,7 +86,6 @@ class UsersValidation {
       const findIfUserExist = 'SELECT * FROM users WHERE email = $1';
       const value = [email];
       const { rows } = await pool.query(findIfUserExist, value);
-      console.log('HERE', rows);
       // const foundEmail = rows[0].email;
       if (!rows[0]) {
         return res.status(401).json({
@@ -97,7 +95,6 @@ class UsersValidation {
       }
       password = password.trim();
       // if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
-      //   console.log('your lips dey break');
       //   return res.status(400).json({
       //     status: 400,
       //     error: 'Password is incorrect',

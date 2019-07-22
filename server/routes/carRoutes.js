@@ -38,12 +38,14 @@ carRouter.get(
   Cars.ViewAllUnsoldCarsPriceRange,
   Cars.ViewAllUnsoldCars,
   UserAuthentication.verifyUser,
+  UserAuthentication.verifyAdmin,
   Cars.AdminViewAllPostedADCar,
 );
 
 carRouter.delete('/car/:id',
   UserAuthentication.verifyUser,
   CarsValidation.validateSpecifyCar,
+  UserAuthentication.verifyAdmin,
   Cars.adminDeleteASpecificCarAD);
 
 export default carRouter;

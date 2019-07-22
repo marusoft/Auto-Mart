@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 /**
  * Order Validation
@@ -15,10 +16,9 @@ class OrderValidation {
   // eslint-disable-next-line consistent-return
   static validateOrdersDetails(req, res, next) {
     let { amount } = req.body;
-    console.log("Validate order",req.body)
     if (!amount) {
       return res.status(404).json({
-        error: 'Please offer amount is required',
+        error: 'Please offer amount is required.',
       });
     }
     if (amount) {

@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 import dotenv from 'dotenv';
-import moment from 'moment';
 import pool from '../../connection';
 import Helper from '../../../helpers/HelperUtils';
 
@@ -18,12 +18,6 @@ const addAllsqlTableQueries = `
              'http://car-img.com/peugeot.jpg'),
              (1, 'used', 'sold', 1500000, 'Mack', 'Diecast', 'Trailer', 'http://car-img.com/mack.jpeg'),
              (2, 'new', 'available', 2500000, 'Volkswagen', 'PickUp', 'Truck', 'http://some-car-img.com/volkswagen.jpg');
-
-
-      INSERT INTO flag(id, car_id, created_on, reason, description) 
-      VALUES (1, 2, '${moment(new Date())}', 'weired demands', 'Because of weired demands'),
-             (2, 3, '${moment(new Date())}', 'pricing', 'Because of unstable price'),
-             (3, 2, '${moment(new Date())}', 'place of advert', 'Because of unstrusted place of advert');       
       `;
 
 /**
@@ -33,10 +27,8 @@ const addAllsqlTableQueries = `
 async function insertAllToTables() {
   try {
     const create = await pool.query(addAllsqlTableQueries);
-    // eslint-disable-next-line no-console
-    console.log(`addAllsqlTableQueries: ${create[0].command}PED`);
+    console.log(`addAllsqlTableQueries: ${create[0].command}ED`);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(`addAllsqlTableQueries: ${error}`);
   }
 }

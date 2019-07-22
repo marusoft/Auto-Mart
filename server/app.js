@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
@@ -23,7 +24,8 @@ app.use('/api/v1', orderRouter);
 app.use('/api/v1', flagRouter);
 app.use('/', initialRouter);
 
-initialRouter.get('/api/v1', (req, res) => res.status(200).send({
+initialRouter.get('/api/v1', (req, res) => res.status(200).json({
+  status: 200,
   message: 'Welcome To AutoMart MarketPlace',
 }));
 
@@ -31,7 +33,6 @@ initialRouter.all('*', (req, res) => res.status(404).send({
   error: 'Oops!, The page you\'re looking for doesn\'t exist',
 }));
 
-// eslint-disable-next-line no-console
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 export default app;

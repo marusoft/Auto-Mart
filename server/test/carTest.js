@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 const defaultUrl = '/api/v1';
 const signinUrl = '/api/v1/auth/signin';
 let adminToken;
-const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6Im1veW9zb3JlQGF1dG9tYXJ0LmNvbSIsImZpcnN0X25hbWUiOiJtb3lvc29yZSIsImxhc3RfbmFtZSI6Im9tb2RhZGEiLCJwYXNzd29yZCI6IiQyYSQxMCRMakFNVWZxRWZqV3BuMFpFSGdBazlPaWpWUnQuekhEcEV4RUIzU0VFY052bmM5YkQ0ZmJBeSIsImFkZHJlc3MiOiIzLFRhbG9tb29sYSBTdHJlZXQsIGFqdW1vYmksIExhZ29zLiIsImlzX2FkbWluIjpmYWxzZSwiaWF0IjoxNTYzMjU4MDIyLCJleHAiOjE1NjMzNDQ0MjJ9.uHQwuo94AVCprlkraelEX4iWmn0Dh730JU1MFD18yoc';
+const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJtb3lvc29yZUBhdXRvbWFydC5jb20iLCJmaXJzdF9uYW1lIjoibW95b3NvcmUiLCJsYXN0X25hbWUiOiJvbW9kYWRhIiwicGFzc3dvcmQiOiIkMmEkMTAkVEJHQS44MEpyOHI3cGhJWGlMakNxZTdDRGVmSjIzMDBxckVuQ2llLkZFRzUzTXlQak5ZNm0iLCJhZGRyZXNzIjoiMyxUYWxvbW9vbGEgU3RyZWV0LCBhanVtb2JpLCBMYWdvcy4iLCJpc19hZG1pbiI6ZmFsc2UsImlhdCI6MTU2MzYxMzEzOH0.U-WUY2N3PSolIoxxxeDe4oIIhBg_dVuXBBh8oO4sxtc';
 
 // create token for an admin
 describe('Login and create token for an admin', () => {
@@ -106,7 +106,7 @@ describe('TEST CAR endpoint routes', () => {
         it('should delete specify car id.', (done) => {
           chai
             .request(app)
-            .delete(`${defaultUrl}/car/24`)
+            .delete(`${defaultUrl}/car/1`)
             .set('authorization', `Bearer ${adminToken}`)
             .end((err, res) => {
               expect(res).to.have.status(200);
@@ -115,28 +115,28 @@ describe('TEST CAR endpoint routes', () => {
               done(err);
             });
         });
-        it('should delete specify car id.', (done) => {
-          chai
-            .request(app)
-            .delete(`${defaultUrl}/car/25`)
-            .set('authorization', `Bearer ${adminToken}`)
-            .end((err, res) => {
-              expect(res).to.have.status(200);
-              expect(res.body).to.have.property('data');
-              done(err);
-            });
-        });
+        // it('should delete specify car id.', (done) => {
+        //   chai
+        //     .request(app)
+        //     .delete(`${defaultUrl}/car/2`)
+        //     .set('authorization', `Bearer ${adminToken}`)
+        //     .end((err, res) => {
+        //       expect(res).to.have.status(200);
+        //       expect(res.body).to.have.property('data');
+        //       done(err);
+        //     });
+        // });
       });
     });
-    it('should not delete specify car with an undefined id.', (done) => {
+    it('should not delete specify car with an unavailable id.', (done) => {
       chai
         .request(app)
-        .delete(`${defaultUrl}/car/9999`)
+        .delete(`${defaultUrl}/car/200`)
         .set('authorization', `Bearer ${adminToken}`)
         .end((err, res) => {
           expect(res).to.have.status(404);
-          expect(res.body).to.have.property('message');
-          expect(res.body.message).to.equal('No Car AD to delete');
+          expect(res.body).to.have.property('error');
+          expect(res.body.error).to.equal('Cannot find the specify car.');
           done(err);
         });
     });
@@ -486,7 +486,7 @@ describe('TEST CAR endpoint routes ', () => {
           expect(res).to.have.status(406);
           expect(res.status).to.equal(406);
           expect(res.body).to.be.a('object');
-          expect(res.body.message).to.equal('Only Alphabets input are acceptable.');
+          expect(res.body.message).to.equal('Only Alphabets input characters are acceptable for models.');
         });
       done();
     });
@@ -569,12 +569,12 @@ describe('TEST CAR endpoint routes ', () => {
     it('should not view specify car with an invalid id.', (done) => {
       chai
         .request(app)
-        .get(`${defaultUrl}/car/somevalue`)
+        .get(`${defaultUrl}/car/0`)
         .set('authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.body).to.have.property('error');
-          expect(res.body.error).to.equal('Cannot find the specify car');
+          expect(res.body.error).to.equal('Cannot find the specify car.');
         });
       done();
     });
@@ -591,14 +591,14 @@ describe('TEST for CAR Update endpoint routes ', () => {
         .end((err, res) => {
           expect(res).to.have.status(404);
           expect(res.body).to.have.property('error');
-          expect(res.body.error).to.equal('Invalid car id');
+          expect(res.body.error).to.equal('Cannot find the specify car.');
         });
       done();
     });
     it('should update car status from available to sold.', (done) => {
       chai
         .request(app)
-        .patch(`${defaultUrl}/car/7/status`)
+        .patch(`${defaultUrl}/car/4/status`)
         .set('authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -623,7 +623,7 @@ describe('TEST for CAR Update endpoint routes ', () => {
     it('should not update car price with price undefined.', (done) => {
       chai
         .request(app)
-        .patch(`${defaultUrl}/car/8/price`)
+        .patch(`${defaultUrl}/car/3/price`)
         .set('authorization', `Bearer ${userToken}`)
         .send({ price: '' })
         .end((err, res) => {
@@ -640,7 +640,7 @@ describe('TEST for CAR Update endpoint routes ', () => {
       };
       chai
         .request(app)
-        .patch(`${defaultUrl}/car/8/price`)
+        .patch(`${defaultUrl}/car/5/price`)
         .set('authorization', `Bearer ${userToken}`)
         .send(carDetails)
         .end((err, res) => {
@@ -657,7 +657,7 @@ describe('TEST for CAR Update endpoint routes ', () => {
       };
       chai
         .request(app)
-        .patch(`${defaultUrl}/car/8/price`)
+        .patch(`${defaultUrl}/car/5/price`)
         .set('authorization', `Bearer ${userToken}`)
         .send(carDetails)
         .end((err, res) => {
@@ -718,7 +718,7 @@ describe('TEST for CAR Update endpoint routes ', () => {
     it('View all unsold cars of a specific state(new).', (done) => {
       chai
         .request(app)
-        .get(`${defaultUrl}/car?bodyType=Van`)
+        .get(`${defaultUrl}/car?body_type=mitsubishi`)
         .set('authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
@@ -730,7 +730,7 @@ describe('TEST for CAR Update endpoint routes ', () => {
     it('View all unsold cars within a price range..', (done) => {
       chai
         .request(app)
-        .get(`${defaultUrl}/car?status=available&minPrice=3500000&maxPrice=7500000`)
+        .get(`${defaultUrl}/car?status=available&min_price=1500000&max_price=8000000`)
         .set('authorization', `Bearer ${userToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);

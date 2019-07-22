@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 import Helper from '../helpers/HelperUtils';
 import pool from '../db/connection';
@@ -74,11 +75,11 @@ class Users {
 
         return res.status(401).json({
           status: 401,
-          error: 'Password does not match',
+          error: 'Password does not match.',
         });
       }
     } catch (error) {
-      return res.status(400).send(error);
+      res.status(500).json({ status: 500, error: error.message });
     }
   }
 }

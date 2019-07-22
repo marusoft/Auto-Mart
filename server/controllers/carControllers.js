@@ -1,8 +1,8 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
-import moment from 'moment';
 import pool from '../db/connection';
 
 /**
@@ -25,7 +25,6 @@ class Cars {
     // eslint-disable-next-line camelcase
     const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
       req.body.img_url];
-    console.log('My body', req.body);
     try {
       const { rows } = await pool.query(sql, values);
       const {
@@ -40,7 +39,6 @@ class Cars {
         body_type,
         img_url,
       } = rows[0];
-      console.log('Rows me', rows);
       return res.status(201).json({
         status: 201,
         data: {
@@ -60,7 +58,7 @@ class Cars {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: error.message,
+        error,
       });
     }
   }
@@ -77,7 +75,6 @@ class Cars {
     const value = Number(id);
     try {
       const { rows } = await pool.query(findOneCarSql, [value]);
-      console.log('Rows me1', rows);
       const {
         id,
         owner,
@@ -128,12 +125,10 @@ class Cars {
    */
   static async adminDeleteASpecificCarAD(req, res) {
     const { findSpecificCar } = req.body;
-    console.log('delete', findSpecificCar);
     // const val = Number(id);
     const deleteSql = 'DELETE FROM cars WHERE id = $1 RETURNING *';
     try {
       const { rowCount } = await pool.query(deleteSql, [findSpecificCar.id]);
-      console.log('Rows me2', rowCount);
       if (rowCount !== 0) {
         return res.status(200).json({
           status: 200,
@@ -155,10 +150,7 @@ class Cars {
    * @params {object} res
    */
   static async updateCarStatus(req, res) {
-
     const { findSpecificCar } = req.body;
-    console.log('>>>', findSpecificCar);
-
     const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
     if (findSpecificCar.status === 'available') {
       try {
@@ -172,7 +164,6 @@ class Cars {
           status: 404,
           error: 'This ad does not exist',
         });
-        
       } catch (error) {
         return res.status(500).json({
           status: 500,
@@ -182,58 +173,8 @@ class Cars {
     }
     return res.status(422).json({
       status: 422,
-      error: 'This ad has already been marked as sold'
+      error: 'This ad has already been marked as sold',
     });
-
-    // const { findSpecificCar } = req.body;
-    // let result;
-    // const val = Number(id);
-    // const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
-    // try {
-    //   result = await pool.query(checkCarStatus, [val]);
-    //   console.log('Rows me3', rows);
-    //   if (result.rowCount === 0) {
-    //     return res.status(404).json({
-    //       status: 404,
-    //       error: 'Car id not found',
-    //     });
-    //   }
-
-    //   if (result.rows[0].status === 'sold') {
-    //     return res.status(302).json({
-    //       status: 302,
-    //       error: 'Status is already mark as sold',
-    //     });
-    //   }
-    //   const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
-    //   const value = ['sold', result.rows[0].id, req.user.id];
-
-    //   const { rows } = await pool.query(markCarAsSoldSql, value);
-    //   console.log('Rows me4', rows);
-    //   // const {
-    //   //   id,
-    //   //   owner,
-    //   //   created_on,
-    //   //   status,
-    //   //   state,
-    //   //   price,
-    //   //   manufacturer,
-    //   //   model,
-    //   //   body_type,
-    //   //   img_url,
-    //   // } = rows[0];
-    //   // const statusUpdate = rows[0];
-    //   return res.status(200).json({
-    //     status: 200,
-    //     data: rows[0],
-    //   });
-    // } catch (error) {
-    //   console.log('I will be wise now');
-    //   return res.status(400).json({
-    //     status: 400,
-    //     error: error.message,
-    //   });
-    // }
   }
 
   /** Update the price of a car.

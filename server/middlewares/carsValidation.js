@@ -133,7 +133,7 @@ class CarsValidation {
     if (findSpecificCar.rowCount === 0) {
       return res.status(404).json({
         status: 404,
-        error: 'Cannot find the specify car',
+        error: 'Cannot find the specify car.',
       });
     }
     req.body.findSpecificCar = findSpecificCar.rows[0];

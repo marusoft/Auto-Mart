@@ -9,7 +9,7 @@
     "clean": "rm -rf build .nyc_output coverage && mkdir build",
     "start": "npm run build && node ./build/app.js",
     "start:dev": "nodemon --exec babel-node ./server/app",
-    "test": "nyc --reporter=html --reporter=text mocha ./server/test/*.js --require @babel/register --exit",
+    "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha ./server/test/*.js --require @babel/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "migrate": "babel-node ./server/db/migrations/createTables"
@@ -39,7 +39,6 @@
     "morgan": "^1.9.1",
     "nyc": "^14.1.1",
     "pg": "^7.11.0",
-    "regenerator-runtime": "^0.13.2",
     "validator.js": "^2.0.3",
     "validatorjs": "^3.15.1"
   },

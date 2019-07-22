@@ -28,39 +28,34 @@ class Orders {
         });
       }
       const { price } = rows[0];
+      const carId = rows[0].id;
 
       const orderSql = `INSERT INTO orders(buyer_id, car_id, amount) VALUES($1, $2, $3)
     RETURNING *`;
-      const values = [userid, value, req.body.amount];
+      const values = [userid, carId, req.body.amount];
       const purchaseOrder = await pool.query(orderSql, values);
-      const {
-        id,
-        car_id,
-        amount,
-        status,
-        created_on,
-      } = purchaseOrder.rows[0];
-
-      // const newPurchaseOrder = {
-      //   id,
-      //   car_id,
-      //   created_on,
-      //   status,
-      //   amount,
-      //   price,
-      // };
-      return res.status(201).json({
-        status: 201,
-        data: {
+      if (purchaseOrder.rowCount !== 0) {
+        const {
           id,
           car_id,
-          created_on,
-          status,
           amount,
-          price,
-        },
-        message: 'Purchase Order Successfully created',
-      });
+          status,
+          created_on,
+        } = purchaseOrder.rows[0];
+
+        return res.status(201).json({
+          status: 201,
+          data: {
+            id,
+            car_id,
+            created_on,
+            status,
+            amount,
+            price,
+          },
+          message: 'Purchase Order Successfully created',
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -117,13 +112,7 @@ class Orders {
             car_id,
             status,
           } = updateOrder.rows[0];
-          // const updatePurchaseOrder = {
-          //   id,
-          //   car_id,
-          //   status,
-          //   old_price_offered,
-          //   new_price_offered,
-          // };
+
           return res.status(200).json({
             status: 200,
             data: {

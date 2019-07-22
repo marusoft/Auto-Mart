@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import pool from '../../connection';
 
 const ordersTable = `DROP TABLE IF EXISTS orders CASCADE;
@@ -21,10 +22,8 @@ DROP TYPE IF EXISTS order_status;
 async function createOrdersTable() {
   try {
     const create = await pool.query(ordersTable);
-    // eslint-disable-next-line no-console
     console.log(`ordersTable: ${create[0].command}PED and ${create[1].command}D`);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(`ordersTable ${error}`);
   }
 }
