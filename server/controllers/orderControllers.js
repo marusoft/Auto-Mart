@@ -1,6 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-unused-vars */
 
 /* eslint-disable camelcase */
 import pool from '../db/connection';
@@ -16,9 +13,9 @@ class Orders {
    * @params {object} res
    */
   static async CreateAPurchaseOrder(req, res) {
-    const id = req.user.user_id;
-    const { car_id, price_offered } = req.body;
-    const value = Number(car_id);
+    const userid = req.user.id;
+    // const { car_id } = req.body;
+    const value = Number(req.body.car_id);
 
     const carSql = 'SELECT * FROM cars WHERE id = $1';
 
@@ -26,38 +23,39 @@ class Orders {
       const { rows, rowCount } = await pool.query(carSql, [value]);
       if (rowCount === 0) {
         return res.status(404).json({
-          status: 404,
+          status: 400,
           error: 'Cannot find the specify car.',
         });
       }
-      const amount = rows[0].price;
+      const { price } = rows[0];
+      const carId = rows[0].id;
 
-      const orderSql = `INSERT INTO orders(buyer_id, car_id, price_offered) VALUES($1, $2, $3)
+      const orderSql = `INSERT INTO orders(buyer_id, car_id, amount) VALUES($1, $2, $3)
     RETURNING *`;
-      const values = [id, car_id, price_offered];
+      const values = [userid, carId, req.body.amount];
       const purchaseOrder = await pool.query(orderSql, values);
-      const {
-        order_id,
-        created_on,
-        status,
-        price_offered,
-      } = purchaseOrder.rows[0];
+      if (purchaseOrder.rowCount !== 0) {
+        const {
+          id,
+          car_id,
+          amount,
+          status,
+          created_on,
+        } = purchaseOrder.rows[0];
 
-      const newPurchaseOrder = {
-        order_id,
-        car_id,
-        created_on,
-        status,
-        amount,
-        price_offered,
-      };
-      return res.status(201).json({
-        status: 201,
-        data: {
-          newPurchaseOrder,
-        },
-        message: 'Purchase Order Successfully created',
-      });
+        return res.status(201).json({
+          status: 201,
+          data: {
+            id,
+            car_id,
+            created_on,
+            status,
+            amount,
+            price,
+          },
+          message: 'Purchase Order Successfully created',
+        });
+      }
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -74,8 +72,8 @@ class Orders {
    */
   // eslint-disable-next-line consistent-return
   static async updatePurchaseOrderPrice(req, res) {
-    const { new_price_offered } = req.body;
-    if (!new_price_offered.trim() === '' || !/^\d+$/.test(new_price_offered)) {
+    const { price } = req.body;
+    if (!price || !/^\d+$/.test(price)) {
       return res.status(400).json({
         status: 400,
         error: 'input offer price can only be numbers',
@@ -83,18 +81,20 @@ class Orders {
     }
     const { orderId } = req.params;
     const val = Number(orderId);
+    // const { id } = req.user.payload
     let old_price_offered;
+    let new_price_offered;
 
     try {
-      const findOrder = 'SELECT * FROM orders WHERE order_id = $1';
-      const { rows, rowCount } = await pool.query(findOrder, [val]);
+      const findOrder = 'SELECT * FROM orders WHERE id = $1 and buyer_id = $2';
+      const { rows, rowCount } = await pool.query(findOrder, [val, req.user.id]);
+      old_price_offered = rows[0].amount;
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
           error: 'Purchase order not found',
         });
       }
-      const previousPrice = rows[0].amount;
       if (rowCount !== 0 && rows[0].status !== 'pending') {
         return res.status(422).json({
           status: 422,
@@ -102,31 +102,32 @@ class Orders {
         });
       }
       if (rowCount !== 0 && rows[0].status === 'pending') {
-        const updateNewPrice = 'UPDATE orders SET price_offered = $1 WHERE order_id  = $2 RETURNING * ';
-        const value = [new_price_offered, val];
+        const updateNewPrice = 'UPDATE orders SET amount = $1 WHERE id  = $2 and buyer_id = $3 RETURNING * ';
+        const value = [price, val, req.user.id];
         const updateOrder = await pool.query(updateNewPrice, value);
+        new_price_offered = price;
         if (updateOrder.rowCount !== 0) {
           const {
-            order_id,
+            id,
             car_id,
             status,
           } = updateOrder.rows[0];
-          old_price_offered = previousPrice;
-          const updatePurchaseOrder = {
-            order_id,
-            car_id,
-            status,
-            old_price_offered,
-            new_price_offered,
-          };
+
           return res.status(200).json({
             status: 200,
-            data: updatePurchaseOrder,
+            data: {
+              id,
+              car_id,
+              status,
+              old_price_offered,
+              new_price_offered,
+            },
           });
         }
       }
     } catch (error) {
       return res.status(400).json({
+        status: 400,
         error: error.message,
       });
     }

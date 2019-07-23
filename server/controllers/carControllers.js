@@ -1,6 +1,8 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-shadow */
+/* eslint-disable max-len */
 /* eslint-disable prefer-const */
 /* eslint-disable camelcase */
-import moment from 'moment';
 import pool from '../db/connection';
 
 /**
@@ -15,37 +17,48 @@ class Cars {
    * @params {object} res
    */
   static async createCarSaleAD(req, res) {
-    // eslint-disable-next-line camelcase
-    const id = req.user.user_id;
-    const {
-      status,
-      state,
-      price,
-      manufacturer,
-      model,
-      body_type,
-      img_url,
-    } = req.body;
-    const createdOn = moment(new Date());
-    const sql = `INSERT INTO cars(owner_id, createdOn, state, status, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    const { id } = req.user;
+
+    // const created_on = moment(new Date());
+    const sql = `INSERT INTO cars(owner, state, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`;
     // eslint-disable-next-line camelcase
-    const values = [id, createdOn, state, status, price, manufacturer, model, body_type,
-      img_url];
-
+    const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
+      req.body.img_url];
     try {
       const { rows } = await pool.query(sql, values);
-      const newCarAD = rows[0];
+      const {
+        id,
+        owner,
+        created_on,
+        status,
+        state,
+        price,
+        manufacturer,
+        model,
+        body_type,
+        img_url,
+      } = rows[0];
       return res.status(201).json({
         status: 201,
         data: {
-          newCarAD,
+          model,
+          id,
+          owner,
+          created_on,
+          status,
+          state,
+          price,
+          manufacturer,
+          body_type,
+          img_url,
         },
         message: 'Car Advert Successfully created',
       });
     } catch (error) {
-      return res.status(400).json({
-        error: error.message,
+      return res.status(500).json({
+        status: 500,
+        error,
       });
     }
   }
@@ -62,8 +75,19 @@ class Cars {
     const value = Number(id);
     try {
       const { rows } = await pool.query(findOneCarSql, [value]);
-      const findSpecificCar = rows[0];
-      if (!findSpecificCar) {
+      const {
+        id,
+        owner,
+        created_on,
+        status,
+        state,
+        price,
+        manufacturer,
+        model,
+        body_type,
+        img_url,
+      } = rows[0];
+      if (!rows[0]) {
         return res.status(404).json({
           status: 404,
           error: 'Cannot find the specify car.',
@@ -71,12 +95,24 @@ class Cars {
       }
       return res.status(200).json({
         status: 200,
-        data: findSpecificCar,
+        // data: findSpecificCar,
+        data: {
+          id,
+          owner,
+          created_on,
+          status,
+          state,
+          price,
+          manufacturer,
+          model,
+          body_type,
+          img_url,
+        },
         message: 'Specify car seen.',
       });
     } catch (error) {
       return res.status(400).json({
-        error: error.message,
+        error,
       });
     }
   }
@@ -88,23 +124,20 @@ class Cars {
    * @params {object} res
    */
   static async adminDeleteASpecificCarAD(req, res) {
-    const { id } = req.params;
-    const val = Number(id);
-    const deleteSql = 'DELETE FROM cars WHERE id = $1';
+    const { findSpecificCar } = req.body;
+    // const val = Number(id);
+    const deleteSql = 'DELETE FROM cars WHERE id = $1 RETURNING *';
     try {
-      const { rowCount } = await pool.query(deleteSql, [val]);
-      if (rowCount === 0) {
-        return res.status(404).json({
-          status: 404,
-          message: 'No Car AD to delete',
+      const { rowCount } = await pool.query(deleteSql, [findSpecificCar.id]);
+      if (rowCount !== 0) {
+        return res.status(200).json({
+          status: 200,
+          data: 'Car Ad successfully deleted',
         });
       }
-      return res.status(200).json({
-        status: 200,
-        data: 'Car Ad successfully deleted',
-      });
     } catch (error) {
       return res.status(400).json({
+        status: 400,
         error: error.message,
       });
     }
@@ -117,39 +150,31 @@ class Cars {
    * @params {object} res
    */
   static async updateCarStatus(req, res) {
-    const { id } = req.params;
-    let result;
-    const val = Number(id);
-    const checkCarStatus = 'SELECT * FROM cars WHERE id = $1';
-    try {
-      result = await pool.query(checkCarStatus, [val]);
-      if (result.rowCount === 0) {
-        return res.status(404).json({
+    const { findSpecificCar } = req.body;
+    const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 AND owner = $3 RETURNING *';
+    if (findSpecificCar.status === 'available') {
+      try {
+        const { rows, rowCount } = await pool.query(markCarAsSoldSql, ['sold', findSpecificCar.id, req.user.id]);
+        if (rowCount !== 0) {
+          return res.status(200).json({
+            status: 200,
+            data: rows[0],
+          });
+        } return res.status(404).json({
           status: 404,
-          error: 'Car id not found',
+          error: 'This ad does not exist',
+        });
+      } catch (error) {
+        return res.status(500).json({
+          status: 500,
+          error: error.message,
         });
       }
-
-      if (result.rows[0].status === 'sold') {
-        return res.status(302).json({
-          status: 302,
-          error: 'Status is already mark as sold',
-        });
-      }
-      const markCarAsSoldSql = 'UPDATE cars SET status = $1 WHERE id = $2 RETURNING *';
-      const value = ['sold', result.rows[0].id];
-
-      const { rows } = await pool.query(markCarAsSoldSql, value);
-      const statusUpdate = rows[0];
-      return res.status(200).json({
-        status: 200,
-        data: statusUpdate,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        error: error.message,
-      });
     }
+    return res.status(422).json({
+      status: 422,
+      error: 'This ad has already been marked as sold',
+    });
   }
 
   /** Update the price of a car.
@@ -166,8 +191,8 @@ class Cars {
     const updateFoundCar = 'UPDATE cars SET price = $1 WHERE id = $2 RETURNING *';
     const values = [price, val];
     try {
-      const { rows } = await pool.query(findACar, [val]);
-      if (!rows[0]) {
+      const result = await pool.query(findACar, [val]);
+      if (result.rowCount === 0) {
         return res.status(404).json({
           status: 404,
           error: 'No Car to Update Price',
@@ -180,7 +205,7 @@ class Cars {
         });
       }
       if (price) {
-        price = price.trim();
+        // price = price.trim();
         if (!/^\d+$/.test(price)) {
           return res.status(400).json({
             status: 400,
@@ -188,11 +213,11 @@ class Cars {
           });
         }
       }
-      const result = await pool.query(updateFoundCar, values);
-      const updateFoundCarPrice = result.rows[0];
+      const { rows } = await pool.query(updateFoundCar, values);
       return res.status(200).json({
         status: 200,
-        data: updateFoundCarPrice,
+        data: rows[0],
+
       });
     } catch (error) {
       return res.status(400).json({
@@ -297,7 +322,7 @@ class Cars {
       }
     }
     if (body_type) {
-      const carsByBodyType = 'SELECT * FROM cars WHERE bodytype = $1';
+      const carsByBodyType = 'SELECT * FROM cars WHERE body_type = $1';
       try {
         const value = [body_type];
         const foundCarByBodyType = await pool.query(carsByBodyType, value);
@@ -323,22 +348,25 @@ class Cars {
    * @params {object} req
    * @params {object} res
    */
-  static async ViewAllUnsoldCarsPriceRange(req, res) {
+  static async ViewAllUnsoldCarsPriceRange(req, res, next) {
     const { min_price, max_price } = req.query;
-    const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${min_price}' AND '${max_price}' `;
-    try {
-      const { rows } = await pool.query(findPriceRange);
-      return res.status(200).json({
-        status: 200,
-        data: {
-          rows,
-        },
-      });
-    } catch (error) {
-      return res.status(400).json({
-        error: error.message,
-      });
+    if (min_price && max_price) {
+      const findPriceRange = `SELECT * FROM cars WHERE status = 'available' AND price BETWEEN '${min_price}' AND '${max_price}' `;
+      try {
+        const { rows } = await pool.query(findPriceRange);
+        return res.status(200).json({
+          status: 200,
+          data: {
+            rows,
+          },
+        });
+      } catch (error) {
+        return res.status(400).json({
+          error: error.message,
+        });
+      }
     }
+    return next();
   }
 
   /** Admin View All Posted AD Car
@@ -358,7 +386,7 @@ class Cars {
         message: 'Success',
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         error: error.message,
       });
     }

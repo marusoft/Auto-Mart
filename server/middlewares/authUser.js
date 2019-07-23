@@ -87,7 +87,7 @@ class UserAuthentication {
       });
     }
 
-    if (payload.isadmin !== true) {
+    if (payload.is_admin !== true) {
       return res.status(403).json({
         status: 403,
         error: 'Only admin can access this route',
@@ -104,7 +104,8 @@ class UserAuthentication {
    */
 
   static async isOwner(req, res, next) {
-    const id = req.user.user_id;
+    // eslint-disable-next-line prefer-destructuring
+    const userid = req.user.id;
     const carId = req.params.id;
     const value = Number(carId);
     // let foundCar;
@@ -117,8 +118,7 @@ class UserAuthentication {
           error: 'Car not found',
         });
       }
-      // eslint-disable-next-line camelcase
-      if (id !== rows[0].owner_id) {
+      if (userid !== rows[0].owner) {
         return res.status(401).json({
           status: 401,
           error: 'You can not edit this AD',

@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import pool from '../../connection';
 
 const usersTable = `DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE users(
-    user_id SERIAL PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     first_name VARCHAR(130) NOT NULL,
     last_name VARCHAR(130) NOT NULL,
@@ -19,10 +20,8 @@ const usersTable = `DROP TABLE IF EXISTS users CASCADE;
 async function createUsersTable() {
   try {
     const create = await pool.query(usersTable);
-    // eslint-disable-next-line no-console
     console.log(`userTable: ${create[0].command}PED and ${create[1].command}D`);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(`userTable ${error}`);
   }
 }

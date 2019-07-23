@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 /**
  * Order Validation
@@ -14,22 +15,22 @@ class OrderValidation {
 
   // eslint-disable-next-line consistent-return
   static validateOrdersDetails(req, res, next) {
-    let { price_offered } = req.body;
-    if (!price_offered) {
+    let { amount } = req.body;
+    if (!amount) {
       return res.status(404).json({
-        error: 'Please offer price is required',
+        error: 'Please offer amount is required.',
       });
     }
-    if (price_offered) {
-      price_offered = price_offered.trim();
-      if (!/^\d+$/.test(price_offered)) {
+    if (amount) {
+      // price = price.trim();
+      if (!/^\d+$/.test(amount)) {
         return res.status(406).json({
-          message: 'price offered should be numbers only',
+          message: 'amount offered should be numbers only',
         });
       }
     }
 
-    req.body.price_offered = price_offered;
+    req.body.price = amount;
     next();
   }
 }

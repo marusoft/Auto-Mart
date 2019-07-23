@@ -2,7 +2,6 @@
 /* eslint-disable prefer-const */
 import validator from 'validatorjs';
 import pool from '../db/connection';
-import Helper from '../helpers/HelperUtils';
 
 /**
  * UsersValidation
@@ -48,8 +47,8 @@ class UsersValidation {
         });
       }
     } catch (error) {
-      return res.status(400).json({
-        error: error.message,
+      return res.status(500).json({
+        error,
       });
     }
 
@@ -87,24 +86,27 @@ class UsersValidation {
       const findIfUserExist = 'SELECT * FROM users WHERE email = $1';
       const value = [email];
       const { rows } = await pool.query(findIfUserExist, value);
-      const foundEmail = rows[0];
-      if (!foundEmail) {
+      // const foundEmail = rows[0].email;
+      if (!rows[0]) {
         return res.status(401).json({
           status: 401,
-          error: `${req.body.email} does not exit, Please register an account or signup`,
+          error: `${req.body.email} does not exist, Please register an account or signup`,
         });
       }
       password = password.trim();
-      if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
-        return res.status(400).json({
-          error: 'Password is incorrect',
-        });
-      }
+      // if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
+      //   return res.status(400).json({
+      //     status: 400,
+      //     error: 'Password is incorrect',
+      //   });
+      // }
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
+        status: 500,
         error: error.message,
       });
     }
+    req.body.email = email;
     req.body.password = password;
     return next();
   }

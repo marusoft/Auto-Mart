@@ -1,16 +1,17 @@
+/* eslint-disable no-console */
 import pool from '../../connection';
 
 const ordersTable = `DROP TABLE IF EXISTS orders CASCADE;
 DROP TYPE IF EXISTS order_status;
   CREATE TYPE order_status as ENUM ('pending', 'accepted','rejected');
   CREATE TABLE IF NOT EXISTS orders(
-    order_id SERIAL PRIMARY KEY NOT NULL,
+    id SERIAL PRIMARY KEY NOT NULL,
     buyer_id INTEGER NOT NULL,
     car_id  INTEGER NOT NULL,
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status order_status DEFAULT 'pending',
-    price_offered FLOAT NOT NULL,
-    FOREIGN KEY (buyer_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    amount VARCHAR(50) NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE
   )`;
 
@@ -21,10 +22,8 @@ DROP TYPE IF EXISTS order_status;
 async function createOrdersTable() {
   try {
     const create = await pool.query(ordersTable);
-    // eslint-disable-next-line no-console
     console.log(`ordersTable: ${create[0].command}PED and ${create[1].command}D`);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.log(`ordersTable ${error}`);
   }
 }

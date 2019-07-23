@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 import pool from '../db/connection';
 /**
@@ -20,7 +22,6 @@ class CarsValidation {
       manufacturer,
       model,
       body_type,
-      // eslint-disable-next-line prefer-const
       img_url,
     } = req.body;
     if (!state) {
@@ -114,6 +115,7 @@ class CarsValidation {
     req.body.manufacturer = manufacturer.toLowerCase();
     req.body.model = model.toLowerCase();
     req.body.body_type = body_type.toLowerCase();
+    req.body.img_url = img_url.toLowerCase();
     return next();
   }
 
@@ -127,15 +129,16 @@ class CarsValidation {
     const { id } = req.params;
     const value = Number(id);
     const findCar = 'SELECT * FROM cars WHERE id = $1';
-    const findSpecificCar = await pool.query(findCar, value);
-    if (!findSpecificCar) {
+    const findSpecificCar = await pool.query(findCar, [value]);
+    if (findSpecificCar.rowCount === 0) {
       return res.status(404).json({
         status: 404,
-        error: 'Cannot find the specify car',
+        error: 'Cannot find the specify car.',
       });
     }
-    req.body.findSpecificCar = findSpecificCar;
+    req.body.findSpecificCar = findSpecificCar.rows[0];
     return next();
   }
 }
+
 export default CarsValidation;

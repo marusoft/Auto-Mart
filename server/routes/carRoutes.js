@@ -18,15 +18,12 @@ carRouter.get(
   Cars.ViewASpecificCar,
 );
 
-carRouter.delete('/car/:id',
-  UserAuthentication.verifyAdmin,
-  CarsValidation.validateSpecifyCar,
-  Cars.adminDeleteASpecificCarAD);
 
 carRouter.patch(
   '/car/:id/status',
   UserAuthentication.verifyUser,
-  UserAuthentication.isOwner,
+  CarsValidation.validateSpecifyCar,
+  /* UserAuthentication.isOwner, */
   Cars.updateCarStatus,
 );
 
@@ -37,11 +34,18 @@ carRouter.patch(
   Cars.updateCarPrice,
 );
 carRouter.get(
-  '/car', Cars.ViewAllUnsoldCarsPriceRange,
+  '/car',
+  Cars.ViewAllUnsoldCarsPriceRange,
   Cars.ViewAllUnsoldCars,
+  UserAuthentication.verifyUser,
   UserAuthentication.verifyAdmin,
   Cars.AdminViewAllPostedADCar,
 );
 
+carRouter.delete('/car/:id',
+  UserAuthentication.verifyUser,
+  CarsValidation.validateSpecifyCar,
+  UserAuthentication.verifyAdmin,
+  Cars.adminDeleteASpecificCarAD);
 
 export default carRouter;

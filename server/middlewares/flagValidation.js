@@ -14,7 +14,8 @@ class FlagValidation {
     // eslint-disable-next-line prefer-const
     let { reason, description } = req.body;
 
-    if (reason === '') {
+
+    if (!reason) {
       return res.status(400).json({
         error: 'Please specify the reason for this AD',
       });
@@ -27,7 +28,8 @@ class FlagValidation {
         });
       }
     }
-    if (description === '') {
+
+    if (!description) {
       return res.status(400).json({
         error: 'Please specify the description for this AD',
       });
