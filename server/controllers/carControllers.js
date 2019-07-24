@@ -1,7 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
-/* eslint-disable max-len */
-/* eslint-disable prefer-const */
 /* eslint-disable camelcase */
 import pool from '../db/connection';
 
@@ -19,11 +17,14 @@ class Cars {
   static async createCarSaleAD(req, res) {
     const { id } = req.user;
 
-    // const created_on = moment(new Date());
-    const sql = `INSERT INTO cars(owner, state, price, manufacturer, model, body_type, img_url)  VALUES($1, $2, $3, $4, $5, $6, $7)
-    RETURNING *`;
-    // eslint-disable-next-line camelcase
-    const values = [id, req.body.state, req.body.price, req.body.manufacturer, req.body.model, req.body.body_type,
+    const sql = `INSERT INTO cars(owner, state, price, manufacturer, model, body_type, img_url)  
+                 VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+    const values = [
+      id, req.body.state,
+      req.body.price,
+      req.body.manufacturer,
+      req.body.model,
+      req.body.body_type,
       req.body.img_url];
     try {
       const { rows } = await pool.query(sql, values);
@@ -95,7 +96,6 @@ class Cars {
       }
       return res.status(200).json({
         status: 200,
-        // data: findSpecificCar,
         data: {
           id,
           owner,
@@ -125,7 +125,6 @@ class Cars {
    */
   static async adminDeleteASpecificCarAD(req, res) {
     const { findSpecificCar } = req.body;
-    // const val = Number(id);
     const deleteSql = 'DELETE FROM cars WHERE id = $1 RETURNING *';
     try {
       const { rowCount } = await pool.query(deleteSql, [findSpecificCar.id]);
@@ -186,7 +185,7 @@ class Cars {
   static async updateCarPrice(req, res) {
     const { id } = req.params;
     const val = Number(id);
-    let { price } = req.body;
+    const { price } = req.body;
     const findACar = 'SELECT * FROM cars WHERE id = $1';
     const updateFoundCar = 'UPDATE cars SET price = $1 WHERE id = $2 RETURNING *';
     const values = [price, val];
@@ -234,7 +233,7 @@ class Cars {
    * @params {object} res
    */
   static async ViewAllUnsoldCars(req, res, next) {
-    let {
+    const {
 
       status, state, manufacturer, body_type,
     } = req.query;

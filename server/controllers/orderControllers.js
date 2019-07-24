@@ -1,4 +1,4 @@
-
+/* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 import pool from '../db/connection';
 
@@ -23,7 +23,7 @@ class Orders {
       const { rows, rowCount } = await pool.query(carSql, [value]);
       if (rowCount === 0) {
         return res.status(404).json({
-          status: 400,
+          status: 404,
           error: 'Cannot find the specify car.',
         });
       }
