@@ -1,4 +1,3 @@
-// /* eslint-disable no-undef */
 // import chai from 'chai';
 // import chaiHttp from 'chai-http';
 // import { describe } from 'mocha';
@@ -58,7 +57,8 @@
 //           expect(res).to.have.status(201);
 //           expect(res.status).to.equal(201);
 //           expect(res.body.data).to.be.a('object');
-//           // expect(res.body.message).to.equal(`${res.body.data.first_name}, your account was successfully created`);
+//           expect(res.body.message).to.equal(`${res.body.data.first_name}, 
+//           your account was successfully created`);
 //         });
 //       done();
 //     });
@@ -239,7 +239,8 @@
 //           expect(res).to.have.status(200);
 //           expect(res.status).to.equal(200);
 //           expect(res.body.data).to.be.a('object');
-//           // expect(res.body.message).to.equal(`Welcome back ${rows[0].first_name}, your login was successful`);
+//           expect(res.body.message).to.equal(`Welcome back ${rows[0].first_name}, 
+//           your login was successful`);
 //         });
 //       done();
 //     });
