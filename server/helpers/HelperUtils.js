@@ -42,6 +42,7 @@ export default class Helper {
    * @returns {sring} hash password
    */
   static hashPassword(password) {
+    console.log('pass', password, salt);
     return bcrypt.hashSync(password, salt);
   }
 
