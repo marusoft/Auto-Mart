@@ -26,7 +26,7 @@ describe('Create a purchase order,ORDER ROUTE TEST', () => {
         .end((err, res) => {
           expect(res).to.have.status(201);
           expect(res.status).to.equal(201);
-          // expect(res.body.data).to.be.a('object');
+          expect(res.body.data).to.be.a('object');
           expect(res.body).to.have.property('data');
         });
       done();
@@ -70,40 +70,40 @@ describe('Create a purchase order,ORDER ROUTE TEST', () => {
 
 describe('Update the price of a purchase order, ORDER ROUTE TEST', () => {
   describe('POST /order', () => {
-    it('should update the price of Purchase Order', (done) => {
-      const updatePurchaseOrder = {
-        car_id: '4',
-        price: '44000000',
-      };
-      chai.request(app)
-        .patch(`${defaultUrl}/order/4/price`)
-        .set('authorization', `Bearer ${userToken}`)
-        .send(updatePurchaseOrder)
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body.status).to.equal(200);
-          expect(res.body).to.be.a('object');
-          expect(res.body).to.have.property('data');
-        });
-      done();
-    });
-    // it('should not update the price of Purchase Order if car status is not pending', (done) => {
+    // it('should update the price of Purchase Order', (done) => {
     //   const updatePurchaseOrder = {
-    //     status: 'accepted',
-    //     price: '3600000',
+    //     car_id: '3',
+    //     price: '44000000',
     //   };
     //   chai.request(app)
-    //     .patch(`${defaultUrl}/order/3/price`)
+    //     .patch(`${defaultUrl}/order/4/price`)
     //     .set('authorization', `Bearer ${userToken}`)
     //     .send(updatePurchaseOrder)
     //     .end((err, res) => {
-    //       expect(res).to.have.status(422);
-    //       expect(res.status).to.equal(422);
+    //       expect(res).to.have.status(200);
+    //       expect(res.body.status).to.equal(200);
     //       expect(res.body).to.be.a('object');
-    //       expect(res.body).to.have.property('message');
-    //       expect(res.body.message).to.equal('Ooosh, Order is no longer pending');
+    //       expect(res.body).to.have.property('data');
     //     });
     //   done();
     // });
+    it('should not update the price of Purchase Order if car status is not pending', (done) => {
+      const updatePurchaseOrder = {
+        status: 'accepted',
+        price: '3600000',
+      };
+      chai.request(app)
+        .patch(`${defaultUrl}/order/3/price`)
+        .set('authorization', `Bearer ${userToken}`)
+        .send(updatePurchaseOrder)
+        .end((err, res) => {
+          expect(res).to.have.status(422);
+          expect(res.status).to.equal(422);
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message).to.equal('Ooosh, Order is no longer pending');
+        });
+      done();
+    });
   });
 });
