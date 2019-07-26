@@ -6,6 +6,7 @@ import UserAuthentication from '../middlewares/authUser';
 
 const orderRouter = express.Router();
 
+
 orderRouter.post(
   '/order', UserAuthentication.verifyUser,
   OrderValidation.validateOrdersDetails,
