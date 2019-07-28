@@ -1,5 +1,7 @@
+/* eslint-disable camelcase */
+/* eslint-disable prefer-const */
 import validator from 'validatorjs';
-import users from '../models/usersModels';
+import pool from '../db/connection';
 
 /**
  * UsersValidation
@@ -12,16 +14,15 @@ class UsersValidation {
    * @param {*} res
    * @param {*} next
    */
-  static ValidateUserSignUpInput(req, res, next) {
+  static async ValidateUserSignUpInput(req, res, next) {
     let {
-      // eslint-disable-next-line prefer-const
-      email, firstName, lastName, password, address,
+      email, first_name, last_name, password, address,
     } = req.body;
 
     const constraint = {
       email: 'required|email|min:12|max:30',
-      firstName: 'required|min:3|max:20|alpha',
-      lastName: 'required|min:3|max:20|alpha',
+      first_name: 'required|min:3|max:20|alpha',
+      last_name: 'required|min:3|max:20|alpha',
       password: 'required|min:8|max:14',
       address: 'required',
     };
@@ -35,16 +36,25 @@ class UsersValidation {
       });
     }
     email = email.toLowerCase().trim();
-    const FoundEmailInModels = users.find(user => user.email === email);
-    if (FoundEmailInModels) {
-      return res.status(409).json({
-        status: 409,
-        error: 'Conflict, Email already registered, proceed to sigin...',
+    try {
+      const findEmail = 'SELECT * FROM users WHERE email = $1';
+      const value = [email];
+      const { rows } = await pool.query(findEmail, value);
+      if (rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Conflict, Email already registered, proceed to sigin...',
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        error,
       });
     }
+
     req.body.email = email;
-    req.body.firstName = firstName.toLowerCase().trim();
-    req.body.lastName = lastName.toLowerCase().trim();
+    req.body.first_name = first_name.toLowerCase().trim();
+    req.body.last_name = last_name.toLowerCase().trim();
     req.body.password = password.trim();
     req.body.address = address.trim();
     return next();
@@ -56,7 +66,7 @@ class UsersValidation {
    * @param {*} res
    * @param {*} next
    */
-  static ValidateUserSignInInput(req, res, next) {
+  static async ValidateUserSignInInput(req, res, next) {
     let { email, password } = req.body;
     const constraint = {
       email: 'required|email',
@@ -72,21 +82,31 @@ class UsersValidation {
       });
     }
     email = email.toLowerCase().trim();
-    const FoundEmailInModels = users.find(user => user.email === email);
-    if (!FoundEmailInModels) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Unauthorized, Cannot verify user details',
+    try {
+      const findIfUserExist = 'SELECT * FROM users WHERE email = $1';
+      const value = [email];
+      const { rows } = await pool.query(findIfUserExist, value);
+      // const foundEmail = rows[0].email;
+      if (!rows[0]) {
+        return res.status(401).json({
+          status: 401,
+          error: `${req.body.email} does not exist, Please register an account or signup`,
+        });
+      }
+      password = password.trim();
+      // if (!Helper.verifyPassword(rows[0].password, req.body.password)) {
+      //   return res.status(400).json({
+      //     status: 400,
+      //     error: 'Password is incorrect',
+      //   });
+      // }
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: error.message,
       });
     }
-    password = password.trim();
-    if (FoundEmailInModels && password !== FoundEmailInModels.password) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Unauthorized, Input details does to match',
-      });
-    }
-    req.body.FoundEmailInModels = FoundEmailInModels;
+    req.body.email = email;
     req.body.password = password;
     return next();
   }

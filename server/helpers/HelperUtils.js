@@ -14,7 +14,7 @@ const salt = +process.env.SALT;
 export default class Helper {
   /**
    * @method generateToken
-   * @param {@} payload
+   * @param {string} payload
    * @returns token
    */
   static generateToken(payload) {
@@ -24,7 +24,7 @@ export default class Helper {
 
   /**
    * @method verifyToken
-   * @param {@} token
+   * @param {string} token
    * @returns payload
    */
   static verifyToken(token) {
@@ -38,8 +38,8 @@ export default class Helper {
 
   /**
    * @method hashPassword
-   * @param {@} password
-   * @returns  hash password
+   * @param {string} password
+   * @returns {sring} hash password
    */
   static hashPassword(password) {
     return bcrypt.hashSync(password, salt);
@@ -47,11 +47,11 @@ export default class Helper {
 
   /**
    * @method verifyPassword
-   * @param password
+   * @param {string} password
    * @param hash
    * @returns
    */
-  static verifyPassword(password, hash) {
-    return bcrypt.compareSync(password, hash);
+  static verifyPassword(hashPassword, password) {
+    return bcrypt.compareSync(password, hashPassword);
   }
 }

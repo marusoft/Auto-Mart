@@ -11,31 +11,41 @@ carRouter.post(
   CarsValidation.validateCarsDetails,
   Cars.createCarSaleAD,
 );
+
 carRouter.get(
   '/car/:id', UserAuthentication.verifyUser,
   CarsValidation.validateSpecifyCar,
   Cars.ViewASpecificCar,
 );
-carRouter.delete(
-  '/car/:id', UserAuthentication.verifyAdmin,
-  CarsValidation.validateSpecifyCar,
-  Cars.deleteASpecificCarAD,
-);
+
+
 carRouter.patch(
   '/car/:id/status',
-  UserAuthentication.verifyUser, UserAuthentication.isOwner,
+  UserAuthentication.verifyUser,
+  CarsValidation.validateSpecifyCar,
+  /* UserAuthentication.isOwner, */
   Cars.updateCarStatus,
 );
+
 carRouter.patch(
   '/car/:id/price',
-  UserAuthentication.verifyUser, UserAuthentication.isOwner,
+  UserAuthentication.verifyUser,
+  UserAuthentication.isOwner,
   Cars.updateCarPrice,
 );
 carRouter.get(
-  '/car', Cars.ViewAllUnsoldCars,
+  '/car',
+  Cars.ViewAllUnsoldCarsPriceRange,
+  Cars.ViewAllUnsoldCars,
+  UserAuthentication.verifyUser,
   UserAuthentication.verifyAdmin,
-  Cars.ViewAllPostedADCar,
+  Cars.AdminViewAllPostedADCar,
 );
 
+carRouter.delete('/car/:id',
+  UserAuthentication.verifyUser,
+  CarsValidation.validateSpecifyCar,
+  UserAuthentication.verifyAdmin,
+  Cars.adminDeleteASpecificCarAD);
 
 export default carRouter;

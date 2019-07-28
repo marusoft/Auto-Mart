@@ -1,5 +1,7 @@
-import cars from '../models/carModels';
-
+/* eslint-disable prefer-destructuring */
+/* eslint-disable prefer-const */
+/* eslint-disable camelcase */
+import pool from '../db/connection';
 /**
  * Car Validation
  * @class CarsValidation
@@ -19,9 +21,8 @@ class CarsValidation {
       price,
       manufacturer,
       model,
-      bodyType,
-      // eslint-disable-next-line prefer-const
-      carImageUrl,
+      body_type,
+      img_url,
     } = req.body;
     if (!state) {
       return res.status(400).json({
@@ -71,9 +72,9 @@ class CarsValidation {
     }
     if (manufacturer) {
       manufacturer = manufacturer.trim();
-      if (/[^a-zA-Z]/.test(manufacturer)) {
+      if (/[^a-zA-Z ]/.test(manufacturer)) {
         return res.status(406).json({
-          message: 'Only Alphabets input are acceptable.',
+          message: 'Only Alphabets input characters are acceptable for manufacturer.',
         });
       }
     }
@@ -86,24 +87,24 @@ class CarsValidation {
       model = model.trim();
       if (/[^a-zA-Z]/.test(model)) {
         return res.status(406).json({
-          message: 'Only Alphabets input are acceptable.',
+          message: 'Only Alphabets input characters are acceptable for models.',
         });
       }
     }
-    if (!bodyType) {
+    if (!body_type) {
       return res.status(400).json({
         message: 'please specify the bodyType of the car.',
       });
     }
-    if (bodyType) {
-      bodyType = bodyType.trim();
-      if (/[^a-zA-Z]/.test(bodyType)) {
+    if (body_type) {
+      body_type = body_type.trim();
+      if (/[^a-zA-Z]/.test(body_type)) {
         return res.status(406).json({
-          message: 'Only Alphabets input are acceptable.',
+          message: 'Only Alphabets input characters are acceptable for body type.',
         });
       }
     }
-    if (!carImageUrl) {
+    if (!img_url) {
       return res.status(400).json({
         message: 'Please upload an image for this vehicle.',
       });
@@ -113,7 +114,8 @@ class CarsValidation {
     req.body.price = price;
     req.body.manufacturer = manufacturer.toLowerCase();
     req.body.model = model.toLowerCase();
-    req.body.bodyType = bodyType.toLowerCase();
+    req.body.body_type = body_type.toLowerCase();
+    req.body.img_url = img_url.toLowerCase();
     return next();
   }
 
@@ -123,17 +125,20 @@ class CarsValidation {
    * @params {object} req
    * @params {object} res
    */
-  static validateSpecifyCar(req, res, next) {
+  static async validateSpecifyCar(req, res, next) {
     const { id } = req.params;
-    const findSpecificCar = cars.find(car => car.id === Number(id));
-    if (!findSpecificCar) {
+    const value = Number(id);
+    const findCar = 'SELECT * FROM cars WHERE id = $1';
+    const findSpecificCar = await pool.query(findCar, [value]);
+    if (findSpecificCar.rowCount === 0) {
       return res.status(404).json({
         status: 404,
-        error: 'Cannot find the specify car',
+        error: 'Cannot find the specify car.',
       });
     }
-    req.body.findSpecificCar = findSpecificCar;
+    req.body.findSpecificCar = findSpecificCar.rows[0];
     return next();
   }
 }
+
 export default CarsValidation;
