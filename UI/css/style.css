@@ -131,9 +131,9 @@ p {
   margin: 25px auto;
   transition: all 0.5s;
 }
-.card:hover {
+/* .card:hover {
   filter: brightness(1.2);
-}
+} */
 img {
   width: 100%;
   height: 150px;
@@ -151,10 +151,17 @@ img {
 .car-price {
   text-align: left;
   margin: 5px;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 /* CARD END SECTION */
-
+.view {
+  background-color: #efefef; 
+  border: 1px solid #ddd;
+  color: #010165;
+  width: auto;
+  padding: 10px 20px;
+  margin: 3px;
+}
 /* FOOTER SECTION */
 #footer p {
   color: #010165;
