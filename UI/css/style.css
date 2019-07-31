@@ -161,6 +161,8 @@ img {
   width: auto;
   padding: 10px 20px;
   margin: 30px 3px;
+  font-style: oblique;
+  font-weight: bold;
 }
 /* FOOTER SECTION */
 #footer p {
