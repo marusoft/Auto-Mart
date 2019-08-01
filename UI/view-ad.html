@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Car Advert|Update Price</title>
+  <title>Car Advert | Update Price</title>
   <link rel="stylesheet" type="text/css" media="screen" href="css/advert.css">
   <link rel="stylesheet" type="text/css" media="screen" href="css/navbar.css">
   <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
@@ -38,11 +38,23 @@
       <div class="update-modal-content">
         <span class="close-update-modal">&times;</span>
         <div class="form-container-update">
-          <form action="#" class="price-upadte-form">
+          <form action="#" class="price-update-form">
             <h2>Add New Price</h2>
-            <input type="text" name="name" id="name" placeholder="Owner Fullname" required>
-            <select required name="make" id="make">
-              <option value="make" disabled selected>Make</option>
+            <input type="text" name="name" id="name" placeholder="Car Owner" required>
+             <!-- car condition -->
+             <select required name="state" id="state">
+              <option value="state" disabled selected>State/Condition</option>
+              <option value="new">New</option>
+              <option value="used">Used</option>
+          </select>
+          <!-- car status -->
+          <select required name="status" id="status">
+              <option value="status" disabled selected>Status</option>
+              <option value="new">Available</option>
+              <option value="used">Sold</option>
+          </select>
+            <select required name="manufacturer" id="manufacturer">
+              <option value="manufacturer" disabled selected>Manufacturer</option>
               <option value="nissan">Nissan</option>
               <option value="bmw">BMW</option>
               <option value="mercedes benz">Mercedes Benz</option>
@@ -63,8 +75,15 @@
               <option value="e-class">E-Class</option>
               <option value="m class">M Class</option>
             </select>
-            <input type="number" name="car-price" id="car-price" min="0.00" max="10000000"
-              placeholder=" new vehicle price">
+            <input type="number" name="car-price" id="car-price" placeholder=" new vehicle price">
+            <!-- vehicle body-type -->
+            <select required name="body-type" id="body-type">
+              <option value="body type" disabled selected>Body Type</option>
+              <option value="car">Car</option>
+              <option value="van">Van</option>
+              <option value="truck">Truck</option>
+              <option value="trailer">Trailer</option>
+            </select>
             <input type="submit" value="Update Price">
           </form>
         </div>
