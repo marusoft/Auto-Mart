@@ -640,7 +640,7 @@ describe('TEST for CAR Update endpoint routes ', () => {
       };
       chai
         .request(app)
-        .patch(`${defaultUrl}/car/5/price`)
+        .patch(`${defaultUrl}/car/3/price`)
         .set('authorization', `Bearer ${userToken}`)
         .send(carDetails)
         .end((err, res) => {
