@@ -78,12 +78,12 @@ npm install
 ```
 4. Start the application by running
 ```
-npm start
+npm run start:dev
 ```
 5. Install postman to test all endpoints
 
 ## Testing
-- run test using `npm test`    
+- run test using `npm run test`    
 
 ## API Routes
 
