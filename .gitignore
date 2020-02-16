@@ -13,3 +13,5 @@ coverage/
 
 # Ignore files related to API keys
 .env
+
+guide.txt
