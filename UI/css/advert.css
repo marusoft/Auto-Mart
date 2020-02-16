@@ -178,7 +178,7 @@ input[type="checkbox"] {
   background-color: #e8e8e8;
   margin: 5% auto;
   padding: 20px;
-  height: 550px;
+  height:720px;
   width: 55%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.15);
   animation-name: modalpriceopen;
@@ -195,7 +195,7 @@ input[type="checkbox"] {
   color: #fa4359;
 }
 
-.price-upadte-form {
+.price-update-form {
   position: relative;
   z-index: 1;
   border-radius: 10px;

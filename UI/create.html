@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Auto Mart</title>
+  <title>Register | Login Page </title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="css/signin.css">
   <link rel="stylesheet" type="text/css" media="screen" href="css/navbar.css">
@@ -44,10 +44,12 @@
     <!-- signup form -->
     <form action="#" id="signup-form" class="alternate-form">
       <h2>Create an Account</h2>
-      <input type="text" name="name" id="name" placeholder="Enter Fullname" required>
-      <input type="text" name="username" id="username" placeholder="Enter Username" required>
-      <input type="password" name="password" id="password" placeholder="Enter Password" required>
       <input type="email" name="email" id="email" placeholder="example@automart.com" required>
+      <input type="text" name="first-name" id="first-name" placeholder="First Name" required>
+      <input type="text" name="last-name" id="last-name" placeholder="Last Name" required>
+      <input type="password" name="password" id="password" placeholder="Password" required>
+      <input type="password" name="c-password" id="c-password" placeholder="Confirm Password" required>
+      <input type="text" name="address" id="address" placeholder="Address" required>
       <input type="submit" value="Sign up For AutoMart">
     </form>
     <!-- signup form  end-->
@@ -55,8 +57,8 @@
     <!-- signin form start -->
     <form action="car-advert.html" id="signin-form" class="alternate-form">
       <h2>AutoMart Account Login</h2>
-      <input type="text" name="username-1" id="username-1" placeholder="Enter Fullname" required>
-      <input type="password" name="pass" id="pass" placeholder="Enter Password" required>
+      <input type="email" name="email" id="email" placeholder="example@automart.com" required>
+      <input type="password" name="pass" id="pass" placeholder="Password" required>
       <input type="submit" value="User Login">
       <input type="submit" id="admin-login" value="Admin Login">
     </form>
@@ -71,4 +73,5 @@
   <script src="js/app.js"></script>
 
 </body>
+
 </html>

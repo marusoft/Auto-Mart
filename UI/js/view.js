@@ -6,15 +6,15 @@ const closeBtn1 = document.querySelector('.close1');
 // create a function to open modal
 const viewCarModal1 = () => {
   modalView1.style.display = 'block';
-}
+};
 const closeCarModal1 = () => {
   modalView1.style.display = 'none';
-}
+};
 
-const closeCarModalOnClickOuterArea1 = event => {
+const closeCarModalOnClickOuterArea1 = (event) => {
   event.target == modalView1
-    ? ( modalView1.style.display = "none")
-    : ( modalView1.style.display = false);
+    ? (modalView1.style.display = 'none')
+    : (modalView1.style.display = false);
 };
 viewBtn1.addEventListener('click', viewCarModal1);
 closeBtn1.addEventListener('click', closeCarModal1);
@@ -28,15 +28,15 @@ const closeBtn2 = document.querySelector('.close2');
 // create a function to open modal
 const viewCarModal2 = () => {
   modalView2.style.display = 'block';
-}
+};
 const closeCarModal2 = () => {
   modalView2.style.display = 'none';
-}
+};
 
-const closeCarModalOnClickOuterArea2 = event => {
+const closeCarModalOnClickOuterArea2 = (event) => {
   event.target == modalView2
-    ? ( modalView2.style.display = "none")
-    : ( modalView2.style.display = false);
+    ? (modalView2.style.display = 'none')
+    : (modalView2.style.display = false);
 };
 viewBtn2.addEventListener('click', viewCarModal2);
 closeBtn2.addEventListener('click', closeCarModal2);
@@ -50,15 +50,15 @@ const closeBtn3 = document.querySelector('.close3');
 // create a function to open modal
 const viewCarModal3 = () => {
   modalView3.style.display = 'block';
-}
+};
 const closeCarModal3 = () => {
   modalView3.style.display = 'none';
-}
+};
 
-const closeCarModalOnClickOuterArea3 = event => {
+const closeCarModalOnClickOuterArea3 = (event) => {
   event.target == modalView3
-    ? ( modalView3.style.display = "none")
-    : ( modalView3.style.display = false);
+    ? (modalView3.style.display = 'none')
+    : (modalView3.style.display = false);
 };
 viewBtn3.addEventListener('click', viewCarModal3);
 closeBtn3.addEventListener('click', closeCarModal3);
@@ -72,15 +72,15 @@ const closeBtn4 = document.querySelector('.close4');
 // create a function to open modal
 const viewCarModal4 = () => {
   modalView4.style.display = 'block';
-}
+};
 const closeCarModal4 = () => {
   modalView4.style.display = 'none';
-}
+};
 
-const closeCarModalOnClickOuterArea4 = event => {
+const closeCarModalOnClickOuterArea4 = (event) => {
   event.target == modalView4
-    ? ( modalView4.style.display = "none")
-    : ( modalView4.style.display = false);
+    ? (modalView4.style.display = 'none')
+    : (modalView4.style.display = false);
 };
 viewBtn4.addEventListener('click', viewCarModal4);
 closeBtn4.addEventListener('click', closeCarModal4);
@@ -94,15 +94,15 @@ const closeBtn5 = document.querySelector('.close5');
 // create a function to open modal
 const viewCarModal5 = () => {
   modalView5.style.display = 'block';
-}
+};
 const closeCarModal5 = () => {
   modalView5.style.display = 'none';
-}
+};
 
-const closeCarModalOnClickOuterArea5 = event => {
+const closeCarModalOnClickOuterArea5 = (event) => {
   event.target == modalView5
-    ? ( modalView5.style.display = "none")
-    : ( modalView5.style.display = false);
+    ? (modalView5.style.display = 'none')
+    : (modalView5.style.display = false);
 };
 viewBtn5.addEventListener('click', viewCarModal5);
 closeBtn5.addEventListener('click', closeCarModal5);
@@ -116,15 +116,15 @@ const closeBtn6 = document.querySelector('.close6');
 // create a function to open modal
 const viewCarModal6 = () => {
   modalView6.style.display = 'block';
-}
+};
 const closeCarModal6 = () => {
   modalView6.style.display = 'none';
-}
+};
 
-const closeCarModalOnClickOuterArea6 = event => {
+const closeCarModalOnClickOuterArea6 = (event) => {
   event.target == modalView6
-    ? ( modalView6.style.display = "none")
-    : ( modalView6.style.display = false);
+    ? (modalView6.style.display = 'none')
+    : (modalView6.style.display = false);
 };
 viewBtn6.addEventListener('click', viewCarModal6);
 closeBtn6.addEventListener('click', closeCarModal6);

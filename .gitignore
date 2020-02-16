@@ -3,6 +3,8 @@ node_modules/
 
 build/
 
+.vscode
+
 # Ignore files related to TEST coverage
 coverage/
 
@@ -10,8 +12,4 @@ coverage/
 .nyc_output
 
 # Ignore files related to API keys
-coverage
-
-.vscode/
-
 .env
